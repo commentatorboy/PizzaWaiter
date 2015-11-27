@@ -41,7 +41,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DatabaseLibrary">
-      <HintPath>..\..\..\..\..\ucn\4 sem\Systemudvikling\Tema\src\DatabaseLib\DatabaseLibrary\DatabaseLibrary\bin\Debug\DatabaseLibrary.dll</HintPath>
+      <HintPath>..\..\..\..\..\Desktop\dmaa\system udvikling\DatabaseLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
