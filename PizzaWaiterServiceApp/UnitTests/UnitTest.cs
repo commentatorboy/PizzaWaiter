@@ -9,6 +9,7 @@ namespace UnitTests
         [TestMethod]
         public void GetAllMenues(int RestID)
         {
+            /*
             RestDB restdb = new RestDB();
 
             Rest rest = RestDB.GetByID(RestID);
@@ -36,7 +37,7 @@ namespace UnitTests
                 }
 
             }
-
+            */
         }
     }
 }
