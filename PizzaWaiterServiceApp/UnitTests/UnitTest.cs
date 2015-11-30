@@ -1,14 +1,27 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CustomHandlers.DatabaseLibrary;
 
 namespace UnitTests
 {
     [TestClass]
     public class UnitTest
     {
+
+        [TestMethod]
+        public void ConnectToDatabase()
+        {
+            SqlConnectionBuilder CB = new SqlConnectionBuilder("(localdb)\\V11.0", "PizzaWaiter", "", "");
+            Assert.IsTrue(CB.CheckConnection());
+
+        }
+
+        
+
         [TestMethod]
         public void GetAllMenues(int RestID)
         {
+            /*
             RestDB restdb = new RestDB();
 
             Rest rest = RestDB.GetByID(RestID);
@@ -36,7 +49,7 @@ namespace UnitTests
                 }
 
             }
-
+            */
         }
     }
 }
