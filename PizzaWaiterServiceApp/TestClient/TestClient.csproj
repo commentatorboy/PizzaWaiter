@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DatabaseLibrary">
-      <HintPath>..\..\..\..\..\Desktop\dmaa\system udvikling\DatabaseLibrary.dll</HintPath>
+      <HintPath>..\..\..\..\..\ucn\4 sem\Systemudvikling\Tema\src\DatabaseLib\DatabaseLibrary\DatabaseLibrary\bin\Debug\DatabaseLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
