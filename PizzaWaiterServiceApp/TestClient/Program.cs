@@ -13,10 +13,13 @@ namespace TestClient
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, world!");
-            
+            /*
             SqlConfig.SqlServer = "(localdb)\\V11.0";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            
+            */
+            SqlConfig.SqlServer = "ALEXANDRALAPTOP\\SQLEXPRESS";
+            SqlConfig.SqlDatabase = "PizzaWaiter";
+
             User user = new User();
             user.PhoneNumber = "12345678";
             user.RankID = 1;
