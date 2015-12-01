@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CustomHandlers.DatabaseLibrary;
 
-namespace TestClient.Models
+namespace Models
 {
     /* Describes an object */
     public class Address : SqlModel

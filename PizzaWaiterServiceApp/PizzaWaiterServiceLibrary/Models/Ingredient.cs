@@ -6,27 +6,23 @@ using System.Text;
 using System.Threading.Tasks;
 using CustomHandlers.DatabaseLibrary;
 
-namespace TestClient.Models
+namespace Models
 {
     /* Describes an object */
-    public class PartOrder : SqlModel
+    public class Ingredient : SqlModel
     {
 
-        private PartOrderDB partOrderDB; //related DB handler (required)
+        private IngredientDB dishDB; //related DB handler (required)
 
         /*Object properties (custom)*/
         public int ID { get; set; }
-        public int DishID { get; set; }
-        public int OrderID { get; set; }
-        public int Amount { get; set; }
+        public string Name { get; set; }
 
         /*Build Object (required)*/
         public void BuildObject(DataRow row)
         {
             this.ID = SqlFormat.ToInt(row, "ID");
-            this.DishID = SqlFormat.ToInt(row, "DishID");
-            this.OrderID = SqlFormat.ToInt(row, "OrderID");
-            this.Amount = SqlFormat.ToInt(row, "Amount");
+            this.Name = SqlFormat.ToString(row, "Name");
         }
 
         /* Connects to handler, only once per object
@@ -34,51 +30,49 @@ namespace TestClient.Models
          */
         public void Connect()
         {
-            if (this.partOrderDB == null)
+            if (this.dishDB == null)
             {
-                this.partOrderDB = new PartOrderDB();
+                this.dishDB = new IngredientDB();
             }
 
         }
 
-        /* Adds partOrder to db */
-        public Response<PartOrder> Create()
+        /* Adds dish to db */
+        public Response<Ingredient> Create()
         {
             this.Connect();
-            return this.partOrderDB.Create(this);
+            return this.dishDB.Create(this);
         }
 
-        /* Updates partOrder in database */
-        public Response<PartOrder> Update()
+        /* Updates dish in database */
+        public Response<Ingredient> Update()
         {
             this.Connect();
-            return this.partOrderDB.Update(this);
+            return this.dishDB.Update(this);
         }
 
-        /*Deletes partOrder from database
+        /*Deletes dish from database
          * add here manual cascades, if are needed
          */
-        public Response<PartOrder> Delete()
+        public Response<Ingredient> Delete()
         {
             this.Connect();
-            return this.partOrderDB.Delete(this);
+            return this.dishDB.Delete(this);
         }
 
     }
 
     /* Communicates object to database */
-    public class PartOrderDB : SqlHandler<PartOrder>
+    public class IngredientDB : SqlHandler<Ingredient>
     {
 
         /* translate data from c# to sql */
-        private SqlData SetData(PartOrder i)
+        private SqlData SetData(Ingredient i)
         {
             SqlData data = new SqlData();
             //tell translator to which db rows which data belongs
             //data.Set("ID", i.ID);
-            data.Set("DishID", i.DishID);
-            data.Set("OrderID", i.OrderID);
-            data.Set("Amount", i.Amount);
+            data.Set("Name", i.Name);
             return data;
         }
 
@@ -89,12 +83,12 @@ namespace TestClient.Models
         {
             IdIsNull,
             OrderIdIsNull,
-            DishIdIsNull,
-            AmountIsNull
+            IngredientIdIsNull,
+            NumberIsNull
         }
 
         /* Validate data stored in the object */
-        private int Validate(PartOrder partOrder, params Input[] inputs)
+        private int Validate(Ingredient dish, params Input[] inputs)
         {
             /* start counting errors
              * Response stores all the information about transaction,
@@ -103,12 +97,12 @@ namespace TestClient.Models
             int err = 0;
 
             /* the object is initiated in handler, need to refresh it with each transaction */
-            this.Response = new Response<PartOrder>();
+            this.Response = new Response<Ingredient>();
 
             /* first check that the object is not null, 
              * will make it easier to catch other errors with transaction 
              */
-            if (partOrder == null)
+            if (dish == null)
             {
                 this.Response.AddMessage(ResponseMessage.NullObject); // add message
                 err++; // count errors up
@@ -125,7 +119,7 @@ namespace TestClient.Models
                     switch (input)
                     {
                         case Input.IdIsNull:
-                            if (this.ValidateIdIsNull(partOrder))
+                            if (this.ValidateIdIsNull(dish))
                             {
                                 this.Response.AddMessage(ResponseMessage.DataEmpty); // add message
                                 err++; // count errors up
@@ -139,53 +133,45 @@ namespace TestClient.Models
 
         #region Raw validation checks
         /* Raw checks for validity on each property requiring validation */
-        private bool ValidateIdIsNull(PartOrder partOrder)
+        private bool ValidateIdIsNull(Ingredient dish)
         {
-            return (partOrder.ID == null || partOrder.ID == 0);
+            return (dish.ID == null || dish.ID == 0);
         }
-        private bool ValidateDishIdIsNull(PartOrder partOrder)
+        private bool ValidateOrderIdIsNull(Ingredient dish)
         {
-            return (partOrder.DishID == null || partOrder.DishID == 0);
-        }
-        private bool ValidateOrderIdIsNull(PartOrder partOrder)
-        {
-            return (partOrder.OrderID == null || partOrder.OrderID == 0);
-        }
-        private bool ValidateAmountIsNull(PartOrder partOrder)
-        {
-            return (partOrder.Amount == null || partOrder.Amount == 0);
+            return (dish.Name == null || dish.Name == "");
         }
         #endregion
         #endregion
 
-        public Response<PartOrder> Update(PartOrder partOrder)
+        public Response<Ingredient> Update(Ingredient dish)
         {
             /* run validation
              * check that id and name are filled up)
              * */
-            int err = this.Validate(partOrder, Input.IdIsNull, Input.AmountIsNull, Input.DishIdIsNull, Input.OrderIdIsNull);
-            // if both fields are filled up, try to update the partOrder 
+            int err = this.Validate(dish, Input.IdIsNull, Input.NumberIsNull, Input.IngredientIdIsNull, Input.OrderIdIsNull);
+            // if both fields are filled up, try to update the dish 
             if (err < 1)
             {
-                SqlData data = this.SetData(partOrder); // translate c# to Sql
-                this.Update(data, partOrder.ID); // run transaction
+                SqlData data = this.SetData(dish); // translate c# to Sql
+                this.Update(data, dish.ID); // run transaction
                                             /* the results of the transaction are stored 
                                              * in this.Response including the SQL mesages and other custom notifications
                                              * */
 
             }
 
-            /* finish by adding the final partOrder to response, 
+            /* finish by adding the final dish to response, 
              * (validation may correct some data without giving a visible to user error)
-             * so we can use both the partOrder and the messages later
+             * so we can use both the dish and the messages later
              * */
-            this.Response.Item = partOrder;
+            this.Response.Item = dish;
 
             /*return all info we have about this transaction*/
             return this.Response;
 
         }
-        public Response<PartOrder> Delete(PartOrder partOrder)
+        public Response<Ingredient> Delete(Ingredient dish)
         {
             /* relete method does not set a success on response 
              * (I dont remember why! Probably has something to do with batch and chain deletes)
@@ -194,10 +180,10 @@ namespace TestClient.Models
              * ToDo: Have a closer look at whats going on there
              * */
 
-            int err = this.Validate(partOrder, Input.IdIsNull);
+            int err = this.Validate(dish, Input.IdIsNull);
             if (err < 1)
             {
-                int rowsAffected = this.Delete(partOrder.ID); // get rows deleted
+                int rowsAffected = this.Delete(dish.ID); // get rows deleted
 
                 /* the following is not really required,
                  * however is good to have for full feedback
@@ -214,24 +200,24 @@ namespace TestClient.Models
             return this.Response;
 
         }
-        public Response<PartOrder> Create(PartOrder partOrder)
+        public Response<Ingredient> Create(Ingredient dish)
         {
             //same procedure as update, just dont need id validation
-            int err = this.Validate(partOrder, Input.AmountIsNull, Input.DishIdIsNull, Input.OrderIdIsNull);
+            int err = this.Validate(dish, Input.NumberIsNull, Input.IngredientIdIsNull, Input.OrderIdIsNull);
 
 
             if (err < 1)
             {
-                SqlData data = this.SetData(partOrder);
-                partOrder.ID = this.InsertScopeId(data);
+                SqlData data = this.SetData(dish);
+                dish.ID = this.InsertScopeId(data);
             }
 
-            this.Response.Item = partOrder;
+            this.Response.Item = dish;
             return this.Response;
 
         }
 
-        public PartOrder GetById(int id)
+        public Ingredient GetById(int id)
         {
             return this.GetAll().FirstOrDefault(x => x.ID == id);
         }

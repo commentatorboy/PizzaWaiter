@@ -6,27 +6,27 @@ using System.Text;
 using System.Threading.Tasks;
 using CustomHandlers.DatabaseLibrary;
 
-namespace TestClient.Models
+namespace Models
 {
     /* Describes an object */
-    public class Dish : SqlModel
+    public class PartOrder : SqlModel
     {
 
-        private DishDB dishDB; //related DB handler (required)
+        private PartOrderDB partOrderDB; //related DB handler (required)
 
         /*Object properties (custom)*/
         public int ID { get; set; }
-        public int CategoryID { get; set; }
-        public string Name { get; set; }
-        public int Number { get; set; }
+        public int DishID { get; set; }
+        public int OrderID { get; set; }
+        public int Amount { get; set; }
 
         /*Build Object (required)*/
         public void BuildObject(DataRow row)
         {
             this.ID = SqlFormat.ToInt(row, "ID");
-            this.CategoryID = SqlFormat.ToInt(row, "CategoryID");
-            this.Name = SqlFormat.ToString(row, "Name");
-            this.Number = SqlFormat.ToInt(row, "Number");
+            this.DishID = SqlFormat.ToInt(row, "DishID");
+            this.OrderID = SqlFormat.ToInt(row, "OrderID");
+            this.Amount = SqlFormat.ToInt(row, "Amount");
         }
 
         /* Connects to handler, only once per object
@@ -34,51 +34,51 @@ namespace TestClient.Models
          */
         public void Connect()
         {
-            if (this.dishDB == null)
+            if (this.partOrderDB == null)
             {
-                this.dishDB = new DishDB();
+                this.partOrderDB = new PartOrderDB();
             }
 
         }
 
-        /* Adds dish to db */
-        public Response<Dish> Create()
+        /* Adds partOrder to db */
+        public Response<PartOrder> Create()
         {
             this.Connect();
-            return this.dishDB.Create(this);
+            return this.partOrderDB.Create(this);
         }
 
-        /* Updates dish in database */
-        public Response<Dish> Update()
+        /* Updates partOrder in database */
+        public Response<PartOrder> Update()
         {
             this.Connect();
-            return this.dishDB.Update(this);
+            return this.partOrderDB.Update(this);
         }
 
-        /*Deletes dish from database
+        /*Deletes partOrder from database
          * add here manual cascades, if are needed
          */
-        public Response<Dish> Delete()
+        public Response<PartOrder> Delete()
         {
             this.Connect();
-            return this.dishDB.Delete(this);
+            return this.partOrderDB.Delete(this);
         }
 
     }
 
     /* Communicates object to database */
-    public class DishDB : SqlHandler<Dish>
+    public class PartOrderDB : SqlHandler<PartOrder>
     {
 
         /* translate data from c# to sql */
-        private SqlData SetData(Dish i)
+        private SqlData SetData(PartOrder i)
         {
             SqlData data = new SqlData();
             //tell translator to which db rows which data belongs
             //data.Set("ID", i.ID);
-            data.Set("CategoryID", i.CategoryID);
-            data.Set("Name", i.Name);
-            data.Set("Number", i.Number);
+            data.Set("DishID", i.DishID);
+            data.Set("OrderID", i.OrderID);
+            data.Set("Amount", i.Amount);
             return data;
         }
 
@@ -90,11 +90,11 @@ namespace TestClient.Models
             IdIsNull,
             OrderIdIsNull,
             DishIdIsNull,
-            NumberIsNull
+            AmountIsNull
         }
 
         /* Validate data stored in the object */
-        private int Validate(Dish dish, params Input[] inputs)
+        private int Validate(PartOrder partOrder, params Input[] inputs)
         {
             /* start counting errors
              * Response stores all the information about transaction,
@@ -103,12 +103,12 @@ namespace TestClient.Models
             int err = 0;
 
             /* the object is initiated in handler, need to refresh it with each transaction */
-            this.Response = new Response<Dish>();
+            this.Response = new Response<PartOrder>();
 
             /* first check that the object is not null, 
              * will make it easier to catch other errors with transaction 
              */
-            if (dish == null)
+            if (partOrder == null)
             {
                 this.Response.AddMessage(ResponseMessage.NullObject); // add message
                 err++; // count errors up
@@ -125,7 +125,7 @@ namespace TestClient.Models
                     switch (input)
                     {
                         case Input.IdIsNull:
-                            if (this.ValidateIdIsNull(dish))
+                            if (this.ValidateIdIsNull(partOrder))
                             {
                                 this.Response.AddMessage(ResponseMessage.DataEmpty); // add message
                                 err++; // count errors up
@@ -139,53 +139,53 @@ namespace TestClient.Models
 
         #region Raw validation checks
         /* Raw checks for validity on each property requiring validation */
-        private bool ValidateIdIsNull(Dish dish)
+        private bool ValidateIdIsNull(PartOrder partOrder)
         {
-            return (dish.ID == null || dish.ID == 0);
+            return (partOrder.ID == null || partOrder.ID == 0);
         }
-        private bool ValidateDishIdIsNull(Dish dish)
+        private bool ValidateDishIdIsNull(PartOrder partOrder)
         {
-            return (dish.CategoryID == null || dish.CategoryID == 0);
+            return (partOrder.DishID == null || partOrder.DishID == 0);
         }
-        private bool ValidateOrderIdIsNull(Dish dish)
+        private bool ValidateOrderIdIsNull(PartOrder partOrder)
         {
-            return (dish.Name == null || dish.Name == "");
+            return (partOrder.OrderID == null || partOrder.OrderID == 0);
         }
-        private bool ValidateNumberIsNull(Dish dish)
+        private bool ValidateAmountIsNull(PartOrder partOrder)
         {
-            return (dish.Number == null || dish.Number == 0);
+            return (partOrder.Amount == null || partOrder.Amount == 0);
         }
         #endregion
         #endregion
 
-        public Response<Dish> Update(Dish dish)
+        public Response<PartOrder> Update(PartOrder partOrder)
         {
             /* run validation
              * check that id and name are filled up)
              * */
-            int err = this.Validate(dish, Input.IdIsNull, Input.NumberIsNull, Input.DishIdIsNull, Input.OrderIdIsNull);
-            // if both fields are filled up, try to update the dish 
+            int err = this.Validate(partOrder, Input.IdIsNull, Input.AmountIsNull, Input.DishIdIsNull, Input.OrderIdIsNull);
+            // if both fields are filled up, try to update the partOrder 
             if (err < 1)
             {
-                SqlData data = this.SetData(dish); // translate c# to Sql
-                this.Update(data, dish.ID); // run transaction
-                                                 /* the results of the transaction are stored 
-                                                  * in this.Response including the SQL mesages and other custom notifications
-                                                  * */
+                SqlData data = this.SetData(partOrder); // translate c# to Sql
+                this.Update(data, partOrder.ID); // run transaction
+                                            /* the results of the transaction are stored 
+                                             * in this.Response including the SQL mesages and other custom notifications
+                                             * */
 
             }
 
-            /* finish by adding the final dish to response, 
+            /* finish by adding the final partOrder to response, 
              * (validation may correct some data without giving a visible to user error)
-             * so we can use both the dish and the messages later
+             * so we can use both the partOrder and the messages later
              * */
-            this.Response.Item = dish;
+            this.Response.Item = partOrder;
 
             /*return all info we have about this transaction*/
             return this.Response;
 
         }
-        public Response<Dish> Delete(Dish dish)
+        public Response<PartOrder> Delete(PartOrder partOrder)
         {
             /* relete method does not set a success on response 
              * (I dont remember why! Probably has something to do with batch and chain deletes)
@@ -194,10 +194,10 @@ namespace TestClient.Models
              * ToDo: Have a closer look at whats going on there
              * */
 
-            int err = this.Validate(dish, Input.IdIsNull);
+            int err = this.Validate(partOrder, Input.IdIsNull);
             if (err < 1)
             {
-                int rowsAffected = this.Delete(dish.ID); // get rows deleted
+                int rowsAffected = this.Delete(partOrder.ID); // get rows deleted
 
                 /* the following is not really required,
                  * however is good to have for full feedback
@@ -214,24 +214,24 @@ namespace TestClient.Models
             return this.Response;
 
         }
-        public Response<Dish> Create(Dish dish)
+        public Response<PartOrder> Create(PartOrder partOrder)
         {
             //same procedure as update, just dont need id validation
-            int err = this.Validate(dish, Input.NumberIsNull, Input.DishIdIsNull, Input.OrderIdIsNull);
+            int err = this.Validate(partOrder, Input.AmountIsNull, Input.DishIdIsNull, Input.OrderIdIsNull);
 
 
             if (err < 1)
             {
-                SqlData data = this.SetData(dish);
-                dish.ID = this.InsertScopeId(data);
+                SqlData data = this.SetData(partOrder);
+                partOrder.ID = this.InsertScopeId(data);
             }
 
-            this.Response.Item = dish;
+            this.Response.Item = partOrder;
             return this.Response;
 
         }
 
-        public Dish GetById(int id)
+        public PartOrder GetById(int id)
         {
             return this.GetAll().FirstOrDefault(x => x.ID == id);
         }

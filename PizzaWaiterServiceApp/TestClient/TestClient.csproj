@@ -46,16 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\Dish.cs" />
-    <Compile Include="Models\Ingredient.cs" />
-    <Compile Include="Models\CustomIngredient.cs" />
-    <Compile Include="Models\OrderStatus.cs" />
-    <Compile Include="Models\Menu.cs" />
-    <Compile Include="Models\PartOrder.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\Restaurant.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
