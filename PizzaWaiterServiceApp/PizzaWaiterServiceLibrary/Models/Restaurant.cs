@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using CustomHandlers.DatabaseLibrary;
@@ -9,20 +10,21 @@ using CustomHandlers.DatabaseLibrary;
 namespace Models {
 
     /* Describes an object */
+    [DataContract]
     public class Restaurant : SqlModel {
 
         private RestaurantDB restaurantDB; //related DB handler (required)
 
         /*Object properties (custom)*/
+        [DataMember]
         public int ID { get; set; }
+        [DataMember]
         public String Name { get; set; }
 
         /*Build Object (required)*/
         public void BuildObject(DataRow row) {
             this.ID = SqlFormat.ToInt(row, "ID");
             this.Name = SqlFormat.ToString(row, "Name");
-
-
         }
 
         /* Connects to handler, only once per object
@@ -200,7 +202,11 @@ namespace Models {
         }
 
         public Restaurant GetById(int id) {
-            return this.GetAll().FirstOrDefault(x => x.ID == id);
+            //return this.GetAll().FirstOrDefault(x => x.ID == id);
+            Restaurant r = new Restaurant();
+            r.Name = "The best";
+            r.ID = 1;
+            return r;
         }
     }
 }
