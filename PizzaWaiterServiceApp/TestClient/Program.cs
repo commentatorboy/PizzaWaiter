@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TestClient
 {
-    class Program
+    class Program 
     {
         static void Main(string[] args)
         {
@@ -44,8 +44,8 @@ namespace TestClient
                 Console.WriteLine(message);
             }
             
-            Console.ReadLine();*/
-        }
+            Console.ReadLine();
+        }*/
 
     }
 }

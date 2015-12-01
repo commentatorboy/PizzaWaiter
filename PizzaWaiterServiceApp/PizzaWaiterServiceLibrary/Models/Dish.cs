@@ -16,7 +16,7 @@ namespace Models
 
         /*Object properties (custom)*/
         public int ID { get; set; }
-        public int CategoryID { get; set; }
+        public int MenuID { get; set; }
         public string Name { get; set; }
         public int Number { get; set; }
 
@@ -24,7 +24,7 @@ namespace Models
         public void BuildObject(DataRow row)
         {
             this.ID = SqlFormat.ToInt(row, "ID");
-            this.CategoryID = SqlFormat.ToInt(row, "CategoryID");
+            this.MenuID = SqlFormat.ToInt(row, "MenuID");
             this.Name = SqlFormat.ToString(row, "Name");
             this.Number = SqlFormat.ToInt(row, "Number");
         }
@@ -76,7 +76,7 @@ namespace Models
             SqlData data = new SqlData();
             //tell translator to which db rows which data belongs
             //data.Set("ID", i.ID);
-            data.Set("CategoryID", i.CategoryID);
+            data.Set("MenuID", i.MenuID);
             data.Set("Name", i.Name);
             data.Set("Number", i.Number);
             return data;
@@ -145,7 +145,7 @@ namespace Models
         }
         private bool ValidateDishIdIsNull(Dish dish)
         {
-            return (dish.CategoryID == null || dish.CategoryID == 0);
+            return (dish.MenuID == null || dish.MenuID == 0);
         }
         private bool ValidateOrderIdIsNull(Dish dish)
         {
