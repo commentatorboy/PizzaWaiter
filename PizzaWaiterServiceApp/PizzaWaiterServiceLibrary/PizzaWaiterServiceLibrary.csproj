@@ -40,6 +40,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DatabaseLibrary">
+      <HintPath>..\..\..\..\..\ucn\4 sem\Systemudvikling\Tema\src\DatabaseLib\DatabaseLibrary\DatabaseLibrary\bin\Debug\DatabaseLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,6 +54,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPizzaWaiterTestService.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\CustomIngredient.cs" />
+    <Compile Include="Models\Dish.cs" />
+    <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderStatus.cs" />
+    <Compile Include="Models\PartOrder.cs" />
+    <Compile Include="Models\Restaurant.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PizzaWaiterTestService.cs" />
   </ItemGroup>

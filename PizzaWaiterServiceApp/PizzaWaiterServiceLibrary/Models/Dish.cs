@@ -6,23 +6,27 @@ using System.Text;
 using System.Threading.Tasks;
 using CustomHandlers.DatabaseLibrary;
 
-namespace TestClient.Models
+namespace Models
 {
     /* Describes an object */
-    public class Ingredient : SqlModel
+    public class Dish : SqlModel
     {
 
-        private IngredientDB dishDB; //related DB handler (required)
+        private DishDB dishDB; //related DB handler (required)
 
         /*Object properties (custom)*/
         public int ID { get; set; }
+        public int CategoryID { get; set; }
         public string Name { get; set; }
+        public int Number { get; set; }
 
         /*Build Object (required)*/
         public void BuildObject(DataRow row)
         {
             this.ID = SqlFormat.ToInt(row, "ID");
+            this.CategoryID = SqlFormat.ToInt(row, "CategoryID");
             this.Name = SqlFormat.ToString(row, "Name");
+            this.Number = SqlFormat.ToInt(row, "Number");
         }
 
         /* Connects to handler, only once per object
@@ -32,20 +36,20 @@ namespace TestClient.Models
         {
             if (this.dishDB == null)
             {
-                this.dishDB = new IngredientDB();
+                this.dishDB = new DishDB();
             }
 
         }
 
         /* Adds dish to db */
-        public Response<Ingredient> Create()
+        public Response<Dish> Create()
         {
             this.Connect();
             return this.dishDB.Create(this);
         }
 
         /* Updates dish in database */
-        public Response<Ingredient> Update()
+        public Response<Dish> Update()
         {
             this.Connect();
             return this.dishDB.Update(this);
@@ -54,7 +58,7 @@ namespace TestClient.Models
         /*Deletes dish from database
          * add here manual cascades, if are needed
          */
-        public Response<Ingredient> Delete()
+        public Response<Dish> Delete()
         {
             this.Connect();
             return this.dishDB.Delete(this);
@@ -63,16 +67,18 @@ namespace TestClient.Models
     }
 
     /* Communicates object to database */
-    public class IngredientDB : SqlHandler<Ingredient>
+    public class DishDB : SqlHandler<Dish>
     {
 
         /* translate data from c# to sql */
-        private SqlData SetData(Ingredient i)
+        private SqlData SetData(Dish i)
         {
             SqlData data = new SqlData();
             //tell translator to which db rows which data belongs
             //data.Set("ID", i.ID);
+            data.Set("CategoryID", i.CategoryID);
             data.Set("Name", i.Name);
+            data.Set("Number", i.Number);
             return data;
         }
 
@@ -83,12 +89,12 @@ namespace TestClient.Models
         {
             IdIsNull,
             OrderIdIsNull,
-            IngredientIdIsNull,
+            DishIdIsNull,
             NumberIsNull
         }
 
         /* Validate data stored in the object */
-        private int Validate(Ingredient dish, params Input[] inputs)
+        private int Validate(Dish dish, params Input[] inputs)
         {
             /* start counting errors
              * Response stores all the information about transaction,
@@ -97,7 +103,7 @@ namespace TestClient.Models
             int err = 0;
 
             /* the object is initiated in handler, need to refresh it with each transaction */
-            this.Response = new Response<Ingredient>();
+            this.Response = new Response<Dish>();
 
             /* first check that the object is not null, 
              * will make it easier to catch other errors with transaction 
@@ -133,31 +139,39 @@ namespace TestClient.Models
 
         #region Raw validation checks
         /* Raw checks for validity on each property requiring validation */
-        private bool ValidateIdIsNull(Ingredient dish)
+        private bool ValidateIdIsNull(Dish dish)
         {
             return (dish.ID == null || dish.ID == 0);
         }
-        private bool ValidateOrderIdIsNull(Ingredient dish)
+        private bool ValidateDishIdIsNull(Dish dish)
+        {
+            return (dish.CategoryID == null || dish.CategoryID == 0);
+        }
+        private bool ValidateOrderIdIsNull(Dish dish)
         {
             return (dish.Name == null || dish.Name == "");
+        }
+        private bool ValidateNumberIsNull(Dish dish)
+        {
+            return (dish.Number == null || dish.Number == 0);
         }
         #endregion
         #endregion
 
-        public Response<Ingredient> Update(Ingredient dish)
+        public Response<Dish> Update(Dish dish)
         {
             /* run validation
              * check that id and name are filled up)
              * */
-            int err = this.Validate(dish, Input.IdIsNull, Input.NumberIsNull, Input.IngredientIdIsNull, Input.OrderIdIsNull);
+            int err = this.Validate(dish, Input.IdIsNull, Input.NumberIsNull, Input.DishIdIsNull, Input.OrderIdIsNull);
             // if both fields are filled up, try to update the dish 
             if (err < 1)
             {
                 SqlData data = this.SetData(dish); // translate c# to Sql
                 this.Update(data, dish.ID); // run transaction
-                                            /* the results of the transaction are stored 
-                                             * in this.Response including the SQL mesages and other custom notifications
-                                             * */
+                                                 /* the results of the transaction are stored 
+                                                  * in this.Response including the SQL mesages and other custom notifications
+                                                  * */
 
             }
 
@@ -171,7 +185,7 @@ namespace TestClient.Models
             return this.Response;
 
         }
-        public Response<Ingredient> Delete(Ingredient dish)
+        public Response<Dish> Delete(Dish dish)
         {
             /* relete method does not set a success on response 
              * (I dont remember why! Probably has something to do with batch and chain deletes)
@@ -200,10 +214,10 @@ namespace TestClient.Models
             return this.Response;
 
         }
-        public Response<Ingredient> Create(Ingredient dish)
+        public Response<Dish> Create(Dish dish)
         {
             //same procedure as update, just dont need id validation
-            int err = this.Validate(dish, Input.NumberIsNull, Input.IngredientIdIsNull, Input.OrderIdIsNull);
+            int err = this.Validate(dish, Input.NumberIsNull, Input.DishIdIsNull, Input.OrderIdIsNull);
 
 
             if (err < 1)
@@ -217,7 +231,7 @@ namespace TestClient.Models
 
         }
 
-        public Ingredient GetById(int id)
+        public Dish GetById(int id)
         {
             return this.GetAll().FirstOrDefault(x => x.ID == id);
         }

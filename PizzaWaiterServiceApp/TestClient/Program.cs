@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Models;
+//using Models;
 
 namespace TestClient
 {
@@ -12,11 +12,12 @@ namespace TestClient
     {
         static void Main(string[] args)
         {
+  /*
             Console.WriteLine("Hello, world!");
-            /*
+            
             SqlConfig.SqlServer = "(localdb)\\V11.0";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            */
+            
             SqlConfig.SqlServer = "ALEXANDRALAPTOP\\SQLEXPRESS";
             SqlConfig.SqlDatabase = "PizzaWaiter";
 
@@ -43,7 +44,8 @@ namespace TestClient
                 Console.WriteLine(message);
             }
             
-            Console.ReadLine();
+            Console.ReadLine();*/
         }
+
     }
 }
