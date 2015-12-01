@@ -33,7 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DatabaseLibrary">
+    <Reference Include="DatabaseLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\ucn\4 sem\Systemudvikling\Tema\src\DatabaseLib\DatabaseLibrary\DatabaseLibrary\bin\Debug\DatabaseLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -46,7 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CustomIngredient.cs" />
+    <Compile Include="Models\OrderStatus.cs" />
     <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Restaurant.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
