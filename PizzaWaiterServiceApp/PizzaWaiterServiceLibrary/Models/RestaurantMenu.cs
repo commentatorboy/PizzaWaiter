@@ -18,24 +18,46 @@ namespace Models {
 
         /*Object properties (custom)*/
         public int ID { get; set; }
-        //public int MenuID { get; set; }
-        //public int RestaurantID { get; set; }
+        public int MenuID { get; set; }
+        public int RestaurantID { get; set; }
         public int Position { get; set; }
 
-        public Menu Menu { get; set; }
+        public Menu Menu
+        {
+            get
+            {
+                return this.GetMenu();
+            }
+            set
+            {
+            }
+        }
+
+
+
         public Restaurant Restaurant { get; set; }
+        
+
+
 
         /*Build Object (required)*/
         public void BuildObject(DataRow row) {
             this.ID = SqlFormat.ToInt(row, "ID");
-            //this.MenuID = SqlFormat.ToInt(row, "MenuID");
-            //this.RestaurantID = SqlFormat.ToInt(row, "RestaurantID");
+            this.MenuID = SqlFormat.ToInt(row, "MenuID");
+            this.RestaurantID = SqlFormat.ToInt(row, "RestaurantID");
             this.Position = SqlFormat.ToInt(row, "Position");
 
             //this.Connect();
             //this.Menu = menuDB.GetById(SqlFormat.ToInt(row, "MenuID"));
             //this.Restaurant = restaurantDB.GetById(SqlFormat.ToInt(row, "RestaurantID"));
             
+        }
+
+
+        private Menu GetMenu()
+        {
+            this.Connect();
+            return this.menuDB.GetById(this.MenuID);
         }
 
         /* Connects to handler, only once per object
@@ -218,8 +240,14 @@ namespace Models {
         public RestaurantMenu GetById(int id) {
             return this.GetAll().FirstOrDefault(x => x.ID == id);
         }
-        public List<RestaurantMenu> GetByRestaurantID(int restaurantId) {
-            return this.GetAll().Where(x => x.Restaurant.ID == restaurantId).ToList();
+        public List<Menu> GetMenuesByRestaurantId(int restaurantId) {
+            List<RestaurantMenu> rml = this.GetAll().Where(x => x.Restaurant.ID == restaurantId).OrderBy(x => x.Position).ToList();
+            List<Menu> menues = new List<Menu>();
+            foreach(RestaurantMenu rm in rml)
+            {
+                menues.Add(rm.Menu);
+            }
+            return menues;
         }
 
     }

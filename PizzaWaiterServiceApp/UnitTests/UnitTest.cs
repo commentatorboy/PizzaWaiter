@@ -8,7 +8,6 @@ namespace UnitTests
     [TestClass]
     public class UnitTest
     {
-/*
         [TestMethod]
         public void ConnectToDatabase()
         {
@@ -16,7 +15,7 @@ namespace UnitTests
             Assert.IsTrue(CB.CheckConnection());
         }
 
-        
+        /*
         
         [TestMethod]
         public void GetAllMenues(int RestID)

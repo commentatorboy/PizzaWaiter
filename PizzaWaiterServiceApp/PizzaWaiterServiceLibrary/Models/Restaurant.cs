@@ -21,6 +21,24 @@ namespace Models {
         public int ID { get; set; }
         [DataMember]
         public String Name { get; set; }
+        [DataMember]
+        public List<Menu> Menues
+        {
+            get
+            {
+                return GetMenues();
+            }
+            set
+            {
+                /// TODO: Order it by Position
+            }
+        }
+
+        private List<Menu> GetMenues()
+        {
+            this.Connect();
+            return this.restaurantMenuDB.GetMenuesByRestaurantId(this.ID);
+        }
 
 
         /*Build Object (required)*/
