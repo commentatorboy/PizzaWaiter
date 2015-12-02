@@ -44,8 +44,8 @@ namespace TestClient
                 Console.WriteLine(message);
             }
             
-            Console.ReadLine();
-        }*/
+            Console.ReadLine();*/
+        }
 
     }
 }

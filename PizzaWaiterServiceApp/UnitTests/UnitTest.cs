@@ -1,14 +1,14 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CustomHandlers.DatabaseLibrary;
-using 
+
 
 namespace UnitTests
 {
     [TestClass]
     public class UnitTest
     {
-
+/*
         [TestMethod]
         public void ConnectToDatabase()
         {
@@ -17,7 +17,7 @@ namespace UnitTests
         }
 
         
-
+        
         [TestMethod]
         public void GetAllMenues(int RestID)
         {
@@ -50,6 +50,6 @@ namespace UnitTests
 
             }
             
-        }
+        }*/
     }
 }
