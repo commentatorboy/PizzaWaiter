@@ -12,16 +12,6 @@
                     <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# Eval("ID", "~/Menu.aspx?ID={0}") %>'>
                         <asp:Literal ID="Literal1" runat="server" Text='<%#Eval("Name") %>'></asp:Literal>
                     </asp:HyperLink>
-                    <ul>
-                        <asp:Repeater ID="rptChildren" runat="server" DataSource='<%#GetChildren(Container.DataItem)%>'>
-
-                            <ItemTemplate>
-                                <li>
-                                    <asp:Literal ID="Literal2" runat="server" Text='<%#Eval("Name") %>'></asp:Literal></li>
-                            </ItemTemplate>
-
-                        </asp:Repeater>
-                    </ul>
                 </li>
             </ItemTemplate>
         </asp:Repeater>
