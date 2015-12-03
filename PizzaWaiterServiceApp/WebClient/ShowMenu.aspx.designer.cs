@@ -10,7 +10,7 @@
 namespace WebClient {
     
     
-    public partial class Menu {
+    public partial class ShowMenu {
         
         /// <summary>
         /// ltRestaurantTitle control.
