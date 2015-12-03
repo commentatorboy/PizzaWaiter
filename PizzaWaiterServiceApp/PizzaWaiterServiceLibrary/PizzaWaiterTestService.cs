@@ -22,12 +22,13 @@ namespace PizzaWaiterServiceLibrary {
         }
         public List<Restaurant> GetLocalRestaurants(decimal latitude, decimal longtitude)
         {
-            List<Restaurant> restaurants = new List<Restaurant>();
+            //List<Restaurant> restaurants = new List<Restaurant>();
             RestaurantDB rDB = new RestaurantDB();
 
             /// TODO: Use Lat and Long in the future.
-            restaurants = rDB.GetAll();
-            return restaurants;
+            List<Restaurant> rl = rDB.GetAll();
+            return rl;
+            //return restaurants;
             /*
             Restaurant r = new Restaurant();
             r.ID = 1;
@@ -49,12 +50,11 @@ namespace PizzaWaiterServiceLibrary {
             return restaurants;
             */
         }
-        public Restaurant getAllMenues(int restaurantID) {
-            /*
-            RestaurantDB restaurantDB = new RestaurantDB();
-            Restaurant r = restaurantDB.GetById(restaurantID);
-            return r;
-             * */
+        public List<RestaurantMenu> GetRestaurantMenues(int restaurantID) {
+            
+            RestaurantMenuDB restaurantMenuDB = new RestaurantMenuDB();
+            List<RestaurantMenu> rm = restaurantMenuDB.GetByRestaurantId(restaurantID);
+            
 /*
             Restaurant r = new Restaurant();
             r.ID = 1;
@@ -73,7 +73,7 @@ namespace PizzaWaiterServiceLibrary {
             r.Menues.Add(m2);
             return r;*/
 
-            return null;
+            return rm;
         }
     }
 }

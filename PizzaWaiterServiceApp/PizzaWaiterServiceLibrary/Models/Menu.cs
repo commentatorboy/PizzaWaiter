@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using CustomHandlers.DatabaseLibrary;
@@ -10,13 +11,16 @@ namespace Models
 {
 
     /* Describes an object */
+    [DataContract]
     public class Menu : SqlModel
     {
 
         private MenuDB menuDB; //related DB handler (required)
 
         /*Object properties (custom)*/
+        [DataMember]
         public int ID { get; set; }
+        [DataMember]
         public String Title { get; set; }
 
         /*Build Object (required)*/

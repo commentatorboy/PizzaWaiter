@@ -40,8 +40,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DatabaseLibrary">
-      <HintPath>..\DatabaseLibrary.dll</HintPath>
+    <Reference Include="DatabaseLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\ucn\4 sem\Systemudvikling\Tema\src\DatabaseLib\DatabaseLibrary\DatabaseLibrary\bin\Debug\DatabaseLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />

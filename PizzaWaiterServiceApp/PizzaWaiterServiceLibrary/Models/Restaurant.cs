@@ -21,36 +21,34 @@ namespace Models {
         public int ID { get; set; }
         [DataMember]
         public String Name { get; set; }
-
-        /// <summary>
-        ///  TODO: is temporary, remove
-        /// </summary>
-        /// 
-        //private List<Menu> menues;
-        [DataMember]
+        /*
+        private List<RestaurantMenu> restaurantMenues;
         public List<RestaurantMenu> RestaurantMenues {
             get
             {
-                return GetRestaurantMenues();
+                if (this.restaurantMenues==null) {
+                    this.restaurantMenues = this.restaurantMenuDB.GetMenuesByRestaurantId(this.ID);
+                }
+                return restaurantMenues;
                 //return menues;
+               //return null;
 
             }
             set {
+                this.restaurantMenues = value;
                 /// TODO: temp, remove:
                 //menues = value;
                 /// TODO: Order it by Position
             }
         }
-
+        
         private List<RestaurantMenu> GetRestaurantMenues()
         {
             //this.Connect();
             return this.restaurantMenuDB.GetMenuesByRestaurantId(this.ID);
         }
+*/
 
-        public Restaurant() {
-            this.Connect();
-        }
         /*Build Object (required)*/
         public void BuildObject(DataRow row) {
             this.ID = SqlFormat.ToInt(row, "ID");

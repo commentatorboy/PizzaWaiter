@@ -1,13 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="Restaurant">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="RestaurantMenues" nillable="true" type="tns:ArrayOfRestaurantMenu" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Restaurant" nillable="true" type="tns:Restaurant" />
   <xs:complexType name="ArrayOfRestaurantMenu">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="RestaurantMenu" nillable="true" type="tns:RestaurantMenu" />
@@ -32,6 +24,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Menu" nillable="true" type="tns:Menu" />
+  <xs:complexType name="Restaurant">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Restaurant" nillable="true" type="tns:Restaurant" />
   <xs:complexType name="ArrayOfRestaurant">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Restaurant" nillable="true" type="tns:Restaurant" />

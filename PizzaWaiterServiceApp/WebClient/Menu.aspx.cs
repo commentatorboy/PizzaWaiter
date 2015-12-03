@@ -13,21 +13,26 @@ namespace WebClient {
     public partial class Menu : System.Web.UI.Page {
 
         /// TODO: prop proxy
+
         private int RestaurantID;
+        Restaurant restaurant; 
         protected void Page_Load(object sender, EventArgs e) {
             if (!IsPostBack) {
+                //proxy = Proxy.Get();
                 RestaurantID = Convert.ToInt32(Request.QueryString["ID"]);
+                
                 BindMenu();
             }
         }
 
         protected void BindMenu() {
+
             this.rptMenu.DataSource = Globals.Restaurants.FirstOrDefault(x => x.ID == RestaurantID).RestaurantMenues;
             this.rptMenu.DataBind();
         }
 
-        protected string GetMenuTitle(string id) {
-            int menuId = Convert.ToInt32(id);
+        protected string FormatMenuTitle(Menu m) {
+            return m.Title;
 
         }
         /*

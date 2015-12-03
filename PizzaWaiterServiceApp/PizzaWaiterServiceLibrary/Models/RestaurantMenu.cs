@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CustomHandlers.DatabaseLibrary;
+using System.Runtime.Serialization;
 
 namespace Models {
 
     /* Describes an object */
+    [DataContract]
     public class RestaurantMenu : SqlModel {
 
         private RestaurantMenuDB restaurantMenuDB; //related DB handler (required)
@@ -17,29 +19,40 @@ namespace Models {
         private MenuDB menuDB;
 
         /*Object properties (custom)*/
+        [DataMember]
         public int ID { get; set; }
+        [DataMember]
         public int MenuID { get; set; }
+        [DataMember]
         public int RestaurantID { get; set; }
+        [DataMember]
         public int Position { get; set; }
-
+        [DataMember]
         public Menu Menu
         {
             get
             {
                 return this.GetMenu();
+                //return null;
             }
             set
             {
             }
         }
+        [DataMember]
         public Restaurant Restaurant {
             get {
                 return this.GetRestaurant();
+                //return null;
             }
             set {
             }
         }
-        
+
+        public RestaurantMenu() {
+            Connect();
+        }
+
 
         /*Build Object (required)*/
         public void BuildObject(DataRow row) {
@@ -56,11 +69,11 @@ namespace Models {
 
         private Menu GetMenu()
         {
-            this.Connect();
+            //this.Connect();
             return this.menuDB.GetById(this.MenuID);
         }
         private Restaurant GetRestaurant() {
-            this.Connect();
+            //this.Connect();
             return this.restaurantDB.GetById(this.RestaurantID);
         }
 
@@ -244,8 +257,8 @@ namespace Models {
         public RestaurantMenu GetById(int id) {
             return this.GetAll().FirstOrDefault(x => x.ID == id);
         }
-        public List<RestaurantMenu> GetMenuesByRestaurantId(int restaurantId) {
-            return this.GetAll().Where(x => x.Restaurant.ID == restaurantId).OrderBy(x => x.Position).ToList();
+        public List<RestaurantMenu> GetByRestaurantId(int restaurantId) {
+            return this.GetAll().Where(x => x.Restaurant.ID == restaurantId).ToList();
         }
 
     }

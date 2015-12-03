@@ -11,7 +11,7 @@ namespace PizzaWaiterServiceLibrary {
     [ServiceContract]
     public interface IPizzaWaiterTestService {
         [OperationContract]
-        Restaurant getAllMenues(int restaurantID); 
+        List<RestaurantMenu> GetRestaurantMenues(int restaurantID); 
         [OperationContract]
         List<Restaurant> GetLocalRestaurants(decimal latitude, decimal longtitude);
     }

@@ -15,83 +15,6 @@ namespace WebClient.PizzaWaiterTestServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Restaurant", Namespace="http://schemas.datacontract.org/2004/07/Models")]
-    [System.SerializableAttribute()]
-    public partial class Restaurant : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WebClient.PizzaWaiterTestServiceReference.RestaurantMenu[] RestaurantMenuesField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ID {
-            get {
-                return this.IDField;
-            }
-            set {
-                if ((this.IDField.Equals(value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public WebClient.PizzaWaiterTestServiceReference.RestaurantMenu[] RestaurantMenues {
-            get {
-                return this.RestaurantMenuesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RestaurantMenuesField, value) != true)) {
-                    this.RestaurantMenuesField = value;
-                    this.RaisePropertyChanged("RestaurantMenues");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="RestaurantMenu", Namespace="http://schemas.datacontract.org/2004/07/Models")]
     [System.SerializableAttribute()]
     public partial class RestaurantMenu : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -276,15 +199,76 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Restaurant", Namespace="http://schemas.datacontract.org/2004/07/Models")]
+    [System.SerializableAttribute()]
+    public partial class Restaurant : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PizzaWaiterTestServiceReference.IPizzaWaiterTestService")]
     public interface IPizzaWaiterTestService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/getAllMenues", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/getAllMenuesResponse")]
-        WebClient.PizzaWaiterTestServiceReference.Restaurant getAllMenues(int restaurantID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetRestaurantMenues", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetRestaurantMenuesResponse")]
+        WebClient.PizzaWaiterTestServiceReference.RestaurantMenu[] GetRestaurantMenues(int restaurantID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/getAllMenues", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/getAllMenuesResponse")]
-        System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.Restaurant> getAllMenuesAsync(int restaurantID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetRestaurantMenues", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetRestaurantMenuesResponse")]
+        System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.RestaurantMenu[]> GetRestaurantMenuesAsync(int restaurantID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetLocalRestaurants", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetLocalRestaurantsResponse")]
         WebClient.PizzaWaiterTestServiceReference.Restaurant[] GetLocalRestaurants(decimal latitude, decimal longtitude);
@@ -320,12 +304,12 @@ namespace WebClient.PizzaWaiterTestServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public WebClient.PizzaWaiterTestServiceReference.Restaurant getAllMenues(int restaurantID) {
-            return base.Channel.getAllMenues(restaurantID);
+        public WebClient.PizzaWaiterTestServiceReference.RestaurantMenu[] GetRestaurantMenues(int restaurantID) {
+            return base.Channel.GetRestaurantMenues(restaurantID);
         }
         
-        public System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.Restaurant> getAllMenuesAsync(int restaurantID) {
-            return base.Channel.getAllMenuesAsync(restaurantID);
+        public System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.RestaurantMenu[]> GetRestaurantMenuesAsync(int restaurantID) {
+            return base.Channel.GetRestaurantMenuesAsync(restaurantID);
         }
         
         public WebClient.PizzaWaiterTestServiceReference.Restaurant[] GetLocalRestaurants(decimal latitude, decimal longtitude) {

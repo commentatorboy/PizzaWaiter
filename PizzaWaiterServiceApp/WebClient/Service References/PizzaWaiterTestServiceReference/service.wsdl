@@ -96,7 +96,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IPizzaWaiterTestService_getAllMenues_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IPizzaWaiterTestService_GetRestaurantMenues_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -115,7 +115,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IPizzaWaiterTestService_getAllMenues_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IPizzaWaiterTestService_GetRestaurantMenues_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -179,11 +179,11 @@
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Models" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IPizzaWaiterTestService_getAllMenues_InputMessage">
-    <wsdl:part name="parameters" element="tns:getAllMenues" />
+  <wsdl:message name="IPizzaWaiterTestService_GetRestaurantMenues_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRestaurantMenues" />
   </wsdl:message>
-  <wsdl:message name="IPizzaWaiterTestService_getAllMenues_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getAllMenuesResponse" />
+  <wsdl:message name="IPizzaWaiterTestService_GetRestaurantMenues_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRestaurantMenuesResponse" />
   </wsdl:message>
   <wsdl:message name="IPizzaWaiterTestService_GetLocalRestaurants_InputMessage">
     <wsdl:part name="parameters" element="tns:GetLocalRestaurants" />
@@ -192,9 +192,9 @@
     <wsdl:part name="parameters" element="tns:GetLocalRestaurantsResponse" />
   </wsdl:message>
   <wsdl:portType name="IPizzaWaiterTestService">
-    <wsdl:operation name="getAllMenues">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPizzaWaiterTestService/getAllMenues" message="tns:IPizzaWaiterTestService_getAllMenues_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPizzaWaiterTestService/getAllMenuesResponse" message="tns:IPizzaWaiterTestService_getAllMenues_OutputMessage" />
+    <wsdl:operation name="GetRestaurantMenues">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPizzaWaiterTestService/GetRestaurantMenues" message="tns:IPizzaWaiterTestService_GetRestaurantMenues_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPizzaWaiterTestService/GetRestaurantMenuesResponse" message="tns:IPizzaWaiterTestService_GetRestaurantMenues_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetLocalRestaurants">
       <wsdl:input wsaw:Action="http://tempuri.org/IPizzaWaiterTestService/GetLocalRestaurants" message="tns:IPizzaWaiterTestService_GetLocalRestaurants_InputMessage" />
@@ -204,14 +204,14 @@
   <wsdl:binding name="WSHttpBinding_IPizzaWaiterTestService" type="tns:IPizzaWaiterTestService">
     <wsp:PolicyReference URI="#WSHttpBinding_IPizzaWaiterTestService_policy" />
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="getAllMenues">
-      <soap12:operation soapAction="http://tempuri.org/IPizzaWaiterTestService/getAllMenues" style="document" />
+    <wsdl:operation name="GetRestaurantMenues">
+      <soap12:operation soapAction="http://tempuri.org/IPizzaWaiterTestService/GetRestaurantMenues" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IPizzaWaiterTestService_getAllMenues_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IPizzaWaiterTestService_GetRestaurantMenues_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IPizzaWaiterTestService_getAllMenues_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IPizzaWaiterTestService_GetRestaurantMenues_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
