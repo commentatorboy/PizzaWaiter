@@ -21,4 +21,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Menu" nillable="true" type="tns:Menu" />
+  <xs:complexType name="ArrayOfRestaurant">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Restaurant" nillable="true" type="tns:Restaurant" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRestaurant" nillable="true" type="tns:ArrayOfRestaurant" />
 </xs:schema>

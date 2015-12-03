@@ -32,13 +32,14 @@ namespace Models {
             {
             }
         }
-
-
-
-        public Restaurant Restaurant { get; set; }
+        public Restaurant Restaurant {
+            get {
+                return this.GetRestaurant();
+            }
+            set {
+            }
+        }
         
-
-
 
         /*Build Object (required)*/
         public void BuildObject(DataRow row) {
@@ -53,11 +54,14 @@ namespace Models {
             
         }
 
-
         private Menu GetMenu()
         {
             this.Connect();
             return this.menuDB.GetById(this.MenuID);
+        }
+        private Restaurant GetRestaurant() {
+            this.Connect();
+            return this.restaurantDB.GetById(this.RestaurantID);
         }
 
         /* Connects to handler, only once per object

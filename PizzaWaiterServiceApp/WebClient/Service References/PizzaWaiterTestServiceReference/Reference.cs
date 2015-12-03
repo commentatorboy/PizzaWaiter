@@ -160,6 +160,12 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/getAllMenues", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/getAllMenuesResponse")]
         System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.Restaurant> getAllMenuesAsync(int restaurantID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetLocalRestaurants", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetLocalRestaurantsResponse")]
+        WebClient.PizzaWaiterTestServiceReference.Restaurant[] GetLocalRestaurants(decimal latitude, decimal longtitude);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetLocalRestaurants", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetLocalRestaurantsResponse")]
+        System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.Restaurant[]> GetLocalRestaurantsAsync(decimal latitude, decimal longtitude);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -195,6 +201,14 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         
         public System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.Restaurant> getAllMenuesAsync(int restaurantID) {
             return base.Channel.getAllMenuesAsync(restaurantID);
+        }
+        
+        public WebClient.PizzaWaiterTestServiceReference.Restaurant[] GetLocalRestaurants(decimal latitude, decimal longtitude) {
+            return base.Channel.GetLocalRestaurants(latitude, longtitude);
+        }
+        
+        public System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.Restaurant[]> GetLocalRestaurantsAsync(decimal latitude, decimal longtitude) {
+            return base.Channel.GetLocalRestaurantsAsync(latitude, longtitude);
         }
     }
 }

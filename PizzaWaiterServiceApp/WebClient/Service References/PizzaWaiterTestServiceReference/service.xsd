@@ -15,4 +15,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetLocalRestaurants">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="latitude" type="xs:decimal" />
+        <xs:element minOccurs="0" name="longtitude" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLocalRestaurantsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetLocalRestaurantsResult" nillable="true" type="q2:ArrayOfRestaurant" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

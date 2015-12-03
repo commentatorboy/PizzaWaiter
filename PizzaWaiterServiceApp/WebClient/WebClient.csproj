@@ -207,6 +207,7 @@
     <Compile Include="Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Globals.cs" />
     <Compile Include="Models\Proxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\PizzaWaiterTestServiceReference\Reference.cs">

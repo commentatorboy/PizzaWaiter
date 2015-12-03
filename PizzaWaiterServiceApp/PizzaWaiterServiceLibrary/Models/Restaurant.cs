@@ -31,24 +31,26 @@ namespace Models {
         public List<Menu> Menues {
             get
             {
-                //return GetMenues();
-                return menues;
+                return GetMenues();
+                //return menues;
 
             }
             set {
                 /// TODO: temp, remove:
-                menues = value;
+                //menues = value;
                 /// TODO: Order it by Position
             }
         }
 
         private List<Menu> GetMenues()
         {
-            this.Connect();
+            //this.Connect();
             return this.restaurantMenuDB.GetMenuesByRestaurantId(this.ID);
         }
 
-
+        public Restaurant() {
+            this.Connect();
+        }
         /*Build Object (required)*/
         public void BuildObject(DataRow row) {
             this.ID = SqlFormat.ToInt(row, "ID");

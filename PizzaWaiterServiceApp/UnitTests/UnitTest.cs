@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CustomHandlers.DatabaseLibrary;
-using UnitTests.PizzaWaiterTestServiceUnitTest;
+//using UnitTests.PizzaWaiterTestServiceUnitTest;
 
 namespace UnitTests
 {
@@ -15,7 +15,7 @@ namespace UnitTests
             Assert.IsTrue(CB.CheckConnection());
         }
         */
-
+        /*
         [TestMethod]
         public void ConnectToWCF()
         {
