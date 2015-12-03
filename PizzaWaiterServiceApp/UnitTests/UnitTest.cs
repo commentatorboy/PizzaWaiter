@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CustomHandlers.DatabaseLibrary;
+using UnitTests.PizzaWaiterUnitTestServiceReference;
 
 
 namespace UnitTests
@@ -8,16 +9,32 @@ namespace UnitTests
     [TestClass]
     public class UnitTest
     {
-        [TestMethod]
+        /*[TestMethod]
         public void ConnectToDatabase()
         {
             SqlConnectionBuilder CB = new SqlConnectionBuilder("(localdb)\\V11.0", "PizzaWaiter", "", "");
             Assert.IsTrue(CB.CheckConnection());
         }
+        */
 
-        /*
-        
         [TestMethod]
+        public void ConnectToWCF()
+        {
+            IPizzaWaiterTestService proxy = new PizzaWaiterTestServiceClient();
+            Restaurant r = proxy.getAllMenues(1);
+            Assert.IsNull(r.Menues);
+        }
+
+        [TestMethod]
+        public void ReceiveOrders()
+        {
+            //Prioritized test
+            //Deleted test
+            //Changed status test
+        }
+        
+        
+        /*[TestMethod]
         public void GetAllMenues(int RestID)
         {
             
