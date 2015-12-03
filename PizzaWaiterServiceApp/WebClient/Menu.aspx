@@ -2,8 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    
     <asp:Literal ID="ltRestaurantTitle" runat="server"></asp:Literal>
-
         <ul>
         <asp:Repeater ID="rptMenu" runat="server">
             <HeaderTemplate>Pick restaurant:</HeaderTemplate>

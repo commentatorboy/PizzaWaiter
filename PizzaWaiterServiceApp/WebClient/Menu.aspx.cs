@@ -22,12 +22,9 @@ namespace WebClient {
         }
 
         protected void BindMenu() {
-            /// TODO: Get menu from proxy 
-            IPizzaWaiterTestService p = Proxy.Get();
-            Restaurant r = p.getAllMenues(RestaurantID);
-            this.ltRestaurantTitle.Text = r.Name;
             
-            this.rptMenu.DataSource = r.Menues;
+            
+            this.rptMenu.DataSource = Globals.Restaurants.FirstOrDefault(x => x.ID == RestaurantID).Menues;
             this.rptMenu.DataBind();
         }
         /*
