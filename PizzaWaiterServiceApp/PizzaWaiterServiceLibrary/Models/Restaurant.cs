@@ -26,12 +26,12 @@ namespace Models {
         ///  TODO: is temporary, remove
         /// </summary>
         /// 
-        private List<Menu> menues;
+        //private List<Menu> menues;
         [DataMember]
-        public List<Menu> Menues {
+        public List<RestaurantMenu> RestaurantMenues {
             get
             {
-                return GetMenues();
+                return GetRestaurantMenues();
                 //return menues;
 
             }
@@ -42,7 +42,7 @@ namespace Models {
             }
         }
 
-        private List<Menu> GetMenues()
+        private List<RestaurantMenu> GetRestaurantMenues()
         {
             //this.Connect();
             return this.restaurantMenuDB.GetMenuesByRestaurantId(this.ID);

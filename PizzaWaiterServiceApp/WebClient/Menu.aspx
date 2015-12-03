@@ -11,8 +11,9 @@
                 <li>
 
                     
-                        <asp:Literal ID="ltMenuTitle" runat="server" Text='<%#Eval("Title") %>'></asp:Literal>
-                    
+                       <%-- <asp:Literal ID="ltMenuTitle" runat="server" Text='<%#Eval("Title") %>'></asp:Literal>--%>
+                     <asp:Literal ID="ltMenuTitle" runat="server" Text='<%#GetMenuTitle(Eval("ID")) %>'></asp:Literal>
+
 <%--                    <ul>
                         <asp:Repeater ID="rptMenuItems" runat="server" DataSource='<%#GetChildren(Container.DataItem)%>'>
 

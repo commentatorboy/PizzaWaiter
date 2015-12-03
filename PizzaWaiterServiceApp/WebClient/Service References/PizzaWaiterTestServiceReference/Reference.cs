@@ -26,10 +26,10 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WebClient.PizzaWaiterTestServiceReference.Menu[] MenuesField;
+        private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
+        private WebClient.PizzaWaiterTestServiceReference.RestaurantMenu[] RestaurantMenuesField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -55,19 +55,6 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WebClient.PizzaWaiterTestServiceReference.Menu[] Menues {
-            get {
-                return this.MenuesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MenuesField, value) != true)) {
-                    this.MenuesField = value;
-                    this.RaisePropertyChanged("Menues");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Name {
             get {
                 return this.NameField;
@@ -76,6 +63,144 @@ namespace WebClient.PizzaWaiterTestServiceReference {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebClient.PizzaWaiterTestServiceReference.RestaurantMenu[] RestaurantMenues {
+            get {
+                return this.RestaurantMenuesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RestaurantMenuesField, value) != true)) {
+                    this.RestaurantMenuesField = value;
+                    this.RaisePropertyChanged("RestaurantMenues");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RestaurantMenu", Namespace="http://schemas.datacontract.org/2004/07/Models")]
+    [System.SerializableAttribute()]
+    public partial class RestaurantMenu : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebClient.PizzaWaiterTestServiceReference.Menu MenuField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int MenuIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PositionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebClient.PizzaWaiterTestServiceReference.Restaurant RestaurantField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int RestaurantIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebClient.PizzaWaiterTestServiceReference.Menu Menu {
+            get {
+                return this.MenuField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MenuField, value) != true)) {
+                    this.MenuField = value;
+                    this.RaisePropertyChanged("Menu");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int MenuID {
+            get {
+                return this.MenuIDField;
+            }
+            set {
+                if ((this.MenuIDField.Equals(value) != true)) {
+                    this.MenuIDField = value;
+                    this.RaisePropertyChanged("MenuID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Position {
+            get {
+                return this.PositionField;
+            }
+            set {
+                if ((this.PositionField.Equals(value) != true)) {
+                    this.PositionField = value;
+                    this.RaisePropertyChanged("Position");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebClient.PizzaWaiterTestServiceReference.Restaurant Restaurant {
+            get {
+                return this.RestaurantField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RestaurantField, value) != true)) {
+                    this.RestaurantField = value;
+                    this.RaisePropertyChanged("Restaurant");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int RestaurantID {
+            get {
+                return this.RestaurantIDField;
+            }
+            set {
+                if ((this.RestaurantIDField.Equals(value) != true)) {
+                    this.RestaurantIDField = value;
+                    this.RaisePropertyChanged("RestaurantID");
                 }
             }
         }

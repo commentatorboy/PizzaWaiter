@@ -244,14 +244,8 @@ namespace Models {
         public RestaurantMenu GetById(int id) {
             return this.GetAll().FirstOrDefault(x => x.ID == id);
         }
-        public List<Menu> GetMenuesByRestaurantId(int restaurantId) {
-            List<RestaurantMenu> rml = this.GetAll().Where(x => x.Restaurant.ID == restaurantId).OrderBy(x => x.Position).ToList();
-            List<Menu> menues = new List<Menu>();
-            foreach(RestaurantMenu rm in rml)
-            {
-                menues.Add(rm.Menu);
-            }
-            return menues;
+        public List<RestaurantMenu> GetMenuesByRestaurantId(int restaurantId) {
+            return this.GetAll().Where(x => x.Restaurant.ID == restaurantId).OrderBy(x => x.Position).ToList();
         }
 
     }

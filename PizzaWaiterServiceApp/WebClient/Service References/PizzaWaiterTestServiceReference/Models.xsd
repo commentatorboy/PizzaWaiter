@@ -3,17 +3,28 @@
   <xs:complexType name="Restaurant">
     <xs:sequence>
       <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="Menues" nillable="true" type="tns:ArrayOfMenu" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RestaurantMenues" nillable="true" type="tns:ArrayOfRestaurantMenu" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Restaurant" nillable="true" type="tns:Restaurant" />
-  <xs:complexType name="ArrayOfMenu">
+  <xs:complexType name="ArrayOfRestaurantMenu">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Menu" nillable="true" type="tns:Menu" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RestaurantMenu" nillable="true" type="tns:RestaurantMenu" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfMenu" nillable="true" type="tns:ArrayOfMenu" />
+  <xs:element name="ArrayOfRestaurantMenu" nillable="true" type="tns:ArrayOfRestaurantMenu" />
+  <xs:complexType name="RestaurantMenu">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Menu" nillable="true" type="tns:Menu" />
+      <xs:element minOccurs="0" name="MenuID" type="xs:int" />
+      <xs:element minOccurs="0" name="Position" type="xs:int" />
+      <xs:element minOccurs="0" name="Restaurant" nillable="true" type="tns:Restaurant" />
+      <xs:element minOccurs="0" name="RestaurantID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RestaurantMenu" nillable="true" type="tns:RestaurantMenu" />
   <xs:complexType name="Menu">
     <xs:sequence>
       <xs:element minOccurs="0" name="ID" type="xs:int" />

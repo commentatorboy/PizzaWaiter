@@ -55,7 +55,7 @@ namespace PizzaWaiterServiceLibrary {
             Restaurant r = restaurantDB.GetById(restaurantID);
             return r;
              * */
-
+/*
             Restaurant r = new Restaurant();
             r.ID = 1;
             r.Name = "Red Sails";
@@ -71,7 +71,9 @@ namespace PizzaWaiterServiceLibrary {
 
             r.Menues.Add(m1);
             r.Menues.Add(m2);
-            return r;
+            return r;*/
+
+            return null;
         }
     }
 }

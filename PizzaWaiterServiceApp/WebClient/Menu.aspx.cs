@@ -22,10 +22,13 @@ namespace WebClient {
         }
 
         protected void BindMenu() {
-            
-            
-            this.rptMenu.DataSource = Globals.Restaurants.FirstOrDefault(x => x.ID == RestaurantID).Menues;
+            this.rptMenu.DataSource = Globals.Restaurants.FirstOrDefault(x => x.ID == RestaurantID).RestaurantMenues;
             this.rptMenu.DataBind();
+        }
+
+        protected string GetMenuTitle(string id) {
+            int menuId = Convert.ToInt32(id);
+
         }
         /*
         protected IEnumerable<Child> GetChildren(object item) {
