@@ -11,8 +11,27 @@ namespace PizzaWaiterServiceLibrary {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class PizzaWaiterTestService : IPizzaWaiterTestService {
         public Restaurant getAllMenues(int restaurantID) {
+            /*
             RestaurantDB restaurantDB = new RestaurantDB();
             Restaurant r = restaurantDB.GetById(restaurantID);
+            return r;
+             * */
+
+            Restaurant r = new Restaurant();
+            r.ID = 1;
+            r.Name = "Red Sails";
+            r.Menues = new List<Menu>();
+
+            Menu m1 = new Menu();
+            m1.ID = 1;
+            m1.Title = "Pizza";
+
+            Menu m2 = new Menu();
+            m2.ID = 2;
+            m2.Title = "Drinks";
+
+            r.Menues.Add(m1);
+            r.Menues.Add(m2);
             return r;
         }
     }

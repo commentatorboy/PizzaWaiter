@@ -23,10 +23,15 @@ namespace WebClient {
         protected void GetRestaurants() {
             /// TODO: Create method at service
             IPizzaWaiterTestService p = Proxy.Get();
-            /*List<Restaurant> restaurants = p.GetLocalRestaurants().ToList();
+            List<Restaurant> restaurants = new List<Restaurant>();//p.GetLocalRestaurants().ToList();
+            Restaurant r = new Restaurant();
+            r.ID = 1;
+            r.Name = "Red Sails";
+
+            restaurants.Add(r);
             rptRestaurants.DataSource = restaurants;
             rptRestaurants.DataBind();
-             * */
+            
              
 
         }
