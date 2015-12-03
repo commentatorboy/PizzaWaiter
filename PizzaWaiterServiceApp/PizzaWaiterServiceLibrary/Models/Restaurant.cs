@@ -21,15 +21,23 @@ namespace Models {
         public int ID { get; set; }
         [DataMember]
         public String Name { get; set; }
+
+        /// <summary>
+        ///  TODO: is temporary, remove
+        /// </summary>
+        /// 
+        private List<Menu> menues;
         [DataMember]
-        public List<Menu> Menues
-        {
+        public List<Menu> Menues {
             get
             {
-                return GetMenues();
+                //return GetMenues();
+                return menues;
+
             }
-            set
-            {
+            set {
+                /// TODO: temp, remove:
+                menues = value;
                 /// TODO: Order it by Position
             }
         }
@@ -232,11 +240,14 @@ namespace Models {
         }
 
         public Restaurant GetById(int id) {
-            //return this.GetAll().FirstOrDefault(x => x.ID == id);
-            Restaurant r = new Restaurant();
+            return this.GetAll().FirstOrDefault(x => x.ID == id);
+            
+            /*
+             * Restaurant r = new Restaurant();
             r.Name = "The best";
             r.ID = 1;
             return r;
+             * */
         }
     }
 }
