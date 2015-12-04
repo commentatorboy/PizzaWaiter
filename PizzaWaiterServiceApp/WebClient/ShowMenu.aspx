@@ -3,8 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+    <asp:Literal ID="ltTest" runat="server"></asp:Literal>
     <asp:Literal ID="ltRestaurantTitle" runat="server"></asp:Literal>
+    
     <ul>
         <asp:Repeater ID="rptMenu" runat="server">
             <HeaderTemplate>Pick restaurant:</HeaderTemplate>
@@ -21,20 +22,23 @@
 
                             <ItemTemplate>
                                 <li>
-                                    <asp:Literal ID="Literal2" runat="server" Text='<%#Eval("Name") %>'></asp:Literal></li>
-                                
-                                <asp:Repeater ID="rptIngredient" runat="server" DataSource='<%#GetIngredients(Container.DataItem)%>'>
-
-                                    <ItemTemplate>
-
-                                        <asp:Literal ID="Literal2" runat="server" Text='<%#FormatIngredientName((WebClient.PizzaWaiterTestServiceReference.Ingredient)Eval("Ingredient")) %>'></asp:Literal>
+                                    <asp:LinkButton ID="addToOrder" CommandName='addToOrder' CommandArgument='<%#Eval("ID") %>' OnCommand="blAddToOrder" runat="server">
                                     
-                                    </ItemTemplate>
-                                    <HeaderTemplate>(</HeaderTemplate>
-                                    <SeparatorTemplate>, </SeparatorTemplate>
-                                    <FooterTemplate>)</FooterTemplate>
+                                        <asp:Literal ID="ltDishName" runat="server" Text='<%#Eval("Name") %>'></asp:Literal>
 
-                                </asp:Repeater>
+                                        <asp:Repeater ID="rptIngredient" runat="server" DataSource='<%#GetIngredients(Container.DataItem)%>'>
+
+                                            <ItemTemplate>
+
+                                                <asp:Literal ID="Literal2" runat="server" Text='<%#FormatIngredientName((WebClient.PizzaWaiterTestServiceReference.Ingredient)Eval("Ingredient")) %>'></asp:Literal>
+
+                                            </ItemTemplate>
+                                            <HeaderTemplate>(</HeaderTemplate>
+                                            <SeparatorTemplate>, </SeparatorTemplate>
+                                            <FooterTemplate>)</FooterTemplate>
+
+                                        </asp:Repeater>
+                                    </asp:LinkButton>
                                 </li>
 
 

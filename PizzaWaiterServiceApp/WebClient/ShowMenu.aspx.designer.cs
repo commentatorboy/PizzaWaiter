@@ -13,6 +13,15 @@ namespace WebClient {
     public partial class ShowMenu {
         
         /// <summary>
+        /// ltTest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltTest;
+        
+        /// <summary>
         /// ltRestaurantTitle control.
         /// </summary>
         /// <remarks>

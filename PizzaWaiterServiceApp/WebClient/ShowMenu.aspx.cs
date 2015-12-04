@@ -48,6 +48,10 @@ namespace WebClient {
 
         protected string FormatIngredientName(WebClient.PizzaWaiterTestServiceReference.Ingredient i)
         {
+            string result = "";
+            if (i!=null) {
+                result = i.Name;
+            }
             return i.Name;
         }
 
@@ -59,6 +63,11 @@ namespace WebClient {
             return il;
         }
 
+        protected void blAddToOrder(object sender, CommandEventArgs e) {
+            
+            int dishId = Convert.ToInt32(e.CommandArgument);
+            this.ltTest.Text = "adding dish...." + dishId;
+        }
 
 
     }
