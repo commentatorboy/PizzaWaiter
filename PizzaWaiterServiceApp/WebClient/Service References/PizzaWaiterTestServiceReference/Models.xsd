@@ -1,5 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfPartOrder">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PartOrder" nillable="true" type="tns:PartOrder" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPartOrder" nillable="true" type="tns:ArrayOfPartOrder" />
+  <xs:complexType name="PartOrder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:int" />
+      <xs:element minOccurs="0" name="Dish" nillable="true" type="tns:Dish" />
+      <xs:element minOccurs="0" name="DishID" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Order" nillable="true" type="tns:Order" />
+      <xs:element minOccurs="0" name="OrderID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PartOrder" nillable="true" type="tns:PartOrder" />
+  <xs:complexType name="Dish">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Number" type="xs:int" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="RestaurantMenuID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Dish" nillable="true" type="tns:Dish" />
+  <xs:complexType name="Order">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressID" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="StatusID" type="tns:OrderStatus" />
+      <xs:element minOccurs="0" name="UserID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Order" nillable="true" type="tns:Order" />
+  <xs:simpleType name="OrderStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default" />
+      <xs:enumeration value="WAITING" />
+      <xs:enumeration value="COOKING" />
+      <xs:enumeration value="TRANPORTING" />
+      <xs:enumeration value="RECIEVED" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrderStatus" nillable="true" type="tns:OrderStatus" />
   <xs:complexType name="ArrayOfDishIngredient">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="DishIngredient" nillable="true" type="tns:DishIngredient" />
@@ -16,16 +62,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DishIngredient" nillable="true" type="tns:DishIngredient" />
-  <xs:complexType name="Dish">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Number" type="xs:int" />
-      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
-      <xs:element minOccurs="0" name="RestaurantMenuID" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Dish" nillable="true" type="tns:Dish" />
   <xs:complexType name="Ingredient">
     <xs:sequence>
       <xs:element minOccurs="0" name="ID" type="xs:int" />

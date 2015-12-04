@@ -54,6 +54,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handlers\Tools.cs" />
     <Compile Include="IPizzaWaiterTestService.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\CustomIngredient.cs" />

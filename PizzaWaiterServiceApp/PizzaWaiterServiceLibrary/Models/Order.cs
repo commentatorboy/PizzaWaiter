@@ -12,19 +12,26 @@ namespace Models {
     public class Order : SqlModel {
 
         private OrderDB orderDB; //related DB handler (required)
+        private UserDB userDB;
+        private AddressDB addressDB;
+        
 
         /*Object properties (custom)*/
         public int ID { get; set; }
         public int UserID { get; set; }
         public int AddressID { get; set; }
-        public int StatusID { get; set; }
+        public OrderStatus StatusID { get; set; }
+
+        
+
+
 
         /*Build Object (required)*/
         public void BuildObject(DataRow row) {
             this.ID = SqlFormat.ToInt(row, "ID");
             this.UserID = SqlFormat.ToInt(row,"UserID");
             this.AddressID = SqlFormat.ToInt(row, "AddressID");
-            this.StatusID = SqlFormat.ToInt(row, "StatusID");
+            this.StatusID = (OrderStatus)SqlFormat.ToInt(row, "StatusID");
 
         }
 
@@ -35,7 +42,12 @@ namespace Models {
             if (this.orderDB == null) {
                 this.orderDB = new OrderDB();
             }
-
+            if (this.userDB == null) {
+                this.userDB = new UserDB();
+            }
+            if (this.addressDB == null) {
+                this.addressDB = new AddressDB();
+            }
         }
 
         /* Adds order to db */
@@ -70,7 +82,7 @@ namespace Models {
             //data.Set("ID", i.ID);
             data.Set("UserID", i.UserID);
             data.Set("AddressID", i.AddressID);
-            data.Set("StatusID", i.StatusID);
+            data.Set("StatusID", (int)i.StatusID);
             return data;
         }
 

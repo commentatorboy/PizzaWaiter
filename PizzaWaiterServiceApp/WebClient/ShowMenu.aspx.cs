@@ -15,7 +15,9 @@ namespace WebClient {
         /// TODO: prop proxy
         IPizzaWaiterTestService proxy;
         private int RestaurantID;
-        List<RestaurantMenu> restaurantMenues; 
+        List<RestaurantMenu> restaurantMenues;
+        List<PartOrder> order;
+
         protected void Page_Load(object sender, EventArgs e) {
             if (!IsPostBack) {
                 proxy = Proxy.Get();
@@ -25,7 +27,7 @@ namespace WebClient {
                     BindMenu();
                 }
 
-                //List<PartOrder> 
+                order = new List<PartOrder>(); 
             }
         }
 
@@ -68,6 +70,17 @@ namespace WebClient {
             
             int dishId = Convert.ToInt32(e.CommandArgument);
             this.ltTest.Text = "adding dish...." + dishId;
+
+            
+            /*
+            PartOrder exists = order.FirstOrDefault(x => x.DishID == dishId);
+            if exists 
+
+            PartOrder po = new PartOrder();
+            po.DishID = dishId;
+            po.Amount = 0;
+             * */
+
         }
 
 

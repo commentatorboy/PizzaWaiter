@@ -12,21 +12,23 @@ namespace PizzaWaiterServiceLibrary {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class PizzaWaiterTestService : IPizzaWaiterTestService {
 
+
         public PizzaWaiterTestService()
         {
-            
+            /*
             SqlConfig.SqlServer = "(localdb)\\V11.0";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            
-            //SqlConfig.SqlServer = "ALEXANDRALAPTOP\\SQLEXPRESS";
-            //SqlConfig.SqlDatabase = "PizzaWaiter";
+            */
+            SqlConfig.SqlServer = "ALEXANDRALAPTOP\\SQLEXPRESS";
+            SqlConfig.SqlDatabase = "PizzaWaiter";
             
         }
         
-        public void ProcessOrder(Order order)
+        public bool ProcessOrder(List<PartOrder> partOrders, string phoneNr, string address)
         {
             PartOrderDB poDB = new PartOrderDB();
             poDB.GetAll();
+            return true;
         }
 
         public List<DishIngredient> GetIngredientsByDishId(int dishID)

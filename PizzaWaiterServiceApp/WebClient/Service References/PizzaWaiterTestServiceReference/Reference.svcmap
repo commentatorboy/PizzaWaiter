@@ -25,6 +25,7 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="5f07ad33-52ee-46bc-9055-faa3feecc7b8" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="9c304fd3-6b0b-49ee-8312-05968b09b1dc" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="2de709d6-651c-4e28-84c5-74272d6391ef" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="2ce1ceaf-9694-4133-b34c-c925811b7c4e" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" />
     <MetadataFile FileName="Models.xsd" MetadataType="Schema" ID="dafeccd1-5dd1-4e3f-b260-56d757f7ccf5" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" />
   </Metadata>
   <Extensions>

@@ -159,6 +159,9 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <None Include="Service References\PizzaWaiterTestServiceReference\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\PizzaWaiterTestServiceReference\configuration91.svcinfo" />
     <None Include="Service References\PizzaWaiterTestServiceReference\configuration.svcinfo" />
     <None Include="Service References\PizzaWaiterTestServiceReference\Reference.svcmap">

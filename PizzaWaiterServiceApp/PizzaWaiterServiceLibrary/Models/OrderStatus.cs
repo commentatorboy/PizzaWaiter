@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Models {
-    enum OrderStatus{
+    public enum OrderStatus{
         Default = 0,
         WAITING = 1,
         COOKING = 2,
