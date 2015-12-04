@@ -163,6 +163,7 @@
     <None Include="Service References\PizzaWaiterTestServiceReference\configuration.svcinfo" />
     <None Include="Service References\PizzaWaiterTestServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="ShowMenu.aspx" />
     <Content Include="Web.config" />
@@ -178,16 +179,16 @@
     <None Include="Service References\PizzaWaiterTestServiceReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Service References\PizzaWaiterTestServiceReference\WebClient.PizzaWaiterTestServiceReference.Restaurant.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\PizzaWaiterTestServiceReference\WebClient.PizzaWaiterTestServiceReference.RestaurantMenu.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Service References\PizzaWaiterTestServiceReference\WebClient.PizzaWaiterTestServiceReference.Dish.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\PizzaWaiterTestServiceReference\WebClient.PizzaWaiterTestServiceReference.DishIngredient.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\PizzaWaiterTestServiceReference\WebClient.PizzaWaiterTestServiceReference.Restaurant.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\PizzaWaiterTestServiceReference\WebClient.PizzaWaiterTestServiceReference.RestaurantMenu.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
@@ -208,6 +209,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Service References\PizzaWaiterTestServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ShowMenu.aspx.cs">
       <DependentUpon>ShowMenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -218,11 +224,6 @@
     <Compile Include="Models\Globals.cs" />
     <Compile Include="Models\Proxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\PizzaWaiterTestServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Templates\Global.Master.cs">
       <DependentUpon>Global.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

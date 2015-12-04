@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using CustomHandlers.DatabaseLibrary;
@@ -9,17 +10,39 @@ using CustomHandlers.DatabaseLibrary;
 namespace Models
 {
     /* Describes an object */
+    [DataContract]
     public class PartOrder : SqlModel
     {
 
         private PartOrderDB partOrderDB; //related DB handler (required)
+        private DishDB dishDB;
+        private OrderDB orderDB;
 
         /*Object properties (custom)*/
+        [DataMember]
         public int ID { get; set; }
+        [DataMember]
         public int DishID { get; set; }
+        [DataMember]
         public int OrderID { get; set; }
+        [DataMember]
         public int Amount { get; set; }
 
+        [DataMember]
+        public Dish Dish {
+            get { return this.dishDB.GetById(this.DishID); }
+            set {  }
+        }
+        [DataMember]
+        public Order Order {
+            get { return this.orderDB.GetById(this.OrderID); }
+            set { }
+        }
+        
+
+        public PartOrder() {
+            Connect();
+        }
         /*Build Object (required)*/
         public void BuildObject(DataRow row)
         {
@@ -37,6 +60,12 @@ namespace Models
             if (this.partOrderDB == null)
             {
                 this.partOrderDB = new PartOrderDB();
+            }
+            if (this.orderDB == null) {
+                this.orderDB = new OrderDB();
+            }
+            if (this.dishDB == null) {
+                this.dishDB = new DishDB();
             }
 
         }

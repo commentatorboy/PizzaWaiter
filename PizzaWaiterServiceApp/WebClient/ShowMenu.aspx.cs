@@ -24,7 +24,8 @@ namespace WebClient {
                     restaurantMenues = proxy.GetRestaurantMenues(RestaurantID).ToList();
                     BindMenu();
                 }
-                
+
+                //List<PartOrder> 
             }
         }
 
