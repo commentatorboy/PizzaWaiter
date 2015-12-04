@@ -11,6 +11,10 @@ namespace PizzaWaiterServiceLibrary {
     [ServiceContract]
     public interface IPizzaWaiterTestService {
         [OperationContract]
+        List<DishIngredient> GetIngredientsByDishId(int dishID);
+        [OperationContract]
+        List<Dish> GetDishesByRestaurantMenuId(int restaurantMenuID);
+        [OperationContract]
         List<RestaurantMenu> GetRestaurantMenues(int restaurantID); 
         [OperationContract]
         List<Restaurant> GetLocalRestaurants(decimal latitude, decimal longtitude);

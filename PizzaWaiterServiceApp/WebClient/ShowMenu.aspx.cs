@@ -34,15 +34,32 @@ namespace WebClient {
             this.rptMenu.DataBind();
         }
 
+        
+
         protected string FormatMenuTitle(WebClient.PizzaWaiterTestServiceReference.Menu m) {
             return m.Title;
         }
-        /*
+        
         protected IEnumerable<Dish> GetDishes(object item) {
             RestaurantMenu rm = (RestaurantMenu)item;
-            List<Dish> dl = proxy.GetDishesByRestaurantMenuId();
+            List<Dish> dl = proxy.GetDishesByRestaurantMenuId(rm.ID).ToList();
             return dl;
         }
-         */
+
+        protected string FormatIngredientName(WebClient.PizzaWaiterTestServiceReference.Ingredient i)
+        {
+            return i.Name;
+        }
+
+        protected IEnumerable<DishIngredient> GetIngredients(object item)
+        {
+            Dish di = (Dish)item;
+
+            List<DishIngredient> il = proxy.GetIngredientsByDishId(di.ID).ToList();
+            return il;
+        }
+
+
+
     }
 }

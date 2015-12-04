@@ -17,16 +17,30 @@
                         Text='<%#FormatMenuTitle((WebClient.PizzaWaiterTestServiceReference.Menu)Eval("Menu")) %>'></asp:Literal>
 
                     <ul>
-                        <asp:Repeater ID="rptMenuItems" runat="server" DataSource='<%#GetDishes(Container.DataItem)%>'>
+                        <asp:Repeater ID="rptDish" runat="server" DataSource='<%#GetDishes(Container.DataItem)%>'>
 
                             <ItemTemplate>
                                 <li>
                                     <asp:Literal ID="Literal2" runat="server" Text='<%#Eval("Name") %>'></asp:Literal></li>
+                                (
+                                <asp:Repeater ID="rptIngredient" runat="server" DataSource='<%#GetIngredients(Container.DataItem)%>'>
+
+                                    <ItemTemplate>
+
+                                        <asp:Literal ID="Literal2" runat="server" Text='<%#FormatIngredientName((WebClient.PizzaWaiterTestServiceReference.Ingredient)Eval("Ingredient")) %>'></asp:Literal>
+                                    
+                                    </ItemTemplate>
+                                    <SeparatorTemplate>, </SeparatorTemplate>
+
+                                </asp:Repeater>)
                                 </li>
+
+
                             </ItemTemplate>
 
+
                         </asp:Repeater>
-                     </ul>
+                    </ul>
                 </li>
             </ItemTemplate>
         </asp:Repeater>

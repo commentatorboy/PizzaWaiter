@@ -11,15 +11,31 @@ namespace PizzaWaiterServiceLibrary {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class PizzaWaiterTestService : IPizzaWaiterTestService {
+
         public PizzaWaiterTestService()
         {
-            /*
+            
             SqlConfig.SqlServer = "(localdb)\\V11.0";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-             * */
+             /*
             SqlConfig.SqlServer = "ALEXANDRALAPTOP\\SQLEXPRESS";
             SqlConfig.SqlDatabase = "PizzaWaiter";
+            */
         }
+
+        public List<DishIngredient> GetIngredientsByDishId(int dishID)
+        {
+            DishIngredientDB dishIngredientDB = new DishIngredientDB();
+            return dishIngredientDB.GetByDishId(dishID);
+        }
+
+        public List<Dish> GetDishesByRestaurantMenuId(int restaurantMenuID)
+        {
+            DishDB dishDB = new DishDB();
+            return dishDB.GetByRestaurantMenuId(restaurantMenuID);
+        }
+
+
         public List<Restaurant> GetLocalRestaurants(decimal latitude, decimal longtitude)
         {
             //List<Restaurant> restaurants = new List<Restaurant>();

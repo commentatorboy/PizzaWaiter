@@ -9,7 +9,7 @@
             <ItemTemplate>
                 <li>
 
-                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# Eval("ID", "~/Menu.aspx?ID={0}") %>'>
+                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# Eval("ID", "~/ShowMenu.aspx?ID={0}") %>'>
                         <asp:Literal ID="Literal1" runat="server" Text='<%#Eval("Name") %>'></asp:Literal>
                     </asp:HyperLink>
                 </li>
