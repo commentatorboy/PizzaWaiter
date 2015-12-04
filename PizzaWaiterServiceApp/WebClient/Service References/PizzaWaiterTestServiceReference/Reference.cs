@@ -26,6 +26,9 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         private int AmountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebClient.PizzaWaiterTestServiceReference.CustomIngredient[] CustomIngredientsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private WebClient.PizzaWaiterTestServiceReference.Dish DishField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -59,6 +62,19 @@ namespace WebClient.PizzaWaiterTestServiceReference {
                 if ((this.AmountField.Equals(value) != true)) {
                     this.AmountField = value;
                     this.RaisePropertyChanged("Amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public WebClient.PizzaWaiterTestServiceReference.CustomIngredient[] CustomIngredients {
+            get {
+                return this.CustomIngredientsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CustomIngredientsField, value) != true)) {
+                    this.CustomIngredientsField = value;
+                    this.RaisePropertyChanged("CustomIngredients");
                 }
             }
         }
@@ -326,6 +342,99 @@ namespace WebClient.PizzaWaiterTestServiceReference {
                 if ((this.UserIDField.Equals(value) != true)) {
                     this.UserIDField = value;
                     this.RaisePropertyChanged("UserID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CustomIngredient", Namespace="http://schemas.datacontract.org/2004/07/Models")]
+    [System.SerializableAttribute()]
+    public partial class CustomIngredient : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IncludeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IngredientIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PartOrderIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Include {
+            get {
+                return this.IncludeField;
+            }
+            set {
+                if ((this.IncludeField.Equals(value) != true)) {
+                    this.IncludeField = value;
+                    this.RaisePropertyChanged("Include");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IngredientID {
+            get {
+                return this.IngredientIDField;
+            }
+            set {
+                if ((this.IngredientIDField.Equals(value) != true)) {
+                    this.IngredientIDField = value;
+                    this.RaisePropertyChanged("IngredientID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PartOrderID {
+            get {
+                return this.PartOrderIDField;
+            }
+            set {
+                if ((this.PartOrderIDField.Equals(value) != true)) {
+                    this.PartOrderIDField = value;
+                    this.RaisePropertyChanged("PartOrderID");
                 }
             }
         }
@@ -781,12 +890,6 @@ namespace WebClient.PizzaWaiterTestServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PizzaWaiterTestServiceReference.IPizzaWaiterTestService")]
     public interface IPizzaWaiterTestService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/TestHeavyObject", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/TestHeavyObjectResponse")]
-        bool TestHeavyObject(string[][] heavyObject);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/TestHeavyObject", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/TestHeavyObjectResponse")]
-        System.Threading.Tasks.Task<bool> TestHeavyObjectAsync(string[][] heavyObject);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/ProcessOrder", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/ProcessOrderResponse")]
         bool ProcessOrder(WebClient.PizzaWaiterTestServiceReference.PartOrder[] partOrders, string phoneNr, string address);
         
@@ -843,14 +946,6 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         
         public PizzaWaiterTestServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
-        }
-        
-        public bool TestHeavyObject(string[][] heavyObject) {
-            return base.Channel.TestHeavyObject(heavyObject);
-        }
-        
-        public System.Threading.Tasks.Task<bool> TestHeavyObjectAsync(string[][] heavyObject) {
-            return base.Channel.TestHeavyObjectAsync(heavyObject);
         }
         
         public bool ProcessOrder(WebClient.PizzaWaiterTestServiceReference.PartOrder[] partOrders, string phoneNr, string address) {

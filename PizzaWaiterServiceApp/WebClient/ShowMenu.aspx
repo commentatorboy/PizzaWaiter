@@ -59,7 +59,7 @@
 
                 <ItemTemplate>
                     <li>
-
+                        <asp:Literal runat="server" ID="ltPartOrder" Text='<%#FormatPartOrder(Container.DataItem) %>'></asp:Literal>
                     </li>
                 </ItemTemplate>
             </asp:Repeater>

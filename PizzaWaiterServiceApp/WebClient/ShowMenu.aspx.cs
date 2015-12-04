@@ -67,22 +67,44 @@ namespace WebClient {
         }
 
         protected void blAddToOrder(object sender, CommandEventArgs e) {
-            
             int dishId = Convert.ToInt32(e.CommandArgument);
             this.ltTest.Text = "adding dish...." + dishId;
 
+            List<PartOrder> sameDishes = order.Where(x => x.DishID == dishId).ToList();
             
-            /*
-            PartOrder exists = order.FirstOrDefault(x => x.DishID == dishId);
-            if exists 
+            if (sameDishes.Count==0) {
+                //add part order
+                this.AddPartOrder(dishId);
+            } else {
+                PartOrder unchanged = sameDishes.FirstOrDefault(x => x.CustomIngredients.Count() == 0);
+                if (unchanged!=null) {
+                    unchanged.Amount++;
+                } else {
+                    this.AddPartOrder(dishId);
+                }
+                // found unchanged dish in order, and new dish is unchanged => increment
+                // new dish is changed and a changes match is found in order => increment
+                // new dish is changed and a changes match is not found in order => new part order
 
-            PartOrder po = new PartOrder();
-            po.DishID = dishId;
-            po.Amount = 0;
-             * */
-
+                this.rptOrder.DataSource = this.order;
+                this.rptOrder.DataBind();
+            }
         }
 
+        protected void AddPartOrder(int dishId) {
+            PartOrder po = new PartOrder();
+            po.DishID = dishId;
+            po.Amount = 1;
+            this.order.Add(po);
+        }
 
+        protected void IncrementPartOrder() {
+        }
+
+        protected string FormatPartOrder(object item) {
+            PartOrder po = (PartOrder)item;
+            string result = string.Format("{0} - {1}x{2} kr",po.Dish.Name,po.Amount,po.Dish.Price);
+            return "";
+        }
     }
 }

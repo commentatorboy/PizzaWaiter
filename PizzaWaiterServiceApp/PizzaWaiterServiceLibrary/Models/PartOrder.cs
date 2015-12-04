@@ -38,6 +38,9 @@ namespace Models
             get { return this.orderDB.GetById(this.OrderID); }
             set { }
         }
+
+        [DataMember]
+        public List<CustomIngredient> CustomIngredients { get; set; }
         
 
         public PartOrder() {

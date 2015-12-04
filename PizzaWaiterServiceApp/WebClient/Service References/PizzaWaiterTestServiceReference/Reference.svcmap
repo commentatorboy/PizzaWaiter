@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="c4b45b88-cfc6-4510-a99c-f6941a04a7a3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="445402b6-3dd9-4840-b566-d95ecd891a3f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,11 +22,10 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="5f07ad33-52ee-46bc-9055-faa3feecc7b8" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="9c304fd3-6b0b-49ee-8312-05968b09b1dc" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="2de709d6-651c-4e28-84c5-74272d6391ef" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" />
-    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="2ce1ceaf-9694-4133-b34c-c925811b7c4e" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" />
-    <MetadataFile FileName="Models.xsd" MetadataType="Schema" ID="dafeccd1-5dd1-4e3f-b260-56d757f7ccf5" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="7abb31e5-dffd-4799-9568-fca6a01005ad" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="3655fcca-f0cf-4813-afd7-960d30c3226d" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="c2fab204-8d49-48bb-9eab-44ab5e0b3570" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" />
+    <MetadataFile FileName="Models.xsd" MetadataType="Schema" ID="b7d285d8-f5b8-4c47-abb4-2c8197b684a9" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/PizzaWaiterServiceLibrary/TestService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
