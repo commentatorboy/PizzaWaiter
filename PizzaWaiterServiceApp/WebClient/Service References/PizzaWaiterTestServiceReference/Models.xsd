@@ -1,5 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfDishIngredient">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DishIngredient" nillable="true" type="tns:DishIngredient" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDishIngredient" nillable="true" type="tns:ArrayOfDishIngredient" />
+  <xs:complexType name="DishIngredient">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Dish" nillable="true" type="tns:Dish" />
+      <xs:element minOccurs="0" name="DishID" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Ingredient" nillable="true" type="tns:Ingredient" />
+      <xs:element minOccurs="0" name="IngredientID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DishIngredient" nillable="true" type="tns:DishIngredient" />
+  <xs:complexType name="Dish">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Number" type="xs:int" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="RestaurantMenuID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Dish" nillable="true" type="tns:Dish" />
+  <xs:complexType name="Ingredient">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Ingredient" nillable="true" type="tns:Ingredient" />
+  <xs:complexType name="ArrayOfDish">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Dish" nillable="true" type="tns:Dish" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDish" nillable="true" type="tns:ArrayOfDish" />
   <xs:complexType name="ArrayOfRestaurantMenu">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="RestaurantMenu" nillable="true" type="tns:RestaurantMenu" />

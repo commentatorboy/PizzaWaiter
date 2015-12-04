@@ -96,6 +96,82 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IPizzaWaiterTestService_GetIngredientsByDishId_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IPizzaWaiterTestService_GetIngredientsByDishId_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IPizzaWaiterTestService_GetDishesByRestaurantMenuId_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IPizzaWaiterTestService_GetDishesByRestaurantMenuId_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IPizzaWaiterTestService_GetRestaurantMenues_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -179,6 +255,18 @@
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Models" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IPizzaWaiterTestService_GetIngredientsByDishId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIngredientsByDishId" />
+  </wsdl:message>
+  <wsdl:message name="IPizzaWaiterTestService_GetIngredientsByDishId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIngredientsByDishIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPizzaWaiterTestService_GetDishesByRestaurantMenuId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDishesByRestaurantMenuId" />
+  </wsdl:message>
+  <wsdl:message name="IPizzaWaiterTestService_GetDishesByRestaurantMenuId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDishesByRestaurantMenuIdResponse" />
+  </wsdl:message>
   <wsdl:message name="IPizzaWaiterTestService_GetRestaurantMenues_InputMessage">
     <wsdl:part name="parameters" element="tns:GetRestaurantMenues" />
   </wsdl:message>
@@ -192,6 +280,14 @@
     <wsdl:part name="parameters" element="tns:GetLocalRestaurantsResponse" />
   </wsdl:message>
   <wsdl:portType name="IPizzaWaiterTestService">
+    <wsdl:operation name="GetIngredientsByDishId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPizzaWaiterTestService/GetIngredientsByDishId" message="tns:IPizzaWaiterTestService_GetIngredientsByDishId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPizzaWaiterTestService/GetIngredientsByDishIdResponse" message="tns:IPizzaWaiterTestService_GetIngredientsByDishId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDishesByRestaurantMenuId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPizzaWaiterTestService/GetDishesByRestaurantMenuId" message="tns:IPizzaWaiterTestService_GetDishesByRestaurantMenuId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPizzaWaiterTestService/GetDishesByRestaurantMenuIdResponse" message="tns:IPizzaWaiterTestService_GetDishesByRestaurantMenuId_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetRestaurantMenues">
       <wsdl:input wsaw:Action="http://tempuri.org/IPizzaWaiterTestService/GetRestaurantMenues" message="tns:IPizzaWaiterTestService_GetRestaurantMenues_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPizzaWaiterTestService/GetRestaurantMenuesResponse" message="tns:IPizzaWaiterTestService_GetRestaurantMenues_OutputMessage" />
@@ -204,6 +300,28 @@
   <wsdl:binding name="WSHttpBinding_IPizzaWaiterTestService" type="tns:IPizzaWaiterTestService">
     <wsp:PolicyReference URI="#WSHttpBinding_IPizzaWaiterTestService_policy" />
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetIngredientsByDishId">
+      <soap12:operation soapAction="http://tempuri.org/IPizzaWaiterTestService/GetIngredientsByDishId" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IPizzaWaiterTestService_GetIngredientsByDishId_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IPizzaWaiterTestService_GetIngredientsByDishId_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDishesByRestaurantMenuId">
+      <soap12:operation soapAction="http://tempuri.org/IPizzaWaiterTestService/GetDishesByRestaurantMenuId" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IPizzaWaiterTestService_GetDishesByRestaurantMenuId_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IPizzaWaiterTestService_GetDishesByRestaurantMenuId_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetRestaurantMenues">
       <soap12:operation soapAction="http://tempuri.org/IPizzaWaiterTestService/GetRestaurantMenues" style="document" />
       <wsdl:input>

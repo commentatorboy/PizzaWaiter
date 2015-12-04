@@ -185,6 +185,12 @@
     <Content Include="Service References\PizzaWaiterTestServiceReference\WebClient.PizzaWaiterTestServiceReference.RestaurantMenu.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\PizzaWaiterTestServiceReference\WebClient.PizzaWaiterTestServiceReference.Dish.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\PizzaWaiterTestServiceReference\WebClient.PizzaWaiterTestServiceReference.DishIngredient.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

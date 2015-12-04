@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using CustomHandlers.DatabaseLibrary;
@@ -9,13 +10,16 @@ using CustomHandlers.DatabaseLibrary;
 namespace Models
 {
     /* Describes an object */
+    [DataContract]
     public class Ingredient : SqlModel
     {
 
         private IngredientDB dishDB; //related DB handler (required)
 
         /*Object properties (custom)*/
+        [DataMember]
         public int ID { get; set; }
+        [DataMember]
         public string Name { get; set; }
 
         /*Build Object (required)*/
