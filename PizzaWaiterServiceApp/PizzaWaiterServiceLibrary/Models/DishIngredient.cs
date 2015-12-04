@@ -18,7 +18,8 @@ namespace Models
         private DishIngredientDB dishIngredientDB; //related DB handler (required)
 
         private DishDB dishDB;
-        private IngredientDB menuDB;
+        private IngredientDB ingredientDB;
+        
 
         /*Object properties (custom)*/
         [DataMember]
@@ -74,7 +75,7 @@ namespace Models
         private Ingredient GetIngredient()
         {
             //this.Connect();
-            return this.menuDB.GetById(this.IngredientID);
+            return this.ingredientDB.GetById(this.IngredientID);
         }
         private Dish GetDish()
         {
@@ -94,6 +95,9 @@ namespace Models
             if (this.dishDB == null)
             {
                 this.dishDB = new DishDB();
+            }
+            if (this.ingredientDB == null) {
+                this.ingredientDB = new IngredientDB();
             }
         }
 

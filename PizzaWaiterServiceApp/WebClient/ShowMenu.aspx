@@ -22,7 +22,7 @@
                             <ItemTemplate>
                                 <li>
                                     <asp:Literal ID="Literal2" runat="server" Text='<%#Eval("Name") %>'></asp:Literal></li>
-                                (
+                                
                                 <asp:Repeater ID="rptIngredient" runat="server" DataSource='<%#GetIngredients(Container.DataItem)%>'>
 
                                     <ItemTemplate>
@@ -30,9 +30,11 @@
                                         <asp:Literal ID="Literal2" runat="server" Text='<%#FormatIngredientName((WebClient.PizzaWaiterTestServiceReference.Ingredient)Eval("Ingredient")) %>'></asp:Literal>
                                     
                                     </ItemTemplate>
+                                    <HeaderTemplate>(</HeaderTemplate>
                                     <SeparatorTemplate>, </SeparatorTemplate>
+                                    <FooterTemplate>)</FooterTemplate>
 
-                                </asp:Repeater>)
+                                </asp:Repeater>
                                 </li>
 
 

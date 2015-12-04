@@ -163,7 +163,6 @@
     <None Include="Service References\PizzaWaiterTestServiceReference\configuration.svcinfo" />
     <None Include="Service References\PizzaWaiterTestServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="ShowMenu.aspx" />
     <Content Include="Web.config" />
