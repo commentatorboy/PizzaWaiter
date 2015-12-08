@@ -8,7 +8,9 @@
     <div>
         <ul>
             <asp:Repeater ID="rptMenu" runat="server">
-                <HeaderTemplate><h1>Menu</h1></HeaderTemplate>
+                <HeaderTemplate>
+                    <h1>Menu</h1>
+                </HeaderTemplate>
                 <ItemTemplate>
                     <li>
 
@@ -55,13 +57,18 @@
     <div>
         <h1>Order</h1>
         <ul>
-            <asp:Repeater ID ="rptOrder" runat="server">
-
+            <asp:Repeater ID="rptOrder" runat="server">
                 <ItemTemplate>
                     <li>
-                        <asp:Literal runat="server" ID="ltPartOrder" Text='<%#FormatPartOrder(Container.DataItem) %>'></asp:Literal>
+                        <asp:LinkButton ID="lbRemoveFromOrder" CommandName='<%#GetDishIngredientsFromPartOrder(Container.DataItem) %>' 
+                            CommandArgument='<%#GetDishIdFromPartOrder(Container.DataItem) %>' OnCommand="removeDishFromOrder" runat="server">
+                            <asp:Literal runat="server" ID="ltPartOrder" Text='<%#FormatPartOrder(Container.DataItem) %>'></asp:Literal>
+                       </asp:LinkButton>
                     </li>
                 </ItemTemplate>
+                <FooterTemplate>
+                    <asp:Literal runat="server" ID="ltPrice" Text='<%#string.Format("Total: {0}",CalculatePrice()) %>'></asp:Literal>
+                </FooterTemplate>
             </asp:Repeater>
 
         </ul>

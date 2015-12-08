@@ -72,7 +72,7 @@ namespace WebClient {
             int dishId = Convert.ToInt32(e.CommandArgument);
             this.ltTest.Text = "adding dish...." + dishId;
 
-            List<PartOrder> sameDishes = order.Where(x => x.DishID == dishId).ToList();
+            List<PartOrder> sameDishes = order.Where(x => x.Dish.ID == dishId).ToList();
             
             if (sameDishes.Count==0) {
                 //add part order
@@ -87,16 +87,49 @@ namespace WebClient {
                 // found unchanged dish in order, and new dish is unchanged => increment
                 // new dish is changed and a changes match is found in order => increment
                 // new dish is changed and a changes match is not found in order => new part order
-
-                
             }
+            this.BindOrder();
+        }
+
+        protected string GetDishIdFromPartOrder(object item)
+        {
+            string result = "";
+            PartOrder po = (PartOrder) item;
+            result = po.Dish.ID.ToString();
+            return result;
+        }
+        protected string GetDishIngredientsFromPartOrder(object item)
+        {
+            string result = "";
+            PartOrder po = (PartOrder) item;
+            return result;
+        }
+        protected void removeDishFromOrder(object sender, CommandEventArgs e) {
+            int dishID = Convert.ToInt32(e.CommandArgument);
+            List<PartOrder> match = order.Where(x => x.Dish.ID == dishID).ToList();
+
+            string ingredients = e.CommandName;
+            if (ingredients == "") {
+                PartOrder po = match.FirstOrDefault(x => x.CustomIngredients.Count() == 0);
+                if (po.Amount==1) {
+                    order.Remove(po);
+                } else {
+                    po.Amount--;
+                }
+            }
+            this.BindOrder();
+
+        }
+        protected void BindOrder() {
             this.rptOrder.DataSource = order;
             this.rptOrder.DataBind();
         }
-
         protected void AddPartOrder(int dishId) {
             PartOrder po = new PartOrder();
             po.Dish = proxy.GetDishById(dishId);
+            /// TODO: convertion to array can give trouble, solve it if occures
+            List<CustomIngredient> cis = new List<CustomIngredient>();
+            po.CustomIngredients = cis.ToArray();
             po.Amount = 1;
             order.Add(po);
         }
@@ -104,6 +137,17 @@ namespace WebClient {
         protected void IncrementPartOrder() {
         }
 
+        protected string CalculatePrice() {
+            decimal priceTotal = 0;
+            if (order.Count>0) {
+                foreach (PartOrder po in order) {
+                    int amount = po.Amount;
+                    decimal dishPrice = po.Dish.Price;
+                    priceTotal += amount * dishPrice;
+                }
+            }
+            return String.Format("{0:0.00}", priceTotal);
+        }
         protected string FormatPartOrder(object item) {
 
             // po has only id. 
