@@ -16,7 +16,7 @@ namespace WebClient {
         IPizzaWaiterTestService proxy;
         private int RestaurantID;
         List<RestaurantMenu> restaurantMenues;
-        List<PartOrder> order;
+        static List<PartOrder> order;
 
         protected void Page_Load(object sender, EventArgs e) {
             if (!IsPostBack) {
@@ -67,6 +67,7 @@ namespace WebClient {
         }
 
         protected void blAddToOrder(object sender, CommandEventArgs e) {
+            //order = (List<PartOrder>)Session["order"];
             int dishId = Convert.ToInt32(e.CommandArgument);
             this.ltTest.Text = "adding dish...." + dishId;
 
@@ -86,24 +87,28 @@ namespace WebClient {
                 // new dish is changed and a changes match is found in order => increment
                 // new dish is changed and a changes match is not found in order => new part order
 
-                this.rptOrder.DataSource = this.order;
-                this.rptOrder.DataBind();
+                
             }
+            this.rptOrder.DataSource = order;
+            this.rptOrder.DataBind();
         }
 
         protected void AddPartOrder(int dishId) {
             PartOrder po = new PartOrder();
             po.DishID = dishId;
             po.Amount = 1;
-            this.order.Add(po);
+            order.Add(po);
         }
 
         protected void IncrementPartOrder() {
         }
 
         protected string FormatPartOrder(object item) {
-            PartOrder po = (PartOrder)item;
-            string result = string.Format("{0} - {1}x{2} kr",po.Dish.Name,po.Amount,po.Dish.Price);
+
+            // po has only id. 
+            //in order to print info need to get full object from server
+            PartOrder po =  (PartOrder)item;
+            //string result = string.Format("{0} - {1}x{2} kr",po.Dish.Name,po.Amount,po.Dish.Price);
             return "";
         }
     }
