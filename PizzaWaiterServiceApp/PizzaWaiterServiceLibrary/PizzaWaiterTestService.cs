@@ -23,7 +23,14 @@ namespace PizzaWaiterServiceLibrary {
             SqlConfig.SqlDatabase = "PizzaWaiter";
             
         }
-        
+
+        public Dish GetDishById(int dishID)
+        {
+            DishDB dishDB = new DishDB();
+            
+            return dishDB.GetById(dishID);
+        }
+
         public bool ProcessOrder(List<PartOrder> partOrders, string phoneNr, string address)
         {
             PartOrderDB poDB = new PartOrderDB();

@@ -12,6 +12,8 @@ namespace PizzaWaiterServiceLibrary {
     public interface IPizzaWaiterTestService {
 
         [OperationContract]
+        Dish GetDishById(int dishID);
+        [OperationContract]
         bool ProcessOrder(List<PartOrder> partOrders, string phoneNr, string address);
         [OperationContract]
         List<DishIngredient> GetIngredientsByDishId(int dishID);
