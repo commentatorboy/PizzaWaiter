@@ -19,16 +19,17 @@ namespace WebClient {
         static List<PartOrder> order;
 
         protected void Page_Load(object sender, EventArgs e) {
+            proxy = Proxy.Get();
             if (!IsPostBack) {
-                proxy = Proxy.Get();
+                
                 RestaurantID = Convert.ToInt32(Request.QueryString["ID"]);
                 if (RestaurantID>0) {
                     restaurantMenues = proxy.GetRestaurantMenues(RestaurantID).ToList();
                     BindMenu();
                 }
-
                 order = new List<PartOrder>(); 
             }
+            
         }
 
         protected void BindMenu() {
@@ -108,8 +109,8 @@ namespace WebClient {
             // po has only id. 
             //in order to print info need to get full object from server
             PartOrder po =  (PartOrder)item;
-            //string result = string.Format("{0} - {1}x{2} kr",po.Dish.Name,po.Amount,po.Dish.Price);
-            return "";
+            string result = string.Format("{0} - {1}x{2} kr",po.Dish.Name,po.Amount,po.Dish.Price);
+            return result;
         }
     }
 }
