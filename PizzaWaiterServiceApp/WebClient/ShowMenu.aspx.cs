@@ -156,5 +156,19 @@ namespace WebClient {
             string result = string.Format("{0} - {1}x{2} kr",po.Dish.Name,po.Amount,po.Dish.Price);
             return result;
         }
+
+        protected void btnSubmitOrder_Click(object sender, EventArgs e) {
+            string phoneNr = this.txtPhoneNr.Text;
+            string address = this.txtAddress.Text;
+
+            if (phoneNr!="" && address !="" && order.Count()!=0) {
+                if(proxy.ProcessOrder(order.ToArray(), phoneNr, address))
+                {
+                    this.ltConfirmation.Text = "Order is sent";
+                }
+            } else {
+                this.ltConfirmation.Text = "Fill up the hone number, address and the order";
+            }
+        }
     }
 }

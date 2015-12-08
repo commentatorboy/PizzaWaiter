@@ -60,17 +60,30 @@
             <asp:Repeater ID="rptOrder" runat="server">
                 <ItemTemplate>
                     <li>
-                        <asp:LinkButton ID="lbRemoveFromOrder" CommandName='<%#GetDishIngredientsFromPartOrder(Container.DataItem) %>' 
+                        <asp:LinkButton ID="lbRemoveFromOrder" CommandName='<%#GetDishIngredientsFromPartOrder(Container.DataItem) %>'
                             CommandArgument='<%#GetDishIdFromPartOrder(Container.DataItem) %>' OnCommand="removeDishFromOrder" runat="server">
                             <asp:Literal runat="server" ID="ltPartOrder" Text='<%#FormatPartOrder(Container.DataItem) %>'></asp:Literal>
-                       </asp:LinkButton>
+                        </asp:LinkButton>
                     </li>
                 </ItemTemplate>
                 <FooterTemplate>
-                    <asp:Literal runat="server" ID="ltPrice" Text='<%#string.Format("Total: {0}",CalculatePrice()) %>'></asp:Literal>
+                        <asp:Literal runat="server" ID="ltPrice" Text='<%#string.Format("Total: {0}",CalculatePrice()) %>'></asp:Literal>
+
                 </FooterTemplate>
             </asp:Repeater>
 
         </ul>
     </div>
+    <asp:Literal runat="server" ID="ltConfirmation" />
+
+    <div>
+        <asp:Literal ID="ltPhoneNr" runat="server" Text="Phone Number:" />
+        <asp:TextBox ID="txtPhoneNr" runat="server" />
+    </div>
+    <div>
+        <asp:Literal ID="ltAddress" runat="server" Text="Address" />
+        <asp:TextBox ID="txtAddress" runat="server" />
+    </div>
+    <asp:Button ID="btnSubmitOrder" runat="server" Text="Submit Order" OnClick="btnSubmitOrder_Click" />
+
 </asp:Content>
