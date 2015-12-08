@@ -95,7 +95,7 @@ namespace WebClient {
 
         protected void AddPartOrder(int dishId) {
             PartOrder po = new PartOrder();
-            po.DishID = dishId;
+            po.Dish = proxy.GetDishById(dishId);
             po.Amount = 1;
             order.Add(po);
         }
