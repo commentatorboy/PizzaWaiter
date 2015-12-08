@@ -15,13 +15,13 @@ namespace PizzaWaiterServiceLibrary {
 
         public PizzaWaiterTestService()
         {
-            /*
+            
             SqlConfig.SqlServer = "(localdb)\\V11.0";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            */
+            /*
             SqlConfig.SqlServer = "ALEXANDRALAPTOP\\SQLEXPRESS";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            
+            */
         }
 
         public Dish GetDishById(int dishID)
@@ -33,9 +33,53 @@ namespace PizzaWaiterServiceLibrary {
 
         public bool ProcessOrder(List<PartOrder> partOrders, string phoneNr, string address)
         {
+            
+            //Create the user to be inserted into the database.
+            UserDB userDB = new UserDB();
+            User user = userDB.GetUserByPhone(phoneNr);
+            
+            //if the user does not exist already, create one.
+            if (user == null)
+            {
+                user = new User();
+                user.PhoneNumber = phoneNr;
+                user.RankID = 0;
+                user.Create();
+            }
+
+
+            //Create the address to be inserted into the database.
+            AddressDB addressDB = new AddressDB();
+            Address userAddress = addressDB.GetByAddress(address);
+
+            //if the address does not exist already, create one.
+            if (userAddress == null)
+            {
+                userAddress = new Address();
+                userAddress.UserAddress = address;
+                userAddress.UserID = user.ID;
+                userAddress.Create();
+                
+            }
+            
+            //Create the order to be inserted to the database
+            Order order = new Order();
+            order.AddressID = userAddress.ID;
+            order.UserID = user.ID;
+            order.StatusID = OrderStatus.WAITING;
+            order.Create();
+
+            //The partorders are inserted to the database
             PartOrderDB poDB = new PartOrderDB();
-            poDB.GetAll();
-            return true;
+
+            //For debugging Part Orders when something happens.
+            CustomHandlers.DatabaseLibrary.Response<PartOrder> r = poDB.CreateBatch(order.ID, partOrders);
+            foreach(string s in r.Messages)
+            {
+                Console.WriteLine(s);
+            }
+
+            return r.Success;
         }
 
         public List<DishIngredient> GetIngredientsByDishId(int dishID)

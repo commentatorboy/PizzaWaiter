@@ -205,5 +205,10 @@ namespace Models {
         public User GetById(int id) {
             return this.GetAll().FirstOrDefault(x => x.ID == id);
         }
+
+        internal User GetUserByPhone(string phone)
+        {
+            return this.GetAll().FirstOrDefault(x => x.PhoneNumber == phone);
+        }
     }
 }

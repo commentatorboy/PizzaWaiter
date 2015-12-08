@@ -17,6 +17,8 @@ namespace Models
         private PartOrderDB partOrderDB; //related DB handler (required)
         private DishDB dishDB;
         private OrderDB orderDB;
+        private Dish dish;
+        private Order order;
 
         /*Object properties (custom)*/
         [DataMember]
@@ -30,13 +32,27 @@ namespace Models
 
         [DataMember]
         public Dish Dish {
-            get { return this.dishDB.GetById(this.DishID); }
-            set {  }
+            get {
+                if(this.dish == null)
+                {
+                    this.Connect();
+                    this.dish = this.dishDB.GetById(this.DishID);
+                }
+                return this.dish;
+            }
+            set { this.dish = value; }
         }
         [DataMember]
         public Order Order {
-            get { return this.orderDB.GetById(this.OrderID); }
-            set { }
+            get {
+                if(this.order == null)
+                {
+                    this.Connect();
+                    this.order = this.orderDB.GetById(this.OrderID);
+                }
+                return this.order;
+            }
+            set { this.order = value; }
         }
 
         [DataMember]
@@ -261,6 +277,34 @@ namespace Models
             this.Response.Item = partOrder;
             return this.Response;
 
+        }
+
+        internal Response<PartOrder> CreateBatch(int orderId, List<PartOrder> partOrders)
+        {
+            List<SqlData> batch = new List<SqlData>();
+            foreach(PartOrder po in partOrders)
+            {
+                SqlData data = new SqlData();
+                data.Set("OrderID", orderId);
+                data.Set("DishID", po.Dish.ID);
+                data.Set("Amount", po.Amount);
+                batch.Add(data);
+            }
+            
+            if (batch.Count > 0)
+            {
+                this.InsertBatch(batch);
+                this.Response = new Response<PartOrder>();
+                if (this.Success)
+                {
+                    this.Response.AddMessage(ResponseMessage.CreateSuccess);
+                }
+                else
+                {
+                    this.Response.AddMessage(ResponseMessage.CreateHandlerError);
+                }
+            }
+            return this.Response;
         }
 
         public PartOrder GetById(int id)

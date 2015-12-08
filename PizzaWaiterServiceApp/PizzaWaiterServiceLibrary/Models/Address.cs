@@ -227,5 +227,10 @@ namespace Models
         {
             return this.GetAll().FirstOrDefault(x => x.ID == id);
         }
+
+        internal Address GetByAddress(string address)
+        {
+            return this.GetAll().FirstOrDefault(x => x.UserAddress == address);
+        }
     }
 }
