@@ -192,6 +192,12 @@ namespace Models {
             return this.Response;
 
         }
+        public Response<CustomIngredient> DeleteBatchByPartOrderList(List<PartOrder> partOrders)
+        {
+            ///stub: 
+            return null;
+        }
+
         public Response<CustomIngredient> Create(CustomIngredient customIngredient) {
             //same procedure as update, just dont need id validation
             int err = this.Validate(customIngredient, Input.IncludeIsNull, Input.IngredientIdIsNull, Input.PartOrderIdIsNull);

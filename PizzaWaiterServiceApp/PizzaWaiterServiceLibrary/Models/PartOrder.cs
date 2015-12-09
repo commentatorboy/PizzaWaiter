@@ -316,6 +316,29 @@ namespace Models
         {
             return this.GetAll().Where(x => x.OrderID == orderID).ToList();
         }
+
+        public Response<PartOrder> DeleteBatch(int orderID)
+        {
+            this.Response = new Response<PartOrder>();
+            
+            if(orderID > 0)
+            {
+                string where = string.Format(@"OrderID={0}", orderID);
+                int rowcount = this.Delete(where);
+                if (this.Success)
+                {
+                    this.Response.Messages.Add(string.Format("request successfull. {0} orders deleted", rowcount));
+                    this.Response.Success = true;
+                    return this.Response;
+                }
+                else
+                {
+                    this.Response.Messages.Add("Request failed in PartOrder .Database handler error");
+
+                    return this.Response;
+                }
+            }
+        }
     }
 
     

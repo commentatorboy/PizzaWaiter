@@ -12,16 +12,24 @@ namespace PizzaWaiterServiceLibrary {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class PizzaWaiterTestService : IPizzaWaiterTestService {
 
+       
 
         public PizzaWaiterTestService()
         {
-            /*
+            
             SqlConfig.SqlServer = "(localdb)\\V11.0";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            */
+            /*
             SqlConfig.SqlServer = "ALEXANDRALAPTOP\\SQLEXPRESS";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            
+            */
+        }
+
+        public void DeleteOrderByID(int orderID)
+        {
+            OrderDB orderDB = new OrderDB();
+            Order order = orderDB.GetById(orderID);
+            order.Delete();
         }
 
         public List<PartOrder> GetPartOrdersByOrderId(int orderID)

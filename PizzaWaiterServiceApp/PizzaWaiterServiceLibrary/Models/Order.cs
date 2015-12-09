@@ -14,7 +14,8 @@ namespace Models {
         private OrderDB orderDB; //related DB handler (required)
         private UserDB userDB;
         private AddressDB addressDB;
-        
+        private PartOrderDB partOrderDB;
+        private CustomIngredientDB customIngredientDB; //for batch deleteing list of partorders   
 
         /*Object properties (custom)*/
         public int ID { get; set; }
@@ -55,6 +56,14 @@ namespace Models {
             if (this.addressDB == null) {
                 this.addressDB = new AddressDB();
             }
+            if (this.partOrderDB == null)
+            {
+                this.partOrderDB = new PartOrderDB();
+            }
+            if (this.customIngredientDB == null)
+            {
+                this.customIngredientDB = new CustomIngredientDB();
+            }
         }
 
         /* Adds order to db */
@@ -74,9 +83,44 @@ namespace Models {
          */
         public Response<Order> Delete() {
             this.Connect();
-            return this.orderDB.Delete(this);
-        }
+            
+            //Get the all the partorders by id
+            List<PartOrder> partOrders = partOrderDB.GetByOrderId(this.ID);
 
+            
+            //Stub: Delete the customingredients for each partorder id.
+            Response<CustomIngredient> customIngredientResponse = customIngredientDB.DeleteBatchByPartOrderList(partOrders);
+            
+            //Declare the response for the partorder.
+            Response<PartOrder> partOrderResponse;
+            
+            //if the custom ingredient deletion succeed.
+            if(customIngredientResponse.Success)
+            {
+                //delete the part orders by order id.
+                partOrderResponse = this.partOrderDB.DeleteBatch(this.ID);
+            }
+            //return error if the deletion did not work.
+            else
+            {
+                partOrderResponse = new Response<PartOrder>();
+
+                partOrderResponse.Messages.Add("The partorder did not delete as expected. This is from the order class.");
+            }
+
+            Response<Order> orderRepsonse;
+            if (partOrderResponse.Success)
+            {
+                orderRepsonse = this.orderDB.Delete(this);
+            }
+            else
+            {
+                orderRepsonse = new Response<Order>();
+                
+                orderRepsonse.Messages.Add("The order did not delete as expected. Because partorders where not deleted. Check The Order class.");
+            }
+            return orderRepsonse;
+        }
     }
 
     /* Communicates object to database */
