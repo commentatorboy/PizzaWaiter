@@ -38,7 +38,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvShowOrders = new System.Windows.Forms.DataGridView();
-            this.orderBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblAddress = new System.Windows.Forms.Label();
             this.lblPhoneNr = new System.Windows.Forms.Label();
@@ -48,15 +48,13 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.orderBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.User = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -65,10 +63,10 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShowOrders)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -161,13 +159,11 @@
             this.dgvShowOrders.AutoGenerateColumns = false;
             this.dgvShowOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvShowOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.addressDataGridViewTextBoxColumn,
-            this.addressIDDataGridViewTextBoxColumn,
-            this.createdDataGridViewTextBoxColumn,
-            this.iDDataGridViewTextBoxColumn,
             this.statusIDDataGridViewTextBoxColumn,
-            this.userDataGridViewTextBoxColumn,
-            this.userIDDataGridViewTextBoxColumn});
+            this.ID,
+            this.createdDataGridViewTextBoxColumn,
+            this.Address,
+            this.User});
             this.dgvShowOrders.DataSource = this.orderBindingSource;
             this.dgvShowOrders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvShowOrders.Location = new System.Drawing.Point(0, 0);
@@ -177,13 +173,13 @@
             this.dgvShowOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvShowOrders.Size = new System.Drawing.Size(791, 147);
             this.dgvShowOrders.TabIndex = 0;
-            this.dgvShowOrders.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvShowOrders_CellContentClick);
             this.dgvShowOrders.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.Grid_CellFormatting);
+            this.dgvShowOrders.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvShowOrders_ColumnHeaderMouseClick);
             this.dgvShowOrders.SelectionChanged += new System.EventHandler(this.dgvShowOrders_SelectionChanged);
             // 
-            // orderBindingSource1
+            // orderBindingSource
             // 
-            this.orderBindingSource1.DataSource = typeof(RestaurantClient.PizzaWaiterTestServiceReference.Order);
+            this.orderBindingSource.DataSource = typeof(RestaurantClient.PizzaWaiterTestServiceReference.Order);
             // 
             // panel2
             // 
@@ -272,6 +268,10 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // orderBindingSource1
+            // 
+            this.orderBindingSource1.DataSource = typeof(RestaurantClient.PizzaWaiterTestServiceReference.Order);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Location = new System.Drawing.Point(0, 393);
@@ -280,23 +280,20 @@
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // orderBindingSource
+            // statusIDDataGridViewTextBoxColumn
             // 
-            this.orderBindingSource.DataSource = typeof(RestaurantClient.PizzaWaiterTestServiceReference.Order);
+            this.statusIDDataGridViewTextBoxColumn.DataPropertyName = "StatusID";
+            this.statusIDDataGridViewTextBoxColumn.HeaderText = "Status";
+            this.statusIDDataGridViewTextBoxColumn.Name = "statusIDDataGridViewTextBoxColumn";
+            this.statusIDDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // addressDataGridViewTextBoxColumn
+            // ID
             // 
-            this.addressDataGridViewTextBoxColumn.DataPropertyName = "Address";
-            this.addressDataGridViewTextBoxColumn.HeaderText = "Address";
-            this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
-            this.addressDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // addressIDDataGridViewTextBoxColumn
-            // 
-            this.addressIDDataGridViewTextBoxColumn.DataPropertyName = "AddressID";
-            this.addressIDDataGridViewTextBoxColumn.HeaderText = "AddressID";
-            this.addressIDDataGridViewTextBoxColumn.Name = "addressIDDataGridViewTextBoxColumn";
-            this.addressIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
             // 
             // createdDataGridViewTextBoxColumn
             // 
@@ -304,34 +301,21 @@
             this.createdDataGridViewTextBoxColumn.HeaderText = "Created";
             this.createdDataGridViewTextBoxColumn.Name = "createdDataGridViewTextBoxColumn";
             this.createdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.createdDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // iDDataGridViewTextBoxColumn
+            // Address
             // 
-            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
-            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
-            this.iDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.Address.DataPropertyName = "Address.UserAddress";
+            this.Address.HeaderText = "Address";
+            this.Address.Name = "Address";
+            this.Address.ReadOnly = true;
             // 
-            // statusIDDataGridViewTextBoxColumn
+            // User
             // 
-            this.statusIDDataGridViewTextBoxColumn.DataPropertyName = "StatusID";
-            this.statusIDDataGridViewTextBoxColumn.HeaderText = "StatusID";
-            this.statusIDDataGridViewTextBoxColumn.Name = "statusIDDataGridViewTextBoxColumn";
-            this.statusIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // userDataGridViewTextBoxColumn
-            // 
-            this.userDataGridViewTextBoxColumn.DataPropertyName = "User.PhoneNumber";
-            this.userDataGridViewTextBoxColumn.HeaderText = "User";
-            this.userDataGridViewTextBoxColumn.Name = "userDataGridViewTextBoxColumn";
-            this.userDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // userIDDataGridViewTextBoxColumn
-            // 
-            this.userIDDataGridViewTextBoxColumn.DataPropertyName = "UserID";
-            this.userIDDataGridViewTextBoxColumn.HeaderText = "UserID";
-            this.userIDDataGridViewTextBoxColumn.Name = "userIDDataGridViewTextBoxColumn";
-            this.userIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.User.DataPropertyName = "User.PhoneNumber";
+            this.User.HeaderText = "User";
+            this.User.Name = "User";
+            this.User.ReadOnly = true;
             // 
             // RestaurantClientForm
             // 
@@ -353,11 +337,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvShowOrders)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -386,13 +370,14 @@
         private System.Windows.Forms.Label lblTotalPrice;
         private System.Windows.Forms.BindingSource orderBindingSource;
         private System.Windows.Forms.BindingSource orderBindingSource1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn addressIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn createdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn statusIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn userDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn userIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn statusIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn User;
     }
 }
 
