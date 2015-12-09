@@ -24,6 +24,12 @@ namespace PizzaWaiterServiceLibrary {
             */
         }
 
+        public List<PartOrder> GetPartOrdersByOrderId(int orderID)
+        {
+            PartOrderDB poDB = new PartOrderDB();
+            return poDB.GetByOrderId(orderID);
+        }
+
         public List<Order> GetOrders()
         {
             OrderDB orderDB = new OrderDB();

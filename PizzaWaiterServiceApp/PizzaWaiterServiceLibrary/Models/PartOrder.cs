@@ -311,6 +311,11 @@ namespace Models
         {
             return this.GetAll().FirstOrDefault(x => x.ID == id);
         }
+
+        public List<PartOrder> GetByOrderId(int orderID)
+        {
+            return this.GetAll().Where(x => x.OrderID == orderID).ToList();
+        }
     }
 
     

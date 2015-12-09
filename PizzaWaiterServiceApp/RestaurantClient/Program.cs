@@ -18,7 +18,7 @@ namespace RestaurantClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new RestaurantClientForm(proxy));
+            Application.Run(new RestaurantClientForm());
         }
     }
 }
