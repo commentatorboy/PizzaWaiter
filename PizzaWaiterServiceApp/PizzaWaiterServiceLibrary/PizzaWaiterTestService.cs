@@ -15,13 +15,13 @@ namespace PizzaWaiterServiceLibrary {
 
         public PizzaWaiterTestService()
         {
-            
+            /*
             SqlConfig.SqlServer = "(localdb)\\V11.0";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            /*
+            */
             SqlConfig.SqlServer = "ALEXANDRALAPTOP\\SQLEXPRESS";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            */
+            
         }
 
         public List<PartOrder> GetPartOrdersByOrderId(int orderID)

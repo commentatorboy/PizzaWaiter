@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ListBoxItem.cs" />
     <Compile Include="RestaurantClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +92,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\PizzaWaiterTestServiceReference\RestaurantClient.PizzaWaiterTestServiceReference.Order.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PizzaWaiterTestServiceReference\RestaurantClient.PizzaWaiterTestServiceReference.PartOrder.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\PizzaWaiterTestServiceReference\RestaurantClient.PizzaWaiterTestServiceReference.Restaurant.datasource">

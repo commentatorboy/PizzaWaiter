@@ -194,6 +194,9 @@
     <Content Include="Service References\PizzaWaiterTestServiceReference\WebClient.PizzaWaiterTestServiceReference.Order.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\PizzaWaiterTestServiceReference\WebClient.PizzaWaiterTestServiceReference.PartOrder.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

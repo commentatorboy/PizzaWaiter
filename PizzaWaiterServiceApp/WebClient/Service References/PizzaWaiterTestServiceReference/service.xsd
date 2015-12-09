@@ -1,6 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.datacontract.org/2004/07/Models" />
+  <xs:element name="GetPartOrdersByOrderId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="orderID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPartOrdersByOrderIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetPartOrdersByOrderIdResult" nillable="true" type="q1:ArrayOfPartOrder" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetOrders">
     <xs:complexType>
       <xs:sequence />
@@ -9,7 +23,7 @@
   <xs:element name="GetOrdersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetOrdersResult" nillable="true" type="q1:ArrayOfOrder" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetOrdersResult" nillable="true" type="q2:ArrayOfOrder" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -23,14 +37,14 @@
   <xs:element name="GetDishByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetDishByIdResult" nillable="true" type="q2:Dish" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetDishByIdResult" nillable="true" type="q3:Dish" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ProcessOrder">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="partOrders" nillable="true" type="q3:ArrayOfPartOrder" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="partOrders" nillable="true" type="q4:ArrayOfPartOrder" />
         <xs:element minOccurs="0" name="phoneNr" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="address" nillable="true" type="xs:string" />
       </xs:sequence>
@@ -53,7 +67,7 @@
   <xs:element name="GetIngredientsByDishIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetIngredientsByDishIdResult" nillable="true" type="q4:ArrayOfDishIngredient" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetIngredientsByDishIdResult" nillable="true" type="q5:ArrayOfDishIngredient" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -67,7 +81,7 @@
   <xs:element name="GetDishesByRestaurantMenuIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetDishesByRestaurantMenuIdResult" nillable="true" type="q5:ArrayOfDish" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetDishesByRestaurantMenuIdResult" nillable="true" type="q6:ArrayOfDish" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -81,7 +95,7 @@
   <xs:element name="GetRestaurantMenuesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetRestaurantMenuesResult" nillable="true" type="q6:ArrayOfRestaurantMenu" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetRestaurantMenuesResult" nillable="true" type="q7:ArrayOfRestaurantMenu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -96,7 +110,7 @@
   <xs:element name="GetLocalRestaurantsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetLocalRestaurantsResult" nillable="true" type="q7:ArrayOfRestaurant" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Models" minOccurs="0" name="GetLocalRestaurantsResult" nillable="true" type="q8:ArrayOfRestaurant" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
