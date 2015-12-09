@@ -24,6 +24,12 @@ namespace PizzaWaiterServiceLibrary {
             */
         }
 
+        public List<Order> GetOrders()
+        {
+            OrderDB orderDB = new OrderDB();
+            return orderDB.GetAll();
+        }
+
         public Dish GetDishById(int dishID)
         {
             DishDB dishDB = new DishDB();
