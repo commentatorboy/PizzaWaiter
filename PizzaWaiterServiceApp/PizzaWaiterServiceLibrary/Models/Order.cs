@@ -21,10 +21,13 @@ namespace Models {
         public int UserID { get; set; }
         public int AddressID { get; set; }
         public OrderStatus StatusID { get; set; }
+        public DateTime Created { get; set; }
+        public Address Address { get; set; }
+        public User User { get; set; }
 
-        
-
-
+        public Order() {
+            this.Connect();
+        }
 
         /*Build Object (required)*/
         public void BuildObject(DataRow row) {
@@ -32,6 +35,10 @@ namespace Models {
             this.UserID = SqlFormat.ToInt(row,"UserID");
             this.AddressID = SqlFormat.ToInt(row, "AddressID");
             this.StatusID = (OrderStatus)SqlFormat.ToInt(row, "StatusID");
+            this.Created = SqlFormat.ToDateTime(row, "Created");
+
+            this.Address = this.addressDB.GetById(this.AddressID);
+            this.User = this.userDB.GetById(this.UserID);
 
         }
 

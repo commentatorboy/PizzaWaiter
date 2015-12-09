@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebClient.PizzaWaiterTestServiceReference {
+namespace RestaurantClient.PizzaWaiterTestServiceReference {
     using System.Runtime.Serialization;
     using System;
     
@@ -32,7 +32,7 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WebClient.PizzaWaiterTestServiceReference.OrderStatus StatusIDField;
+        private RestaurantClient.PizzaWaiterTestServiceReference.OrderStatus StatusIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int UserIDField;
@@ -87,7 +87,7 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WebClient.PizzaWaiterTestServiceReference.OrderStatus StatusID {
+        public RestaurantClient.PizzaWaiterTestServiceReference.OrderStatus StatusID {
             get {
                 return this.StatusIDField;
             }
@@ -264,10 +264,10 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         private int AmountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WebClient.PizzaWaiterTestServiceReference.CustomIngredient[] CustomIngredientsField;
+        private RestaurantClient.PizzaWaiterTestServiceReference.CustomIngredient[] CustomIngredientsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WebClient.PizzaWaiterTestServiceReference.Dish DishField;
+        private RestaurantClient.PizzaWaiterTestServiceReference.Dish DishField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int DishIDField;
@@ -276,7 +276,7 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WebClient.PizzaWaiterTestServiceReference.Order OrderField;
+        private RestaurantClient.PizzaWaiterTestServiceReference.Order OrderField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int OrderIDField;
@@ -305,7 +305,7 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WebClient.PizzaWaiterTestServiceReference.CustomIngredient[] CustomIngredients {
+        public RestaurantClient.PizzaWaiterTestServiceReference.CustomIngredient[] CustomIngredients {
             get {
                 return this.CustomIngredientsField;
             }
@@ -318,7 +318,7 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WebClient.PizzaWaiterTestServiceReference.Dish Dish {
+        public RestaurantClient.PizzaWaiterTestServiceReference.Dish Dish {
             get {
                 return this.DishField;
             }
@@ -357,7 +357,7 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WebClient.PizzaWaiterTestServiceReference.Order Order {
+        public RestaurantClient.PizzaWaiterTestServiceReference.Order Order {
             get {
                 return this.OrderField;
             }
@@ -495,7 +495,7 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WebClient.PizzaWaiterTestServiceReference.Dish DishField;
+        private RestaurantClient.PizzaWaiterTestServiceReference.Dish DishField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int DishIDField;
@@ -504,7 +504,7 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WebClient.PizzaWaiterTestServiceReference.Ingredient IngredientField;
+        private RestaurantClient.PizzaWaiterTestServiceReference.Ingredient IngredientField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IngredientIDField;
@@ -520,7 +520,7 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WebClient.PizzaWaiterTestServiceReference.Dish Dish {
+        public RestaurantClient.PizzaWaiterTestServiceReference.Dish Dish {
             get {
                 return this.DishField;
             }
@@ -559,7 +559,7 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WebClient.PizzaWaiterTestServiceReference.Ingredient Ingredient {
+        public RestaurantClient.PizzaWaiterTestServiceReference.Ingredient Ingredient {
             get {
                 return this.IngredientField;
             }
@@ -668,7 +668,7 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WebClient.PizzaWaiterTestServiceReference.Menu MenuField;
+        private RestaurantClient.PizzaWaiterTestServiceReference.Menu MenuField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int MenuIDField;
@@ -677,7 +677,7 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         private int PositionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WebClient.PizzaWaiterTestServiceReference.Restaurant RestaurantField;
+        private RestaurantClient.PizzaWaiterTestServiceReference.Restaurant RestaurantField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int RestaurantIDField;
@@ -706,7 +706,7 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WebClient.PizzaWaiterTestServiceReference.Menu Menu {
+        public RestaurantClient.PizzaWaiterTestServiceReference.Menu Menu {
             get {
                 return this.MenuField;
             }
@@ -745,7 +745,7 @@ namespace WebClient.PizzaWaiterTestServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WebClient.PizzaWaiterTestServiceReference.Restaurant Restaurant {
+        public RestaurantClient.PizzaWaiterTestServiceReference.Restaurant Restaurant {
             get {
                 return this.RestaurantField;
             }
@@ -907,55 +907,55 @@ namespace WebClient.PizzaWaiterTestServiceReference {
     public interface IPizzaWaiterTestService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetOrders", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetOrdersResponse")]
-        WebClient.PizzaWaiterTestServiceReference.Order[] GetOrders();
+        RestaurantClient.PizzaWaiterTestServiceReference.Order[] GetOrders();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetOrders", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetOrdersResponse")]
-        System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.Order[]> GetOrdersAsync();
+        System.Threading.Tasks.Task<RestaurantClient.PizzaWaiterTestServiceReference.Order[]> GetOrdersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetDishById", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetDishByIdResponse")]
-        WebClient.PizzaWaiterTestServiceReference.Dish GetDishById(int dishID);
+        RestaurantClient.PizzaWaiterTestServiceReference.Dish GetDishById(int dishID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetDishById", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetDishByIdResponse")]
-        System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.Dish> GetDishByIdAsync(int dishID);
+        System.Threading.Tasks.Task<RestaurantClient.PizzaWaiterTestServiceReference.Dish> GetDishByIdAsync(int dishID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/ProcessOrder", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/ProcessOrderResponse")]
-        bool ProcessOrder(WebClient.PizzaWaiterTestServiceReference.PartOrder[] partOrders, string phoneNr, string address);
+        bool ProcessOrder(RestaurantClient.PizzaWaiterTestServiceReference.PartOrder[] partOrders, string phoneNr, string address);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/ProcessOrder", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/ProcessOrderResponse")]
-        System.Threading.Tasks.Task<bool> ProcessOrderAsync(WebClient.PizzaWaiterTestServiceReference.PartOrder[] partOrders, string phoneNr, string address);
+        System.Threading.Tasks.Task<bool> ProcessOrderAsync(RestaurantClient.PizzaWaiterTestServiceReference.PartOrder[] partOrders, string phoneNr, string address);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetIngredientsByDishId", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetIngredientsByDishIdResponse")]
-        WebClient.PizzaWaiterTestServiceReference.DishIngredient[] GetIngredientsByDishId(int dishID);
+        RestaurantClient.PizzaWaiterTestServiceReference.DishIngredient[] GetIngredientsByDishId(int dishID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetIngredientsByDishId", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetIngredientsByDishIdResponse")]
-        System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.DishIngredient[]> GetIngredientsByDishIdAsync(int dishID);
+        System.Threading.Tasks.Task<RestaurantClient.PizzaWaiterTestServiceReference.DishIngredient[]> GetIngredientsByDishIdAsync(int dishID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetDishesByRestaurantMenuId", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetDishesByRestaurantMenuIdResponse")]
-        WebClient.PizzaWaiterTestServiceReference.Dish[] GetDishesByRestaurantMenuId(int restaurantMenuID);
+        RestaurantClient.PizzaWaiterTestServiceReference.Dish[] GetDishesByRestaurantMenuId(int restaurantMenuID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetDishesByRestaurantMenuId", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetDishesByRestaurantMenuIdResponse")]
-        System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.Dish[]> GetDishesByRestaurantMenuIdAsync(int restaurantMenuID);
+        System.Threading.Tasks.Task<RestaurantClient.PizzaWaiterTestServiceReference.Dish[]> GetDishesByRestaurantMenuIdAsync(int restaurantMenuID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetRestaurantMenues", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetRestaurantMenuesResponse")]
-        WebClient.PizzaWaiterTestServiceReference.RestaurantMenu[] GetRestaurantMenues(int restaurantID);
+        RestaurantClient.PizzaWaiterTestServiceReference.RestaurantMenu[] GetRestaurantMenues(int restaurantID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetRestaurantMenues", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetRestaurantMenuesResponse")]
-        System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.RestaurantMenu[]> GetRestaurantMenuesAsync(int restaurantID);
+        System.Threading.Tasks.Task<RestaurantClient.PizzaWaiterTestServiceReference.RestaurantMenu[]> GetRestaurantMenuesAsync(int restaurantID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetLocalRestaurants", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetLocalRestaurantsResponse")]
-        WebClient.PizzaWaiterTestServiceReference.Restaurant[] GetLocalRestaurants(decimal latitude, decimal longtitude);
+        RestaurantClient.PizzaWaiterTestServiceReference.Restaurant[] GetLocalRestaurants(decimal latitude, decimal longtitude);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetLocalRestaurants", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetLocalRestaurantsResponse")]
-        System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.Restaurant[]> GetLocalRestaurantsAsync(decimal latitude, decimal longtitude);
+        System.Threading.Tasks.Task<RestaurantClient.PizzaWaiterTestServiceReference.Restaurant[]> GetLocalRestaurantsAsync(decimal latitude, decimal longtitude);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IPizzaWaiterTestServiceChannel : WebClient.PizzaWaiterTestServiceReference.IPizzaWaiterTestService, System.ServiceModel.IClientChannel {
+    public interface IPizzaWaiterTestServiceChannel : RestaurantClient.PizzaWaiterTestServiceReference.IPizzaWaiterTestService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class PizzaWaiterTestServiceClient : System.ServiceModel.ClientBase<WebClient.PizzaWaiterTestServiceReference.IPizzaWaiterTestService>, WebClient.PizzaWaiterTestServiceReference.IPizzaWaiterTestService {
+    public partial class PizzaWaiterTestServiceClient : System.ServiceModel.ClientBase<RestaurantClient.PizzaWaiterTestServiceReference.IPizzaWaiterTestService>, RestaurantClient.PizzaWaiterTestServiceReference.IPizzaWaiterTestService {
         
         public PizzaWaiterTestServiceClient() {
         }
@@ -976,59 +976,59 @@ namespace WebClient.PizzaWaiterTestServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public WebClient.PizzaWaiterTestServiceReference.Order[] GetOrders() {
+        public RestaurantClient.PizzaWaiterTestServiceReference.Order[] GetOrders() {
             return base.Channel.GetOrders();
         }
         
-        public System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.Order[]> GetOrdersAsync() {
+        public System.Threading.Tasks.Task<RestaurantClient.PizzaWaiterTestServiceReference.Order[]> GetOrdersAsync() {
             return base.Channel.GetOrdersAsync();
         }
         
-        public WebClient.PizzaWaiterTestServiceReference.Dish GetDishById(int dishID) {
+        public RestaurantClient.PizzaWaiterTestServiceReference.Dish GetDishById(int dishID) {
             return base.Channel.GetDishById(dishID);
         }
         
-        public System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.Dish> GetDishByIdAsync(int dishID) {
+        public System.Threading.Tasks.Task<RestaurantClient.PizzaWaiterTestServiceReference.Dish> GetDishByIdAsync(int dishID) {
             return base.Channel.GetDishByIdAsync(dishID);
         }
         
-        public bool ProcessOrder(WebClient.PizzaWaiterTestServiceReference.PartOrder[] partOrders, string phoneNr, string address) {
+        public bool ProcessOrder(RestaurantClient.PizzaWaiterTestServiceReference.PartOrder[] partOrders, string phoneNr, string address) {
             return base.Channel.ProcessOrder(partOrders, phoneNr, address);
         }
         
-        public System.Threading.Tasks.Task<bool> ProcessOrderAsync(WebClient.PizzaWaiterTestServiceReference.PartOrder[] partOrders, string phoneNr, string address) {
+        public System.Threading.Tasks.Task<bool> ProcessOrderAsync(RestaurantClient.PizzaWaiterTestServiceReference.PartOrder[] partOrders, string phoneNr, string address) {
             return base.Channel.ProcessOrderAsync(partOrders, phoneNr, address);
         }
         
-        public WebClient.PizzaWaiterTestServiceReference.DishIngredient[] GetIngredientsByDishId(int dishID) {
+        public RestaurantClient.PizzaWaiterTestServiceReference.DishIngredient[] GetIngredientsByDishId(int dishID) {
             return base.Channel.GetIngredientsByDishId(dishID);
         }
         
-        public System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.DishIngredient[]> GetIngredientsByDishIdAsync(int dishID) {
+        public System.Threading.Tasks.Task<RestaurantClient.PizzaWaiterTestServiceReference.DishIngredient[]> GetIngredientsByDishIdAsync(int dishID) {
             return base.Channel.GetIngredientsByDishIdAsync(dishID);
         }
         
-        public WebClient.PizzaWaiterTestServiceReference.Dish[] GetDishesByRestaurantMenuId(int restaurantMenuID) {
+        public RestaurantClient.PizzaWaiterTestServiceReference.Dish[] GetDishesByRestaurantMenuId(int restaurantMenuID) {
             return base.Channel.GetDishesByRestaurantMenuId(restaurantMenuID);
         }
         
-        public System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.Dish[]> GetDishesByRestaurantMenuIdAsync(int restaurantMenuID) {
+        public System.Threading.Tasks.Task<RestaurantClient.PizzaWaiterTestServiceReference.Dish[]> GetDishesByRestaurantMenuIdAsync(int restaurantMenuID) {
             return base.Channel.GetDishesByRestaurantMenuIdAsync(restaurantMenuID);
         }
         
-        public WebClient.PizzaWaiterTestServiceReference.RestaurantMenu[] GetRestaurantMenues(int restaurantID) {
+        public RestaurantClient.PizzaWaiterTestServiceReference.RestaurantMenu[] GetRestaurantMenues(int restaurantID) {
             return base.Channel.GetRestaurantMenues(restaurantID);
         }
         
-        public System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.RestaurantMenu[]> GetRestaurantMenuesAsync(int restaurantID) {
+        public System.Threading.Tasks.Task<RestaurantClient.PizzaWaiterTestServiceReference.RestaurantMenu[]> GetRestaurantMenuesAsync(int restaurantID) {
             return base.Channel.GetRestaurantMenuesAsync(restaurantID);
         }
         
-        public WebClient.PizzaWaiterTestServiceReference.Restaurant[] GetLocalRestaurants(decimal latitude, decimal longtitude) {
+        public RestaurantClient.PizzaWaiterTestServiceReference.Restaurant[] GetLocalRestaurants(decimal latitude, decimal longtitude) {
             return base.Channel.GetLocalRestaurants(latitude, longtitude);
         }
         
-        public System.Threading.Tasks.Task<WebClient.PizzaWaiterTestServiceReference.Restaurant[]> GetLocalRestaurantsAsync(decimal latitude, decimal longtitude) {
+        public System.Threading.Tasks.Task<RestaurantClient.PizzaWaiterTestServiceReference.Restaurant[]> GetLocalRestaurantsAsync(decimal latitude, decimal longtitude) {
             return base.Channel.GetLocalRestaurantsAsync(latitude, longtitude);
         }
     }
