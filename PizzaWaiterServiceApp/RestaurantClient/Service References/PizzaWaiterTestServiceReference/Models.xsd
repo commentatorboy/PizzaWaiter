@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="OrderStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Default" />
+      <xs:enumeration value="WAITING" />
+      <xs:enumeration value="COOKING" />
+      <xs:enumeration value="TRANPORTING" />
+      <xs:enumeration value="RECIEVED" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrderStatus" nillable="true" type="tns:OrderStatus" />
   <xs:complexType name="ArrayOfPartOrder">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="PartOrder" nillable="true" type="tns:PartOrder" />
@@ -63,16 +73,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Address" nillable="true" type="tns:Address" />
-  <xs:simpleType name="OrderStatus">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Default" />
-      <xs:enumeration value="WAITING" />
-      <xs:enumeration value="COOKING" />
-      <xs:enumeration value="TRANPORTING" />
-      <xs:enumeration value="RECIEVED" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="OrderStatus" nillable="true" type="tns:OrderStatus" />
   <xs:complexType name="User">
     <xs:sequence>
       <xs:element minOccurs="0" name="ID" type="xs:int" />

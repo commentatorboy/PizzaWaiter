@@ -13,6 +13,26 @@ namespace RestaurantClient.PizzaWaiterTestServiceReference {
     using System;
     
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OrderStatus", Namespace="http://schemas.datacontract.org/2004/07/Models")]
+    public enum OrderStatus : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Default = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        WAITING = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        COOKING = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        TRANPORTING = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RECIEVED = 4,
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="PartOrder", Namespace="http://schemas.datacontract.org/2004/07/Models")]
@@ -651,26 +671,6 @@ namespace RestaurantClient.PizzaWaiterTestServiceReference {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OrderStatus", Namespace="http://schemas.datacontract.org/2004/07/Models")]
-    public enum OrderStatus : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Default = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        WAITING = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        COOKING = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        TRANPORTING = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        RECIEVED = 4,
-    }
-    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DishIngredient", Namespace="http://schemas.datacontract.org/2004/07/Models")]
@@ -1092,6 +1092,12 @@ namespace RestaurantClient.PizzaWaiterTestServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PizzaWaiterTestServiceReference.IPizzaWaiterTestService")]
     public interface IPizzaWaiterTestService {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/ChangeOrderStatus", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/ChangeOrderStatusResponse")]
+        void ChangeOrderStatus(int OrderId, RestaurantClient.PizzaWaiterTestServiceReference.OrderStatus newStatus);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/ChangeOrderStatus", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/ChangeOrderStatusResponse")]
+        System.Threading.Tasks.Task ChangeOrderStatusAsync(int OrderId, RestaurantClient.PizzaWaiterTestServiceReference.OrderStatus newStatus);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/DeleteOrderByID", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/DeleteOrderByIDResponse")]
         void DeleteOrderByID(int orderID);
         
@@ -1172,6 +1178,14 @@ namespace RestaurantClient.PizzaWaiterTestServiceReference {
         
         public PizzaWaiterTestServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public void ChangeOrderStatus(int OrderId, RestaurantClient.PizzaWaiterTestServiceReference.OrderStatus newStatus) {
+            base.Channel.ChangeOrderStatus(OrderId, newStatus);
+        }
+        
+        public System.Threading.Tasks.Task ChangeOrderStatusAsync(int OrderId, RestaurantClient.PizzaWaiterTestServiceReference.OrderStatus newStatus) {
+            return base.Channel.ChangeOrderStatusAsync(OrderId, newStatus);
         }
         
         public void DeleteOrderByID(int orderID) {

@@ -50,12 +50,12 @@
             this.lblTotalPrice = new System.Windows.Forms.Label();
             this.clbPartOrdersList = new System.Windows.Forms.CheckedListBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnChangeStatus = new System.Windows.Forms.Button();
             this.cbStatus = new System.Windows.Forms.ComboBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.orderBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.btnChangeStatus = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -279,6 +279,17 @@
             this.panel1.Size = new System.Drawing.Size(791, 34);
             this.panel1.TabIndex = 0;
             // 
+            // btnChangeStatus
+            // 
+            this.btnChangeStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnChangeStatus.Location = new System.Drawing.Point(351, 6);
+            this.btnChangeStatus.Name = "btnChangeStatus";
+            this.btnChangeStatus.Size = new System.Drawing.Size(75, 23);
+            this.btnChangeStatus.TabIndex = 2;
+            this.btnChangeStatus.Text = "Save";
+            this.btnChangeStatus.UseVisualStyleBackColor = true;
+            this.btnChangeStatus.Click += new System.EventHandler(this.btnChangeStatus_Click);
+            // 
             // cbStatus
             // 
             this.cbStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -320,16 +331,6 @@
             this.statusStrip1.Size = new System.Drawing.Size(804, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
-            // 
-            // btnChangeStatus
-            // 
-            this.btnChangeStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnChangeStatus.Location = new System.Drawing.Point(351, 6);
-            this.btnChangeStatus.Name = "btnChangeStatus";
-            this.btnChangeStatus.Size = new System.Drawing.Size(75, 23);
-            this.btnChangeStatus.TabIndex = 2;
-            this.btnChangeStatus.Text = "Save";
-            this.btnChangeStatus.UseVisualStyleBackColor = true;
             // 
             // RestaurantClientForm
             // 

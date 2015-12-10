@@ -26,19 +26,30 @@ namespace RestaurantClient
             orders = Program.proxy.GetOrders().ToList();
             direction = SortOrder.Ascending;
             this.BindOrders();
-            this.BindStatus(OrderStatus.Default);
+            this.BindStatus();
             
         }
 
-        private void BindStatus(OrderStatus status)
+        private void BindStatus()
         {
+
+            Order selectedOrder = this.GetSelectedOrder();
+            OrderStatus status;
+            if (selectedOrder==null) {
+                status = OrderStatus.Default;
+            } else {
+                status = selectedOrder.StatusID;
+            }
+             
             this.cbStatus.Items.Clear();
             this.cbStatus.DisplayMember = "Name";
             this.cbStatus.ValueMember = "ID";
             foreach (int item in Enum.GetValues(typeof(OrderStatus))) {
                 this.cbStatus.Items.Add(new ListBoxItem(item, Enum.GetName(typeof(OrderStatus),item)));
+                if ((int)status == item) {
+                    this.cbStatus.SelectedItem = this.cbStatus.Items[item];
+                }
             }
-            this.cbStatus.SelectedItem = 1;
         }
 
         private List<ListBoxItem> ToListBoxItem(List<PartOrder> partOrders)
@@ -57,9 +68,9 @@ namespace RestaurantClient
 
             if (this.dgvShowOrders.SelectedRows.Count == 1)
             {
-                DataGridViewRow row = this.dgvShowOrders.SelectedRows[0];
-                orderID = Convert.ToInt32(row.Cells["ID"].Value);
-                this.updateInfo(orderID);
+                //DataGridViewRow row = this.dgvShowOrders.SelectedRows[0];
+                orderID = this.GetSelectedOrder().ID;
+                this.UpdateInfo();
             }
         }
 
@@ -93,6 +104,7 @@ namespace RestaurantClient
         private void BindOrders() {
             orders = direction == SortOrder.Ascending ? orders.OrderBy(x => x.Created).ToList() : orders.OrderByDescending(x => x.Created).ToList();
             this.dgvShowOrders.DataSource = orders;
+            this.UpdateInfo();
             
         }
 
@@ -107,25 +119,24 @@ namespace RestaurantClient
             Order deleteOrder = orders.FirstOrDefault(x => x.ID == orderID);
             orders.Remove(deleteOrder);
             this.BindOrders();
-            this.updateInfo(0);
         }
 
-        private void updateInfo(int orderID)
+        private void UpdateInfo()
         {
+            Order order = this.GetSelectedOrder();
+
             ((ListBox)clbPartOrdersList).DisplayMember = "Name";
             ((ListBox)clbPartOrdersList).ValueMember = "ID";
-            if (orderID > 0)
+            if (order != null)
             {
                 
                 List<PartOrder> partOrders = Program.proxy.GetPartOrdersByOrderId(orderID).ToList();
                 List<ListBoxItem> dataSource = this.ToListBoxItem(partOrders);
                 ((ListBox)clbPartOrdersList).DataSource = dataSource;
-                
-                Order order = orders.FirstOrDefault(x => x.ID == orderID);
                 this.lblAddress.Text = string.Format("Address: {0}", order.Address.UserAddress);
                 this.lblPhoneNr.Text = string.Format("PhoneNumber: {0}", order.User.PhoneNumber);
                 this.lblTotalPrice.Text = string.Format("Total: {0:0.00}kr", this.CalculateTotalPrice(partOrders));
-                this.BindStatus(order.StatusID);
+
             }
             else
             {
@@ -133,8 +144,36 @@ namespace RestaurantClient
                 this.lblAddress.Text = "";
                 this.lblPhoneNr.Text = "";
                 this.lblTotalPrice.Text = "";
-                this.BindStatus(OrderStatus.Default);
+                
             }
+            this.BindStatus();
+        }
+
+        private Order GetSelectedOrder() {
+            Order order = null;
+            if (this.dgvShowOrders.SelectedRows.Count>0) {
+                DataGridViewRow row = this.dgvShowOrders.SelectedRows[0];
+                orderID = Convert.ToInt32(row.Cells["ID"].Value);
+                order =  orders.FirstOrDefault(x => x.ID == orderID);    
+            }
+                /*
+            else
+	        {
+                order = new Order();
+	        }*/
+            return order;
+        }
+
+        private void btnChangeStatus_Click(object sender, EventArgs e) {
+            ListBoxItem item = (ListBoxItem)this.cbStatus.SelectedItem;
+            OrderStatus newStatus = (OrderStatus)item.ID;
+            Order order = this.GetSelectedOrder();
+            //update in database
+            Program.proxy.ChangeOrderStatus(order.ID, newStatus);
+            //update locally
+            order.StatusID = newStatus;
+            //update interface
+            this.BindOrders();
         }
     }
 }
