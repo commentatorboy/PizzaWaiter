@@ -38,6 +38,11 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvShowOrders = new System.Windows.Forms.DataGridView();
+            this.statusIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.User = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblAddress = new System.Windows.Forms.Label();
@@ -45,16 +50,12 @@
             this.lblTotalPrice = new System.Windows.Forms.Label();
             this.clbPartOrdersList = new System.Windows.Forms.CheckedListBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cbStatus = new System.Windows.Forms.ComboBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.orderBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.statusIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.User = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnChangeStatus = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -177,6 +178,43 @@
             this.dgvShowOrders.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvShowOrders_ColumnHeaderMouseClick);
             this.dgvShowOrders.SelectionChanged += new System.EventHandler(this.dgvShowOrders_SelectionChanged);
             // 
+            // statusIDDataGridViewTextBoxColumn
+            // 
+            this.statusIDDataGridViewTextBoxColumn.DataPropertyName = "StatusID";
+            this.statusIDDataGridViewTextBoxColumn.HeaderText = "Status";
+            this.statusIDDataGridViewTextBoxColumn.Name = "statusIDDataGridViewTextBoxColumn";
+            this.statusIDDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // createdDataGridViewTextBoxColumn
+            // 
+            this.createdDataGridViewTextBoxColumn.DataPropertyName = "Created";
+            this.createdDataGridViewTextBoxColumn.HeaderText = "Created";
+            this.createdDataGridViewTextBoxColumn.Name = "createdDataGridViewTextBoxColumn";
+            this.createdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.createdDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // Address
+            // 
+            this.Address.DataPropertyName = "Address.UserAddress";
+            this.Address.HeaderText = "Address";
+            this.Address.Name = "Address";
+            this.Address.ReadOnly = true;
+            // 
+            // User
+            // 
+            this.User.DataPropertyName = "User.PhoneNumber";
+            this.User.HeaderText = "User";
+            this.User.Name = "User";
+            this.User.ReadOnly = true;
+            // 
             // orderBindingSource
             // 
             this.orderBindingSource.DataSource = typeof(RestaurantClient.PizzaWaiterTestServiceReference.Order);
@@ -233,31 +271,34 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.SkyBlue;
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btnChangeStatus);
+            this.panel1.Controls.Add(this.cbStatus);
+            this.panel1.Controls.Add(this.btnDelete);
             this.panel1.Location = new System.Drawing.Point(3, 301);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(791, 34);
             this.panel1.TabIndex = 0;
             // 
-            // comboBox1
+            // cbStatus
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(583, 10);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 1;
+            this.cbStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbStatus.FormattingEnabled = true;
+            this.cbStatus.Location = new System.Drawing.Point(224, 8);
+            this.cbStatus.Name = "cbStatus";
+            this.cbStatus.Size = new System.Drawing.Size(121, 21);
+            this.cbStatus.TabIndex = 1;
             // 
-            // button1
+            // btnDelete
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(710, 8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Location = new System.Drawing.Point(710, 6);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 0;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // tabPage2
             // 
@@ -280,42 +321,15 @@
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // statusIDDataGridViewTextBoxColumn
+            // btnChangeStatus
             // 
-            this.statusIDDataGridViewTextBoxColumn.DataPropertyName = "StatusID";
-            this.statusIDDataGridViewTextBoxColumn.HeaderText = "Status";
-            this.statusIDDataGridViewTextBoxColumn.Name = "statusIDDataGridViewTextBoxColumn";
-            this.statusIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // createdDataGridViewTextBoxColumn
-            // 
-            this.createdDataGridViewTextBoxColumn.DataPropertyName = "Created";
-            this.createdDataGridViewTextBoxColumn.HeaderText = "Created";
-            this.createdDataGridViewTextBoxColumn.Name = "createdDataGridViewTextBoxColumn";
-            this.createdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.createdDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // Address
-            // 
-            this.Address.DataPropertyName = "Address.UserAddress";
-            this.Address.HeaderText = "Address";
-            this.Address.Name = "Address";
-            this.Address.ReadOnly = true;
-            // 
-            // User
-            // 
-            this.User.DataPropertyName = "User.PhoneNumber";
-            this.User.HeaderText = "User";
-            this.User.Name = "User";
-            this.User.ReadOnly = true;
+            this.btnChangeStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnChangeStatus.Location = new System.Drawing.Point(351, 6);
+            this.btnChangeStatus.Name = "btnChangeStatus";
+            this.btnChangeStatus.Size = new System.Drawing.Size(75, 23);
+            this.btnChangeStatus.TabIndex = 2;
+            this.btnChangeStatus.Text = "Save";
+            this.btnChangeStatus.UseVisualStyleBackColor = true;
             // 
             // RestaurantClientForm
             // 
@@ -362,8 +376,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dgvShowOrders;
         private System.Windows.Forms.CheckedListBox clbPartOrdersList;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cbStatus;
+        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label lblPhoneNr;
@@ -378,6 +392,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn createdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
         private System.Windows.Forms.DataGridViewTextBoxColumn User;
+        private System.Windows.Forms.Button btnChangeStatus;
     }
 }
 
