@@ -329,15 +329,13 @@ namespace Models
                 {
                     this.Response.Messages.Add(string.Format("request successfull. {0} orders deleted", rowcount));
                     this.Response.Success = true;
-                    return this.Response;
                 }
                 else
                 {
                     this.Response.Messages.Add("Request failed in PartOrder .Database handler error");
-
-                    return this.Response;
                 }
             }
+            return this.Response;
         }
     }
 
