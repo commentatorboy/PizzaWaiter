@@ -32,6 +32,13 @@ namespace PizzaWaiterServiceLibrary {
             return dishes;
         }
 
+        public void ChangeOrderStatus(int orderId, OrderStatus newStatus) {
+            OrderDB orderDB = new OrderDB();
+            Order order = orderDB.GetById(orderId);
+            order.StatusID = newStatus;
+            order.Update();
+        }
+
         public void DeleteOrderByID(int orderID)
         {
             OrderDB orderDB = new OrderDB();

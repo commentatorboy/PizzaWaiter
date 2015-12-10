@@ -15,6 +15,8 @@ namespace PizzaWaiterServiceLibrary {
         [OperationContract]
         List<Dish> GetDishesByRestaurantID(int restaurantID);
         [OperationContract]
+        void ChangeOrderStatus(int OrderId, OrderStatus newStatus);
+        [OperationContract]
         void DeleteOrderByID(int orderID);
         [OperationContract]
         List<PartOrder> GetPartOrdersByOrderId(int orderID);
