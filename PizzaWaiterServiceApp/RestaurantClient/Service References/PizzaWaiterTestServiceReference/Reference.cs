@@ -1092,6 +1092,12 @@ namespace RestaurantClient.PizzaWaiterTestServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PizzaWaiterTestServiceReference.IPizzaWaiterTestService")]
     public interface IPizzaWaiterTestService {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/DeleteOrderByID", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/DeleteOrderByIDResponse")]
+        void DeleteOrderByID(int orderID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/DeleteOrderByID", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/DeleteOrderByIDResponse")]
+        System.Threading.Tasks.Task DeleteOrderByIDAsync(int orderID);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPizzaWaiterTestService/GetPartOrdersByOrderId", ReplyAction="http://tempuri.org/IPizzaWaiterTestService/GetPartOrdersByOrderIdResponse")]
         RestaurantClient.PizzaWaiterTestServiceReference.PartOrder[] GetPartOrdersByOrderId(int orderID);
         
@@ -1166,6 +1172,14 @@ namespace RestaurantClient.PizzaWaiterTestServiceReference {
         
         public PizzaWaiterTestServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public void DeleteOrderByID(int orderID) {
+            base.Channel.DeleteOrderByID(orderID);
+        }
+        
+        public System.Threading.Tasks.Task DeleteOrderByIDAsync(int orderID) {
+            return base.Channel.DeleteOrderByIDAsync(orderID);
         }
         
         public RestaurantClient.PizzaWaiterTestServiceReference.PartOrder[] GetPartOrdersByOrderId(int orderID) {

@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ListBoxItem.cs" />
+    <Compile Include="Models\ListBoxItem.cs" />
     <Compile Include="RestaurantClientForm.cs">
       <SubType>Form</SubType>
     </Compile>

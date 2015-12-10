@@ -26,7 +26,19 @@ namespace RestaurantClient
             orders = Program.proxy.GetOrders().ToList();
             direction = SortOrder.Ascending;
             this.BindOrders();
+            this.BindStatus(OrderStatus.Default);
             
+        }
+
+        private void BindStatus(OrderStatus status)
+        {
+            this.cbStatus.Items.Clear();
+            this.cbStatus.DisplayMember = "Name";
+            this.cbStatus.ValueMember = "ID";
+            foreach (int item in Enum.GetValues(typeof(OrderStatus))) {
+                this.cbStatus.Items.Add(new ListBoxItem(item, Enum.GetName(typeof(OrderStatus),item)));
+            }
+            this.cbStatus.SelectedItem = 1;
         }
 
         private List<ListBoxItem> ToListBoxItem(List<PartOrder> partOrders)
@@ -113,6 +125,7 @@ namespace RestaurantClient
                 this.lblAddress.Text = string.Format("Address: {0}", order.Address.UserAddress);
                 this.lblPhoneNr.Text = string.Format("PhoneNumber: {0}", order.User.PhoneNumber);
                 this.lblTotalPrice.Text = string.Format("Total: {0:0.00}kr", this.CalculateTotalPrice(partOrders));
+                this.BindStatus(order.StatusID);
             }
             else
             {
@@ -120,6 +133,7 @@ namespace RestaurantClient
                 this.lblAddress.Text = "";
                 this.lblPhoneNr.Text = "";
                 this.lblTotalPrice.Text = "";
+                this.BindStatus(OrderStatus.Default);
             }
         }
     }
