@@ -29,6 +29,7 @@ namespace PizzaWaiterServiceLibrary {
         {
             OrderDB orderDB = new OrderDB();
             Order order = orderDB.GetById(orderID);
+            //Make a check for nulls
             order.Delete();
         }
 

@@ -195,7 +195,36 @@ namespace Models {
         public Response<CustomIngredient> DeleteBatchByPartOrderList(List<PartOrder> partOrders)
         {
             ///stub: 
-            return null;
+            this.Response = new Response<CustomIngredient>();
+            //make sure that the partOrders is not null.
+            if(partOrders != null)
+            {
+                string[] completeString = new string[partOrders.Count];
+                int var = 0;
+
+                foreach (PartOrder po in partOrders)
+                {
+                    ///Delete from (class name) where id=(orderIdn0) OR id=(orderIdn..) OR id=(orderIdn)
+                    string joinPartOrdersID = string.Format("PartOrderID = {0}", po.ID);
+                    completeString[var] = joinPartOrdersID;
+                    var++;
+                }
+
+                string sqlCondition = string.Join(" OR ", completeString);
+                
+
+                int rowcount = this.Delete(sqlCondition);
+                if (this.Success)
+                {
+                    this.Response.Messages.Add(string.Format("request successfull. {0} Custom ingredients deleted", rowcount));
+                    this.Response.Success = true;
+                }
+                else
+                {
+                    this.Response.Messages.Add("Request failed in Custom Ingredient DeleteBatchByPartOrderList");
+                }                
+            }
+            return this.Response;
         }
 
         public Response<CustomIngredient> Create(CustomIngredient customIngredient) {

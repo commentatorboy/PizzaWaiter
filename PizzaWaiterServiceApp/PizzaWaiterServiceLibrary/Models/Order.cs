@@ -87,7 +87,6 @@ namespace Models {
             //Get the all the partorders by id
             List<PartOrder> partOrders = partOrderDB.GetByOrderId(this.ID);
 
-            
             //Stub: Delete the customingredients for each partorder id.
             Response<CustomIngredient> customIngredientResponse = customIngredientDB.DeleteBatchByPartOrderList(partOrders);
             

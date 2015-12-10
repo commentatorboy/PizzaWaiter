@@ -15,12 +15,14 @@ namespace RestaurantClient
     public partial class RestaurantClientForm : Form
     {
         private List<Order> orders;
-
+        private int orderID;
         private SortOrder direction;
+
 
         public RestaurantClientForm()
         {
             InitializeComponent();
+            orderID = 0;
             orders = Program.proxy.GetOrders().ToList();
             direction = SortOrder.Ascending;
             this.BindOrders();
@@ -39,19 +41,13 @@ namespace RestaurantClient
 
         private void dgvShowOrders_SelectionChanged(object sender, EventArgs e)
         {
+            this.btnDelete.Enabled = true;
+
             if (this.dgvShowOrders.SelectedRows.Count == 1)
             {
                 DataGridViewRow row = this.dgvShowOrders.SelectedRows[0];
-                int orderID = Convert.ToInt32(row.Cells["ID"].Value);
-                List<PartOrder> partOrders = Program.proxy.GetPartOrdersByOrderId(orderID).ToList();
-                List<ListBoxItem> dataSource = this.ToListBoxItem(partOrders);
-                ((ListBox)clbPartOrdersList).DataSource = dataSource;
-                ((ListBox)clbPartOrdersList).DisplayMember = "Name";
-                ((ListBox)clbPartOrdersList).ValueMember = "ID";
-                Order order = orders.FirstOrDefault(x => x.ID == orderID);
-                this.lblAddress.Text = string.Format("Address: {0}",order.Address.UserAddress);
-                this.lblPhoneNr.Text = string.Format("PhoneNumber: {0}",order.User.PhoneNumber);
-                this.lblTotalPrice.Text = string.Format("Total: {0:0.00}kr",this.CalculateTotalPrice(partOrders));
+                orderID = Convert.ToInt32(row.Cells["ID"].Value);
+                this.updateInfo(orderID);
             }
         }
 
@@ -85,11 +81,46 @@ namespace RestaurantClient
         private void BindOrders() {
             orders = direction == SortOrder.Ascending ? orders.OrderBy(x => x.Created).ToList() : orders.OrderByDescending(x => x.Created).ToList();
             this.dgvShowOrders.DataSource = orders;
+            
         }
 
         private void dgvShowOrders_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e) {
             this.direction = direction == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
             this.BindOrders();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            Program.proxy.DeleteOrderByID(orderID);
+            Order deleteOrder = orders.FirstOrDefault(x => x.ID == orderID);
+            orders.Remove(deleteOrder);
+            this.BindOrders();
+            this.updateInfo(0);
+        }
+
+        private void updateInfo(int orderID)
+        {
+            ((ListBox)clbPartOrdersList).DisplayMember = "Name";
+            ((ListBox)clbPartOrdersList).ValueMember = "ID";
+            if (orderID > 0)
+            {
+                
+                List<PartOrder> partOrders = Program.proxy.GetPartOrdersByOrderId(orderID).ToList();
+                List<ListBoxItem> dataSource = this.ToListBoxItem(partOrders);
+                ((ListBox)clbPartOrdersList).DataSource = dataSource;
+                
+                Order order = orders.FirstOrDefault(x => x.ID == orderID);
+                this.lblAddress.Text = string.Format("Address: {0}", order.Address.UserAddress);
+                this.lblPhoneNr.Text = string.Format("PhoneNumber: {0}", order.User.PhoneNumber);
+                this.lblTotalPrice.Text = string.Format("Total: {0:0.00}kr", this.CalculateTotalPrice(partOrders));
+            }
+            else
+            {
+                ((ListBox)clbPartOrdersList).DataSource = new List<ListBoxItem>();
+                this.lblAddress.Text = "";
+                this.lblPhoneNr.Text = "";
+                this.lblTotalPrice.Text = "";
+            }
         }
     }
 }
