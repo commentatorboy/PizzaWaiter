@@ -11,6 +11,9 @@ namespace PizzaWaiterServiceLibrary {
     [ServiceContract]
     public interface IPizzaWaiterTestService {
 
+
+        [OperationContract]
+        List<Dish> GetDishesByRestaurantID(int restaurantID);
         [OperationContract]
         void DeleteOrderByID(int orderID);
         [OperationContract]

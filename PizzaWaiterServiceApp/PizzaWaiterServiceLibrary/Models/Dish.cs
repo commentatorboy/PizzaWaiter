@@ -15,6 +15,7 @@ namespace Models
     {
 
         private DishDB dishDB; //related DB handler (required)
+        private RestaurantMenuDB restaurantMenuDB;
 
         /*Object properties (custom)*/
         [DataMember]
@@ -27,6 +28,15 @@ namespace Models
         public int Number { get; set; }
         [DataMember]
         public decimal Price { get; set; }
+        [DataMember]
+        public RestaurantMenu RestaurantMenu { get; set; }
+
+        public Dish()
+        {
+            this.Connect();
+
+        }
+            
 
         /*Build Object (required)*/
         public void BuildObject(DataRow row)
@@ -36,6 +46,8 @@ namespace Models
             this.Name = SqlFormat.ToString(row, "Name");
             this.Number = SqlFormat.ToInt(row, "Number");
             this.Price = SqlFormat.ToDecimal(row, "Price");
+
+            this.RestaurantMenu = restaurantMenuDB.GetById(this.RestaurantMenuID);
         }
 
         /* Connects to handler, only once per object
@@ -46,6 +58,10 @@ namespace Models
             if (this.dishDB == null)
             {
                 this.dishDB = new DishDB();
+            }
+            if (this.restaurantMenuDB == null)
+            {
+                this.restaurantMenuDB = new RestaurantMenuDB();
             }
 
         }
@@ -251,6 +267,20 @@ namespace Models
         public Dish GetById(int id)
         {
             return this.GetAll().FirstOrDefault(x => x.ID == id);
+        }
+
+        public List<Dish> GetDishesByRestaurantID(int restaurantID)
+        {
+
+            RestaurantMenuDB restaurantMenuDB = new RestaurantMenuDB();
+            List<RestaurantMenu> restaurantMenues = restaurantMenuDB.GetByRestaurantId(restaurantID);
+            List<Dish> dishes = new List<Dish>();
+                        foreach (RestaurantMenu rm in restaurantMenues)
+            {
+                dishes.AddRange(this.GetByRestaurantMenuId(rm.ID));
+            }
+
+            return dishes;
         }
     }
 }

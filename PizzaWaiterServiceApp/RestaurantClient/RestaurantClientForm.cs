@@ -17,6 +17,7 @@ namespace RestaurantClient
         private List<Order> orders;
         private int orderID;
         private SortOrder direction;
+        private List<Dish> dishes;
 
 
         public RestaurantClientForm()
@@ -24,12 +25,50 @@ namespace RestaurantClient
             InitializeComponent();
             orderID = 0;
             orders = Program.proxy.GetOrders().ToList();
+            ///TODO: This is the part the Restaurant Login
+            dishes = Program.proxy.GetDishesByRestaurantID(2).ToList();
+
             direction = SortOrder.Ascending;
             this.BindOrders();
+            this.BindDishes();
             this.BindStatus(OrderStatus.Default);
             
         }
 
+        #region Dishes
+        private void BindDishes()
+        {
+            ///TODO: make it sort by menu
+            this.dgvShowDishes.DataSource = dishes;
+
+        }
+
+        #endregion
+
+        #region common
+        private void Grid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+            DataGridView grid = (DataGridView)sender;
+            DataGridViewRow row = grid.Rows[e.RowIndex];
+            DataGridViewColumn col = grid.Columns[e.ColumnIndex];
+            if (row.DataBoundItem != null && col.DataPropertyName.Contains("."))
+            {
+                string[] props = col.DataPropertyName.Split('.');
+                PropertyInfo propInfo = row.DataBoundItem.GetType().GetProperty(props[0]);
+                object val = propInfo.GetValue(row.DataBoundItem, null);
+                for (int i = 1; i < props.Length; i++)
+                {
+                    propInfo = val.GetType().GetProperty(props[i]);
+                    val = propInfo.GetValue(val, null);
+                }
+                e.Value = val;
+            }
+        }
+        #endregion
+
+
+        #region Orders
         private void BindStatus(OrderStatus status)
         {
             this.cbStatus.Items.Clear();
@@ -38,7 +77,7 @@ namespace RestaurantClient
             foreach (int item in Enum.GetValues(typeof(OrderStatus))) {
                 this.cbStatus.Items.Add(new ListBoxItem(item, Enum.GetName(typeof(OrderStatus),item)));
             }
-            this.cbStatus.SelectedItem = 1;
+            this.cbStatus.SelectedValue = OrderStatus.Default;
         }
 
         private List<ListBoxItem> ToListBoxItem(List<PartOrder> partOrders)
@@ -73,22 +112,6 @@ namespace RestaurantClient
             return totalPrice;
         }
 
-        private void Grid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
-
-            DataGridView grid = (DataGridView)sender;
-            DataGridViewRow row = grid.Rows[e.RowIndex];
-            DataGridViewColumn col = grid.Columns[e.ColumnIndex];
-            if (row.DataBoundItem != null && col.DataPropertyName.Contains(".")) {
-                string[] props = col.DataPropertyName.Split('.');
-                PropertyInfo propInfo = row.DataBoundItem.GetType().GetProperty(props[0]);
-                object val = propInfo.GetValue(row.DataBoundItem, null);
-                for (int i = 1; i < props.Length; i++) {
-                    propInfo = val.GetType().GetProperty(props[i]);
-                    val = propInfo.GetValue(val, null);
-                }
-                e.Value = val;
-            }
-        }
 
         private void BindOrders() {
             orders = direction == SortOrder.Ascending ? orders.OrderBy(x => x.Created).ToList() : orders.OrderByDescending(x => x.Created).ToList();
@@ -136,5 +159,6 @@ namespace RestaurantClient
                 this.BindStatus(OrderStatus.Default);
             }
         }
+        #endregion
     }
 }

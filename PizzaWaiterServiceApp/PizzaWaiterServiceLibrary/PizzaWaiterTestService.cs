@@ -16,13 +16,20 @@ namespace PizzaWaiterServiceLibrary {
 
         public PizzaWaiterTestService()
         {
-            /*
+            
             SqlConfig.SqlServer = "(localdb)\\V11.0";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            */
+            /*
             SqlConfig.SqlServer = "ALEXANDRALAPTOP\\SQLEXPRESS";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            
+            */
+        }
+
+        public List<Dish> GetDishesByRestaurantID(int restaurantID)
+        {
+            DishDB dishDB = new DishDB();
+            List<Dish> dishes = dishDB.GetDishesByRestaurantID(restaurantID);
+            return dishes;
         }
 
         public void DeleteOrderByID(int orderID)
