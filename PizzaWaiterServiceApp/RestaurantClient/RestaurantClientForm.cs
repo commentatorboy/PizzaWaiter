@@ -37,6 +37,23 @@ namespace RestaurantClient
         }
 
         #region Dishes
+        private void btnSaveDish_Click(object sender, EventArgs e)
+        {
+            Dish dish = this.GetSelectedDish();
+            dish.Name = this.tbDishName.Text;
+            dish.Number = Convert.ToInt32(this.tbDishNumber.Text);
+            dish.Price = Convert.ToDecimal(this.tbDishPrice.Text);
+           
+            ///TODO: Change the menu and ingredients for it
+            /// TODO: Make the method in service.
+            Program.proxy.UpdateDish(dish.ID, dish.Name, dish.Price, dish.Number, dish.RestaurantMenuID);
+
+            this.BindDishes();
+            
+
+
+        }
+
         private void BindDishes()
         {
 
@@ -253,10 +270,11 @@ namespace RestaurantClient
             //update interface
             this.BindOrders();
         }
+
+
+
+
         #endregion
-
-
-
 
 
     }

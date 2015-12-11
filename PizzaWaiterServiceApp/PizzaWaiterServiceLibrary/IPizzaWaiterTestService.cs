@@ -5,12 +5,15 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using Models;
+using CustomHandlers.DatabaseLibrary;
 
 namespace PizzaWaiterServiceLibrary {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
     public interface IPizzaWaiterTestService {
 
+        [OperationContract]
+        bool UpdateDish(int dishID, string dishName, decimal dishPrice, int dishNumber, int dishRestaurantMenuID);
         [OperationContract]
         bool DeleteDishByID(int dishID);
         [OperationContract]

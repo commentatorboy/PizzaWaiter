@@ -72,7 +72,7 @@
             this.tbDishName = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSaveDish = new System.Windows.Forms.Button();
             this.btnDeleteDish = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.RestaurantMenu = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -289,7 +289,7 @@
             this.clbPartOrdersList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.clbPartOrdersList.FormattingEnabled = true;
             this.clbPartOrdersList.Location = new System.Drawing.Point(0, 0);
-            this.clbPartOrdersList.MinimumSize = new System.Drawing.Size(250, 0);
+            this.clbPartOrdersList.MinimumSize = new System.Drawing.Size(250, 4);
             this.clbPartOrdersList.Name = "clbPartOrdersList";
             this.clbPartOrdersList.Size = new System.Drawing.Size(791, 144);
             this.clbPartOrdersList.TabIndex = 0;
@@ -546,7 +546,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.SkyBlue;
             this.panel4.Controls.Add(this.button5);
-            this.panel4.Controls.Add(this.button1);
+            this.panel4.Controls.Add(this.btnSaveDish);
             this.panel4.Controls.Add(this.btnDeleteDish);
             this.panel4.Location = new System.Drawing.Point(3, 301);
             this.panel4.Name = "panel4";
@@ -563,15 +563,16 @@
             this.button5.Text = "New";
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnSaveDish
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(710, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSaveDish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSaveDish.Location = new System.Drawing.Point(710, 6);
+            this.btnSaveDish.Name = "btnSaveDish";
+            this.btnSaveDish.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveDish.TabIndex = 2;
+            this.btnSaveDish.Text = "Save";
+            this.btnSaveDish.UseVisualStyleBackColor = true;
+            this.btnSaveDish.Click += new System.EventHandler(this.btnSaveDish_Click);
             // 
             // btnDeleteDish
             // 
@@ -734,7 +735,7 @@
         private System.Windows.Forms.DataGridView dgvShowDishes;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSaveDish;
         private System.Windows.Forms.Button btnDeleteDish;
         private System.Windows.Forms.BindingSource dishBindingSource;
         private System.Windows.Forms.Label label4;
