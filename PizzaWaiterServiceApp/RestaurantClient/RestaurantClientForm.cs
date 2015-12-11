@@ -39,8 +39,23 @@ namespace RestaurantClient
         #region Dishes
         private void BindDishes()
         {
+
+            dishes = direction == SortOrder.Ascending ? dishes.OrderBy(x => x.RestaurantMenu.Position).ToList() : dishes.OrderByDescending(x => x.RestaurantMenu.Position).ToList();
+
             ///TODO: make it sort by menu
-            this.dgvShowDishes.DataSource = dishes;
+            //this.dgvShowDishes.ClearSelection();
+            //this.dgvShowDishes.Refresh();
+            if (dishes.Count > 0)
+            {
+                this.dgvShowDishes.DataSource = dishes;
+            }
+            else
+            {
+                this.dgvShowDishes.DataSource = null;
+            }
+            
+            
+            this.UpdateDishInfo();
 
         }
         private Dish GetSelectedDish() {
