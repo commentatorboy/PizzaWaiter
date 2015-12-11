@@ -16,13 +16,17 @@ namespace PizzaWaiterServiceLibrary {
 
         public PizzaWaiterTestService()
         {
-            
+            /*
             SqlConfig.SqlServer = "(localdb)\\V11.0";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            /*
+             */
             SqlConfig.SqlServer = "ALEXANDRALAPTOP\\SQLEXPRESS";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            */
+           
+        }
+        public bool DeleteDishByID(int dishID)
+        {
+            return true;
         }
 
         public List<Dish> GetDishesByRestaurantID(int restaurantID)
@@ -39,6 +43,10 @@ namespace PizzaWaiterServiceLibrary {
             order.Update();
         }
 
+        /// <summary>
+        ///  TODO: change to boolean
+        /// </summary>
+        /// <param name="orderID"></param>
         public void DeleteOrderByID(int orderID)
         {
             OrderDB orderDB = new OrderDB();

@@ -16,6 +16,7 @@ namespace RestaurantClient
     {
         private List<Order> orders;
         private int orderID;
+        private int dishID;
         private SortOrder direction;
         private List<Dish> dishes;
 
@@ -42,6 +43,41 @@ namespace RestaurantClient
             this.dgvShowDishes.DataSource = dishes;
 
         }
+        private Dish GetSelectedDish() {
+            Dish dish = null;
+            if (this.dgvShowDishes.SelectedRows.Count > 0) {
+                DataGridViewRow row = this.dgvShowDishes.SelectedRows[0];
+                this.dishID = Convert.ToInt32(row.Cells["iDDataGridViewTextBoxColumn"].Value);
+                dish = dishes.FirstOrDefault(x => x.ID == this.dishID);
+            }
+            return dish;
+        }
+        private void dgvShowDishes_SelectionChanged(object sender, EventArgs e) {
+            this.btnDeleteDish.Enabled = true;
+            if (this.dgvShowDishes.SelectedRows.Count == 1) {
+                this.UpdateDishInfo();
+            }
+        }
+
+        private void UpdateDishInfo() {
+            Dish dish = this.GetSelectedDish();
+            if (dish!= null) {
+                this.tbDishName.Text = dish.Name;
+                this.tbDishNumber.Text = dish.Number.ToString();
+                this.tbDishPrice.Text = String.Format("{0:0.00}",dish.Price);
+            }
+        }
+        private void btnDeleteDish_Click(object sender, EventArgs e) {
+            /// STUB: 
+            if (Program.proxy.DeleteDishByID(this.dishID)) {
+                this.dishes.Remove(this.GetSelectedDish());
+                this.BindDishes();
+
+            }
+
+            
+            
+        }
 
         #endregion
 
@@ -66,7 +102,6 @@ namespace RestaurantClient
             }
         }
         #endregion
-
 
         #region Orders
         private void BindStatus()
@@ -108,13 +143,13 @@ namespace RestaurantClient
 
         private void dgvShowOrders_SelectionChanged(object sender, EventArgs e)
         {
-            this.btnDelete.Enabled = true;
+            this.btnDeleteOrder.Enabled = true;
 
             if (this.dgvShowOrders.SelectedRows.Count == 1)
             {
                 //DataGridViewRow row = this.dgvShowOrders.SelectedRows[0];
-                orderID = this.GetSelectedOrder().ID;
-                this.UpdateInfo();
+                //orderID = this.GetSelectedOrder().ID;
+                this.UpdateOrderInfo();
             }
         }
 
@@ -132,7 +167,7 @@ namespace RestaurantClient
         private void BindOrders() {
             orders = direction == SortOrder.Ascending ? orders.OrderBy(x => x.Created).ToList() : orders.OrderByDescending(x => x.Created).ToList();
             this.dgvShowOrders.DataSource = orders;
-            this.UpdateInfo();
+            this.UpdateOrderInfo();
             
         }
 
@@ -144,12 +179,12 @@ namespace RestaurantClient
         private void btnDelete_Click(object sender, EventArgs e)
         {
             Program.proxy.DeleteOrderByID(orderID);
-            Order deleteOrder = orders.FirstOrDefault(x => x.ID == orderID);
+            Order deleteOrder = this.GetSelectedOrder();
             orders.Remove(deleteOrder);
             this.BindOrders();
         }
 
-        private void UpdateInfo()
+        private void UpdateOrderInfo()
         {
             Order order = this.GetSelectedOrder();
 
@@ -181,8 +216,8 @@ namespace RestaurantClient
             Order order = null;
             if (this.dgvShowOrders.SelectedRows.Count>0) {
                 DataGridViewRow row = this.dgvShowOrders.SelectedRows[0];
-                orderID = Convert.ToInt32(row.Cells["ID"].Value);
-                order =  orders.FirstOrDefault(x => x.ID == orderID);    
+                this.orderID = Convert.ToInt32(row.Cells["ID"].Value);
+                order =  orders.FirstOrDefault(x => x.ID == this.orderID);    
             }
                 /*
             else
@@ -204,5 +239,10 @@ namespace RestaurantClient
             this.BindOrders();
         }
         #endregion
+
+
+
+
+
     }
 }

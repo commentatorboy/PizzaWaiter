@@ -53,15 +53,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnChangeStatus = new System.Windows.Forms.Button();
             this.cbStatus = new System.Windows.Forms.ComboBox();
-            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnDeleteOrder = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dgvShowDishes = new System.Windows.Forms.DataGridView();
-            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RestaurantMenu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dishBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -76,15 +71,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbDishPrice = new System.Windows.Forms.TextBox();
+            this.tbDishNumber = new System.Windows.Forms.TextBox();
+            this.tbDishName = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnDeleteDish = new System.Windows.Forms.Button();
             this.orderBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RestaurantMenu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -319,7 +319,7 @@
             this.panel1.BackColor = System.Drawing.Color.SkyBlue;
             this.panel1.Controls.Add(this.btnChangeStatus);
             this.panel1.Controls.Add(this.cbStatus);
-            this.panel1.Controls.Add(this.btnDelete);
+            this.panel1.Controls.Add(this.btnDeleteOrder);
             this.panel1.Location = new System.Drawing.Point(3, 301);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(791, 34);
@@ -345,17 +345,17 @@
             this.cbStatus.Size = new System.Drawing.Size(121, 21);
             this.cbStatus.TabIndex = 1;
             // 
-            // btnDelete
+            // btnDeleteOrder
             // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(710, 6);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 0;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDeleteOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteOrder.Enabled = false;
+            this.btnDeleteOrder.Location = new System.Drawing.Point(710, 6);
+            this.btnDeleteOrder.Name = "btnDeleteOrder";
+            this.btnDeleteOrder.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteOrder.TabIndex = 0;
+            this.btnDeleteOrder.Text = "Delete";
+            this.btnDeleteOrder.UseVisualStyleBackColor = true;
+            this.btnDeleteOrder.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // tabPage2
             // 
@@ -391,6 +391,8 @@
             // 
             // dgvShowDishes
             // 
+            this.dgvShowDishes.AllowUserToAddRows = false;
+            this.dgvShowDishes.AllowUserToDeleteRows = false;
             this.dgvShowDishes.AutoGenerateColumns = false;
             this.dgvShowDishes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvShowDishes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -409,42 +411,7 @@
             this.dgvShowDishes.Size = new System.Drawing.Size(791, 147);
             this.dgvShowDishes.TabIndex = 0;
             this.dgvShowDishes.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.Grid_CellFormatting);
-            // 
-            // iDDataGridViewTextBoxColumn
-            // 
-            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
-            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
-            this.iDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.iDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // RestaurantMenu
-            // 
-            this.RestaurantMenu.DataPropertyName = "RestaurantMenu.Position";
-            this.RestaurantMenu.HeaderText = "Menu Position";
-            this.RestaurantMenu.Name = "RestaurantMenu";
-            this.RestaurantMenu.ReadOnly = true;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // numberDataGridViewTextBoxColumn
-            // 
-            this.numberDataGridViewTextBoxColumn.DataPropertyName = "Number";
-            this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
-            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
-            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // priceDataGridViewTextBoxColumn
-            // 
-            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
-            this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
-            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
-            this.priceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dgvShowDishes.SelectionChanged += new System.EventHandler(this.dgvShowDishes_SelectionChanged);
             // 
             // dishBindingSource
             // 
@@ -458,9 +425,9 @@
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.comboBox2);
-            this.panel3.Controls.Add(this.textBox3);
-            this.panel3.Controls.Add(this.textBox2);
-            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Controls.Add(this.tbDishPrice);
+            this.panel3.Controls.Add(this.tbDishNumber);
+            this.panel3.Controls.Add(this.tbDishName);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
@@ -574,26 +541,26 @@
             this.comboBox2.Size = new System.Drawing.Size(222, 21);
             this.comboBox2.TabIndex = 3;
             // 
-            // textBox3
+            // tbDishPrice
             // 
-            this.textBox3.Location = new System.Drawing.Point(55, 54);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(99, 20);
-            this.textBox3.TabIndex = 2;
+            this.tbDishPrice.Location = new System.Drawing.Point(55, 54);
+            this.tbDishPrice.Name = "tbDishPrice";
+            this.tbDishPrice.Size = new System.Drawing.Size(99, 20);
+            this.tbDishPrice.TabIndex = 2;
             // 
-            // textBox2
+            // tbDishNumber
             // 
-            this.textBox2.Location = new System.Drawing.Point(55, 27);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(99, 20);
-            this.textBox2.TabIndex = 1;
+            this.tbDishNumber.Location = new System.Drawing.Point(55, 27);
+            this.tbDishNumber.Name = "tbDishNumber";
+            this.tbDishNumber.Size = new System.Drawing.Size(99, 20);
+            this.tbDishNumber.TabIndex = 1;
             // 
-            // textBox1
+            // tbDishName
             // 
-            this.textBox1.Location = new System.Drawing.Point(55, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(222, 20);
-            this.textBox1.TabIndex = 0;
+            this.tbDishName.Location = new System.Drawing.Point(55, 2);
+            this.tbDishName.Name = "tbDishName";
+            this.tbDishName.Size = new System.Drawing.Size(222, 20);
+            this.tbDishName.TabIndex = 0;
             // 
             // panel4
             // 
@@ -602,7 +569,7 @@
             this.panel4.BackColor = System.Drawing.Color.SkyBlue;
             this.panel4.Controls.Add(this.button5);
             this.panel4.Controls.Add(this.button1);
-            this.panel4.Controls.Add(this.button2);
+            this.panel4.Controls.Add(this.btnDeleteDish);
             this.panel4.Location = new System.Drawing.Point(3, 301);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(791, 34);
@@ -627,16 +594,17 @@
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnDeleteDish
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(548, 6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Delete";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnDeleteDish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteDish.Enabled = false;
+            this.btnDeleteDish.Location = new System.Drawing.Point(548, 6);
+            this.btnDeleteDish.Name = "btnDeleteDish";
+            this.btnDeleteDish.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteDish.TabIndex = 0;
+            this.btnDeleteDish.Text = "Delete";
+            this.btnDeleteDish.UseVisualStyleBackColor = true;
+            this.btnDeleteDish.Click += new System.EventHandler(this.btnDeleteDish_Click);
             // 
             // orderBindingSource1
             // 
@@ -649,6 +617,42 @@
             this.statusStrip1.Size = new System.Drawing.Size(804, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // iDDataGridViewTextBoxColumn
+            // 
+            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
+            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
+            this.iDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.iDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // RestaurantMenu
+            // 
+            this.RestaurantMenu.DataPropertyName = "RestaurantMenu.Position";
+            this.RestaurantMenu.HeaderText = "Menu Position";
+            this.RestaurantMenu.Name = "RestaurantMenu";
+            this.RestaurantMenu.ReadOnly = true;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // numberDataGridViewTextBoxColumn
+            // 
+            this.numberDataGridViewTextBoxColumn.DataPropertyName = "Number";
+            this.numberDataGridViewTextBoxColumn.HeaderText = "Number";
+            this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
+            this.numberDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // priceDataGridViewTextBoxColumn
+            // 
+            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+            this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
+            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            this.priceDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // RestaurantClientForm
             // 
@@ -706,7 +710,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckedListBox clbPartOrdersList;
         private System.Windows.Forms.ComboBox cbStatus;
-        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnDeleteOrder;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label lblPhoneNr;
@@ -729,16 +733,16 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnDeleteDish;
         private System.Windows.Forms.BindingSource dishBindingSource;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbDishPrice;
+        private System.Windows.Forms.TextBox tbDishNumber;
+        private System.Windows.Forms.TextBox tbDishName;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox4;
@@ -748,12 +752,12 @@
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ToolStripMenuItem dishesToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn RestaurantMenu;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }
 
