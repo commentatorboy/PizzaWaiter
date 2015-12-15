@@ -54,6 +54,8 @@ namespace PizzaWaiterServiceLibrary {
             return response.Success;
         }
 
+
+
         public bool DeleteDishByID(int dishID)
         {
             DishDB dishDB = new DishDB();
@@ -228,6 +230,15 @@ namespace PizzaWaiterServiceLibrary {
                         return r;*/
 
             return rm;
+        }
+
+        public bool UpdatePhoneNumber(int userID, string phoneNumber)
+        {
+            UserDB userDB = new UserDB();
+            User user = userDB.GetById(userID);
+            user.PhoneNumber = phoneNumber;
+            Response<User> response = user.Update();
+            return response.Success;
         }
 
     }

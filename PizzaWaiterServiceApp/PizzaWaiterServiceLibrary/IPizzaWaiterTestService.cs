@@ -14,6 +14,8 @@ namespace PizzaWaiterServiceLibrary {
     {
 
         [OperationContract]
+        bool UpdatePhoneNumber(int userID, string phoneNumber);
+        [OperationContract]
         bool CreateNewDish(string dishName, int dishNumber, decimal dishPrice, int restaurantID);
         [OperationContract]
         bool UpdateDish(int dishID, string dishName, decimal dishPrice, int dishNumber, int dishRestaurantMenuID);
