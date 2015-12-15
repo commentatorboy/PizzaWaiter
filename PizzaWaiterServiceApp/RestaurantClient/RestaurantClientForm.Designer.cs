@@ -71,7 +71,7 @@
             this.tbDishNumber = new System.Windows.Forms.TextBox();
             this.tbDishName = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnCreateDish = new System.Windows.Forms.Button();
             this.btnSaveDish = new System.Windows.Forms.Button();
             this.btnDeleteDish = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -545,7 +545,7 @@
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.SkyBlue;
-            this.panel4.Controls.Add(this.button5);
+            this.panel4.Controls.Add(this.btnCreateDish);
             this.panel4.Controls.Add(this.btnSaveDish);
             this.panel4.Controls.Add(this.btnDeleteDish);
             this.panel4.Location = new System.Drawing.Point(3, 301);
@@ -553,15 +553,16 @@
             this.panel4.Size = new System.Drawing.Size(791, 34);
             this.panel4.TabIndex = 0;
             // 
-            // button5
+            // btnCreateDish
             // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(629, 6);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "New";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnCreateDish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateDish.Location = new System.Drawing.Point(629, 6);
+            this.btnCreateDish.Name = "btnCreateDish";
+            this.btnCreateDish.Size = new System.Drawing.Size(75, 23);
+            this.btnCreateDish.TabIndex = 3;
+            this.btnCreateDish.Text = "New";
+            this.btnCreateDish.UseVisualStyleBackColor = true;
+            this.btnCreateDish.Click += new System.EventHandler(this.btnCreateDish_Click);
             // 
             // btnSaveDish
             // 
@@ -753,7 +754,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckedListBox checkedListBox2;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnCreateDish;
         private System.Windows.Forms.ToolStripMenuItem dishesToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
