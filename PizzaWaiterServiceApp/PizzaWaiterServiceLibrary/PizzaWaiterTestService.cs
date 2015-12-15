@@ -25,18 +25,16 @@ namespace PizzaWaiterServiceLibrary {
            */
         }
 
-        public bool CreateNewDish(string dishName, int dishNumber, decimal dishPrice, int restaurantID)
+        public bool CreateNewDish(string dishName, int dishNumber, decimal dishPrice, int restaurantMenuID)
         {
-            /*
-            DishDB dishDB = new DishDB();
-            Dish dish = dishDB.GetById(dishID);
+            Dish dish = new Dish();
             dish.Name = dishName;
             dish.Price = dishPrice;
             dish.Number = dishNumber;
-            dish.RestaurantMenuID = dishRestaurantMenuID;
-            dish.Create();
-            */
-            return true;
+            dish.RestaurantMenuID = restaurantMenuID;
+            Response<Dish> response = dish.Create();
+            
+            return response.Success;
         }
 
         public bool UpdateDish(int dishID, string dishName, decimal dishPrice, int dishNumber, int dishRestaurantMenuID)

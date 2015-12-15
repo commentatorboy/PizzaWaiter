@@ -115,7 +115,7 @@ namespace Models
         enum Input
         {
             IdIsNull,
-            OrderIdIsNull,
+            PriceIsNull,
             DishIdIsNull,
             NumberIsNull,
             RestaurantMenuIdIsNull
@@ -173,7 +173,7 @@ namespace Models
                                 err++; // count errors up
                             }
                             break;
-                        case Input.OrderIdIsNull:
+                        case Input.PriceIsNull:
                             if (this.ValidateIdIsNull(dish))
                             {
                                 this.Response.AddMessage(ResponseMessage.DataEmpty); // add message
@@ -197,19 +197,19 @@ namespace Models
         /* Raw checks for validity on each property requiring validation */
         private bool ValidateIdIsNull(Dish dish)
         {
-            return (dish.ID == null || dish.ID == 0);
+            return (dish.ID == 0);
         }
-        private bool ValidateDishIdIsNull(Dish dish)
+        private bool ValidateResaurantMenuIdIsNull(Dish dish)
         {
-            return (dish.RestaurantMenuID == null || dish.RestaurantMenuID == 0);
+            return (dish.RestaurantMenuID == 0);
         }
-        private bool ValidateOrderIdIsNull(Dish dish)
+        private bool ValidatePriceIsNull(Dish dish)
         {
-            return (dish.Name == null || dish.Name == "");
+            return (dish.Price == 0);
         }
         private bool ValidateNumberIsNull(Dish dish)
         {
-            return (dish.Number == null || dish.Number == 0);
+            return (dish.Number == 0);
         }
         #endregion
         #endregion
@@ -219,7 +219,7 @@ namespace Models
             /* run validation
              * check that id and name are filled up)
              * */
-            int err = this.Validate(dish, Input.IdIsNull, Input.NumberIsNull, Input.DishIdIsNull, Input.OrderIdIsNull, Input.RestaurantMenuIdIsNull);
+            int err = this.Validate(dish, Input.IdIsNull, Input.NumberIsNull, Input.DishIdIsNull, Input.RestaurantMenuIdIsNull, Input.PriceIsNull);
             // if both fields are filled up, try to update the dish 
             if (err < 1)
             {
@@ -273,7 +273,7 @@ namespace Models
         public Response<Dish> Create(Dish dish)
         {
             //same procedure as update, just dont need id validation
-            int err = this.Validate(dish, Input.NumberIsNull, Input.DishIdIsNull, Input.OrderIdIsNull, Input.RestaurantMenuIdIsNull);
+            int err = this.Validate(dish, Input.NumberIsNull, Input.DishIdIsNull, Input.RestaurantMenuIdIsNull);
 
 
             if (err < 1)
