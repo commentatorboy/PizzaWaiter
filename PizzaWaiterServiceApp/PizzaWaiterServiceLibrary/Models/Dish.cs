@@ -173,13 +173,6 @@ namespace Models
                                 err++; // count errors up
                             }
                             break;
-                        case Input.IdIsNull:
-                            if (this.ValidateIdIsNull(dish))
-                            {
-                                this.Response.AddMessage(ResponseMessage.DataEmpty); // add message
-                                err++; // count errors up
-                            }
-                            break;
                         case Input.OrderIdIsNull:
                             if (this.ValidateIdIsNull(dish))
                             {
