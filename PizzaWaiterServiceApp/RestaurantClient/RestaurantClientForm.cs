@@ -59,11 +59,15 @@ namespace RestaurantClient
             decimal dishPrice = Convert.ToDecimal(this.tbDishPrice.Text);
             int dishRestaurantMenuID = 1; // TODO: Replace with data from menu combobox
 
+
             if (this.dishID == 0)
             {
                 //create new dish
-                Program.proxy.CreateNewDish(dishName, dishNumber, dishPrice, dishRestaurantMenuID);
-                this.dishes = Program.proxy.GetDishesByRestaurantID(RESTAURANT_ID).ToList();
+                bool success = Program.proxy.CreateNewDish(dishName, dishNumber, dishPrice, dishRestaurantMenuID);
+                if(success)
+                {
+                    this.dishes = Program.proxy.GetDishesByRestaurantID(RESTAURANT_ID).ToList();
+                }
             }
             else
             {

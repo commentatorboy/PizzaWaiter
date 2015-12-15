@@ -56,7 +56,11 @@ namespace PizzaWaiterServiceLibrary {
 
         public bool DeleteDishByID(int dishID)
         {
-            return true;
+            DishDB dishDB = new DishDB();
+            Dish dish = dishDB.GetById(dishID);
+            Response<Dish> response = dish.Delete();
+            return response.Success;
+
         }
 
         public List<Dish> GetDishesByRestaurantID(int restaurantID)

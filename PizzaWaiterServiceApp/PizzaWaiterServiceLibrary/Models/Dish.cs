@@ -115,6 +115,7 @@ namespace Models
         enum Input
         {
             IdIsNull,
+            NameIsNull,
             PriceIsNull,
             DishIdIsNull,
             NumberIsNull,
@@ -160,28 +161,28 @@ namespace Models
                             }
                             break;
                         case Input.NumberIsNull:
-                            if (this.ValidateIdIsNull(dish))
+                            if (this.ValidateNumberIsNull(dish))
                             {
                                 this.Response.AddMessage(ResponseMessage.DataEmpty); // add message
                                 err++; // count errors up
                             }
                             break;
-                        case Input.DishIdIsNull:
-                            if (this.ValidateIdIsNull(dish))
+                        case Input.NameIsNull:
+                            if (this.ValidateNameIsNull(dish))
                             {
                                 this.Response.AddMessage(ResponseMessage.DataEmpty); // add message
                                 err++; // count errors up
                             }
                             break;
                         case Input.PriceIsNull:
-                            if (this.ValidateIdIsNull(dish))
+                            if (this.ValidatePriceIsNull(dish))
                             {
                                 this.Response.AddMessage(ResponseMessage.DataEmpty); // add message
                                 err++; // count errors up
                             }
                             break;
                         case Input.RestaurantMenuIdIsNull:
-                            if (this.ValidateIdIsNull(dish))
+                            if (this.ValidateResaurantMenuIdIsNull(dish))
                             {
                                 this.Response.AddMessage(ResponseMessage.DataEmpty); // add message
                                 err++; // count errors up
@@ -211,6 +212,10 @@ namespace Models
         {
             return (dish.Number == 0);
         }
+        private bool ValidateNameIsNull(Dish dish)
+        {
+            return (dish.Name == null);
+        }
         #endregion
         #endregion
 
@@ -219,7 +224,7 @@ namespace Models
             /* run validation
              * check that id and name are filled up)
              * */
-            int err = this.Validate(dish, Input.IdIsNull, Input.NumberIsNull, Input.DishIdIsNull, Input.RestaurantMenuIdIsNull, Input.PriceIsNull);
+            int err = this.Validate(dish, Input.IdIsNull, Input.NumberIsNull, Input.DishIdIsNull, Input.RestaurantMenuIdIsNull, Input.PriceIsNull, Input.NameIsNull);
             // if both fields are filled up, try to update the dish 
             if (err < 1)
             {
@@ -273,7 +278,7 @@ namespace Models
         public Response<Dish> Create(Dish dish)
         {
             //same procedure as update, just dont need id validation
-            int err = this.Validate(dish, Input.NumberIsNull, Input.DishIdIsNull, Input.RestaurantMenuIdIsNull);
+            int err = this.Validate(dish, Input.NumberIsNull, Input.RestaurantMenuIdIsNull, Input.PriceIsNull, Input.NameIsNull);
 
 
             if (err < 1)
@@ -281,7 +286,10 @@ namespace Models
                 SqlData data = this.SetData(dish);
                 dish.ID = this.InsertScopeId(data);
             }
-
+            if(dish.ID != 0)
+            {
+                this.Response.Success = true;
+            }
             this.Response.Item = dish;
             return this.Response;
 
