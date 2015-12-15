@@ -218,6 +218,9 @@ namespace Models
                 address.ID = this.InsertScopeId(data);
             }
 
+            if (address.ID!=0) {
+                this.Response.Success = true;
+            }
             this.Response.Item = address;
             return this.Response;
 

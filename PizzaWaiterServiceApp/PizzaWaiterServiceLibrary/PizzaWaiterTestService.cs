@@ -16,15 +16,27 @@ namespace PizzaWaiterServiceLibrary {
 
         public PizzaWaiterTestService()
         {
-
+            /*
             SqlConfig.SqlServer = "(localdb)\\V11.0";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            /*
+            */
             SqlConfig.SqlServer = "ALEXANDRALAPTOP\\SQLEXPRESS";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-           */
+           
         }
-
+        public bool CreateNewUserAddress(int userID, string userAddress) {
+            Address address = new Address();
+            address.UserID = userID;
+            address.UserAddress = userAddress;
+            Response<Address> response = address.Create();
+            return response.Success;
+        }
+        public bool DeleteAddressByID(int addressID) {
+            AddressDB addressDB = new AddressDB();
+            Address address  = addressDB.GetById(addressID);
+            Response<Address> response = address.Delete();
+            return response.Success;
+        }
         public bool CreateNewDish(string dishName, int dishNumber, decimal dishPrice, int restaurantMenuID)
         {
             Dish dish = new Dish();

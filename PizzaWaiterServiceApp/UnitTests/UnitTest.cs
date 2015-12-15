@@ -10,7 +10,7 @@ namespace UnitTests
     [TestClass]
     public class UnitTest
     {
-        [TestMethod]
+        //[TestMethod]
         public void UpdatePhoneForProfile()
         {
             IPizzaWaiterTestService proxy = new PizzaWaiterTestServiceClient("WSHttpBinding_IPizzaWaiterTestService");
@@ -20,7 +20,22 @@ namespace UnitTests
 
             Assert.IsTrue(success);
         }
+        //[TestMethod]
+        public void DeleteUserAddress() {
+            IPizzaWaiterTestService proxy = new PizzaWaiterTestServiceClient("WSHttpBinding_IPizzaWaiterTestService");
+            int addressID = 1;
+            bool success = proxy.DeleteAddressByID(addressID);
+            Assert.IsTrue(success);
+        }
 
+        [TestMethod]
+        public void CreateUserAddress() {
+            IPizzaWaiterTestService proxy = new PizzaWaiterTestServiceClient("WSHttpBinding_IPizzaWaiterTestService");
+            int userID = 1;
+            string newAddress = "65487 jkdhkjahkdfhdkjhv, 15";
+            bool success = proxy.CreateNewUserAddress(userID, newAddress);
+            Assert.IsTrue(success);
+        }
         //[TestMethod]
         public void DeleteCustomIngredientQueryString()
         {
@@ -59,7 +74,7 @@ namespace UnitTests
             Assert.IsNotNull(orders);
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void UpdatingDish()
         {
             SqlConnectionBuilder CB = new SqlConnectionBuilder("(localdb)\\V11.0", "PizzaWaiter", "", "");
