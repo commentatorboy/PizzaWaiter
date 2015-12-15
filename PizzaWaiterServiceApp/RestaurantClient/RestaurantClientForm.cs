@@ -19,7 +19,7 @@ namespace RestaurantClient
         private int dishID;
         private SortOrder direction;
         private List<Dish> dishes;
-
+        const int RESTAURANT_ID = 2; 
 
         public RestaurantClientForm()
         {
@@ -27,7 +27,7 @@ namespace RestaurantClient
             orderID = 0;
             orders = Program.proxy.GetOrders().ToList();
             ///TODO: This is the part the Restaurant Login
-            dishes = Program.proxy.GetDishesByRestaurantID(2).ToList();
+            dishes = Program.proxy.GetDishesByRestaurantID(RESTAURANT_ID).ToList();
 
             direction = SortOrder.Ascending;
             this.BindOrders();
@@ -37,20 +37,47 @@ namespace RestaurantClient
         }
 
         #region Dishes
+
+
+        private void btnCreateDish_Click(object sender, EventArgs e)
+        {
+            this.dgvShowDishes.ClearSelection();
+            //this.dgvShowDishes.Refresh();
+            //clear the fields:
+            this.tbDishName.Text = "";
+            this.tbDishNumber.Text = "";
+            this.tbDishPrice.Text = "";
+
+            //assign new dish.
+            this.dishID = 0;
+        }
+
         private void btnSaveDish_Click(object sender, EventArgs e)
         {
-            Dish dish = this.GetSelectedDish();
-            dish.Name = this.tbDishName.Text;
-            dish.Number = Convert.ToInt32(this.tbDishNumber.Text);
-            dish.Price = Convert.ToDecimal(this.tbDishPrice.Text);
-           
-            ///TODO: Change the menu and ingredients for it
-            /// TODO: Make the method in service.
-            Program.proxy.UpdateDish(dish.ID, dish.Name, dish.Price, dish.Number, dish.RestaurantMenuID);
+            string dishName = this.tbDishName.Text;
+            int dishNumber = Convert.ToInt32(this.tbDishNumber.Text);
+            decimal dishPrice = Convert.ToDecimal(this.tbDishPrice.Text);
+            int dishRestaurantMenuID = 1; // TODO: Replace with data from menu combobox
 
+            if (this.dishID == 0)
+            {
+                //create new dish
+                Program.proxy.CreateNewDish(dishName, dishNumber, dishPrice, dishRestaurantMenuID);
+                this.dishes = Program.proxy.GetDishesByRestaurantID(RESTAURANT_ID).ToList();
+            }
+            else
+            {
+                Dish dish = this.GetSelectedDish();
+                dish.Name = dishName;
+                dish.Number = dishNumber;
+                dish.Price = dishPrice;
+                dish.RestaurantMenuID = dishRestaurantMenuID;
+
+                ///TODO: Change the menu and ingredients for it
+                /// TODO: Make the method in service.
+                Program.proxy.UpdateDish(dish.ID, dishName, dishPrice, dishNumber, dishRestaurantMenuID);
+            }
             this.BindDishes();
-            
-
 
         }
 
@@ -104,11 +131,7 @@ namespace RestaurantClient
             if (Program.proxy.DeleteDishByID(this.dishID)) {
                 this.dishes.Remove(this.GetSelectedDish());
                 this.BindDishes();
-
             }
-
-            
-            
         }
 
         #endregion
@@ -274,8 +297,8 @@ namespace RestaurantClient
 
 
 
-        #endregion
 
+        #endregion
 
     }
 }
