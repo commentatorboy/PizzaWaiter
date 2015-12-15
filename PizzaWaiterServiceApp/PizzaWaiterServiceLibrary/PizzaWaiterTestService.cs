@@ -12,17 +12,31 @@ namespace PizzaWaiterServiceLibrary {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class PizzaWaiterTestService : IPizzaWaiterTestService {
 
-       
+
 
         public PizzaWaiterTestService()
         {
-            
+
             SqlConfig.SqlServer = "(localdb)\\V11.0";
             SqlConfig.SqlDatabase = "PizzaWaiter";
             /*
             SqlConfig.SqlServer = "ALEXANDRALAPTOP\\SQLEXPRESS";
             SqlConfig.SqlDatabase = "PizzaWaiter";
            */
+        }
+
+        public bool CreateNewDish(string dishName, int dishNumber, decimal dishPrice, int restaurantID)
+        {
+            /*
+            DishDB dishDB = new DishDB();
+            Dish dish = dishDB.GetById(dishID);
+            dish.Name = dishName;
+            dish.Price = dishPrice;
+            dish.Number = dishNumber;
+            dish.RestaurantMenuID = dishRestaurantMenuID;
+            dish.Create();
+            */
+            return true;
         }
 
         public bool UpdateDish(int dishID, string dishName, decimal dishPrice, int dishNumber, int dishRestaurantMenuID)
@@ -33,12 +47,12 @@ namespace PizzaWaiterServiceLibrary {
             dish.Price = dishPrice;
             dish.Number = dishNumber;
             dish.RestaurantMenuID = dishRestaurantMenuID;
-            Response<Dish> response =  dish.Update();
-            foreach(string r in response.Messages)
+            Response<Dish> response = dish.Update();
+            foreach (string r in response.Messages)
             {
                 Console.WriteLine(r);
             }
-            
+
             return response.Success;
         }
 
@@ -54,7 +68,8 @@ namespace PizzaWaiterServiceLibrary {
             return dishes;
         }
 
-        public void ChangeOrderStatus(int orderId, OrderStatus newStatus) {
+        public void ChangeOrderStatus(int orderId, OrderStatus newStatus)
+        {
             OrderDB orderDB = new OrderDB();
             Order order = orderDB.GetById(orderId);
             order.StatusID = newStatus;
@@ -88,17 +103,17 @@ namespace PizzaWaiterServiceLibrary {
         public Dish GetDishById(int dishID)
         {
             DishDB dishDB = new DishDB();
-            
+
             return dishDB.GetById(dishID);
         }
 
         public bool ProcessOrder(List<PartOrder> partOrders, string phoneNr, string address)
         {
-            
+
             //Create the user to be inserted into the database.
             UserDB userDB = new UserDB();
             User user = userDB.GetUserByPhone(phoneNr);
-            
+
             //if the user does not exist already, create one.
             if (user == null)
             {
@@ -120,9 +135,9 @@ namespace PizzaWaiterServiceLibrary {
                 userAddress.UserAddress = address;
                 userAddress.UserID = user.ID;
                 userAddress.Create();
-                
+
             }
-            
+
             //Create the order to be inserted to the database
             Order order = new Order();
             order.AddressID = userAddress.ID;
@@ -135,7 +150,7 @@ namespace PizzaWaiterServiceLibrary {
 
             //For debugging Part Orders when something happens.
             CustomHandlers.DatabaseLibrary.Response<PartOrder> r = poDB.CreateBatch(order.ID, partOrders);
-            foreach(string s in r.Messages)
+            foreach (string s in r.Messages)
             {
                 Console.WriteLine(s);
             }
@@ -186,30 +201,33 @@ namespace PizzaWaiterServiceLibrary {
             return restaurants;
             */
         }
-        public List<RestaurantMenu> GetRestaurantMenues(int restaurantID) {
-            
+        public List<RestaurantMenu> GetRestaurantMenues(int restaurantID)
+        {
+
             RestaurantMenuDB restaurantMenuDB = new RestaurantMenuDB();
             List<RestaurantMenu> rm = restaurantMenuDB.GetByRestaurantId(restaurantID);
-            
-/*
-            Restaurant r = new Restaurant();
-            r.ID = 1;
-            r.Name = "Red Sails";
-            r.Menues = new List<Menu>();
 
-            Menu m1 = new Menu();
-            m1.ID = 1;
-            m1.Title = "Pizza";
+            /*
+                        Restaurant r = new Restaurant();
+                        r.ID = 1;
+                        r.Name = "Red Sails";
+                        r.Menues = new List<Menu>();
 
-            Menu m2 = new Menu();
-            m2.ID = 2;
-            m2.Title = "Drinks";
+                        Menu m1 = new Menu();
+                        m1.ID = 1;
+                        m1.Title = "Pizza";
 
-            r.Menues.Add(m1);
-            r.Menues.Add(m2);
-            return r;*/
+                        Menu m2 = new Menu();
+                        m2.ID = 2;
+                        m2.Title = "Drinks";
+
+                        r.Menues.Add(m1);
+                        r.Menues.Add(m2);
+                        return r;*/
 
             return rm;
         }
+
     }
+
 }
