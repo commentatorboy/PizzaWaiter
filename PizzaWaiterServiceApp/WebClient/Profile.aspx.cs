@@ -56,7 +56,8 @@ namespace WebClient {
             listBoxItems = new List<ListBoxItem>();
             foreach (Favorite favorite in this.Favorites)
             {
-                listBoxItems.Add(new ListBoxItem(favorite.DishID.ToString(), String.Format("DishID: {0}", favorite.DishID)));
+                //we should get f.dish.name and f.dish.restaurant.name from the service and database
+                listBoxItems.Add(new ListBoxItem(favorite.ID, String.Format("DishID: {0}", favorite.DishID)));
             }
             return listBoxItems;
         }
