@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using WebClient.Models;
+using Models;
 namespace WebClient {
     
     public partial class Profile : System.Web.UI.Page {
