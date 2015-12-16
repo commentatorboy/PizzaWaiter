@@ -10,10 +10,12 @@ namespace WebClient {
     public partial class Profile : System.Web.UI.Page {
 
         private List<Address> Addresses;
-        private List<Favorite> Favorites;
+        private static List<Favorite> Favorites;
         private List<ListBoxItem> listBoxItems;
         private User User;
         private int userID;
+        private static bool togglePhoneForm;
+        private static bool toggleAddresForm;
         
 
         protected void Page_Load(object sender, EventArgs e) {
@@ -31,7 +33,7 @@ namespace WebClient {
                 // this.Addresses = proxy.GetAddressesByUserID(this.UserID);
                 // this.Favorites = proxy.GetFavoritesByUserID(this.UserID);
                 this.Addresses = new List<Address>();
-                this.Favorites = new List<Favorite>();
+                Favorites = new List<Favorite>();
 
                 this.Addresses.Add(new Address(1, 1, "Address1, user1"));
                 this.Addresses.Add(new Address(2, 1, "Address2, user1"));
@@ -39,12 +41,15 @@ namespace WebClient {
                 //this.Addresses.Add(new Address(4, 2, "Address4, user2"));
                 //this.Addresses.Add(new Address(5, 2, "Address5, user2"));
 
-                this.Favorites.Add(new Favorite(1, 1, 9));
-                this.Favorites.Add(new Favorite(2, 1, 8));
+                Favorites.Add(new Favorite(1, 1, 9));
+                Favorites.Add(new Favorite(2, 1, 8));
                 //this.Favorites.Add(new Favorite(3, 2, 9));
                 //this.Favorites.Add(new Favorite(4, 2, 11));
 
                 //end todo
+                toggleAddresForm = false;
+                togglePhoneForm = false;
+
                 this.BindAddresses();
                 this.BindFavorites();
             }
@@ -54,7 +59,7 @@ namespace WebClient {
         {
             //convert favorites to listboxitem
             listBoxItems = new List<ListBoxItem>();
-            foreach (Favorite favorite in this.Favorites)
+            foreach (Favorite favorite in Favorites)
             {
                 //we should get f.dish.name and f.dish.restaurant.name from the service and database
                 listBoxItems.Add(new ListBoxItem(favorite.ID, String.Format("DishID: {0}", favorite.DishID)));
@@ -63,6 +68,7 @@ namespace WebClient {
         }
 
         private void BindFavorites() {
+            
             this.cblFavorites.DataMember = "Key";
             this.cblFavorites.DataValueField = "Value";
             this.cblFavorites.DataSource = ToListItem();
@@ -77,9 +83,68 @@ namespace WebClient {
         }
 
         private void ToggleEditPhone() {
+            if (togglePhoneForm) {
+                this.tbPhone.Visible = false;
+                this.btnSavePhone.Visible = false;
+                this.btnEditPhone.Visible = true;
+                togglePhoneForm = false;
+            } else {
+                this.tbPhone.Visible = true;
+                this.btnSavePhone.Visible = true;
+                this.btnEditPhone.Visible = false;
+                togglePhoneForm = true;
+            }
+
         }
         private void ToggleEditAddress() {
+            if (toggleAddresForm) {
+                this.tbAddress.Visible = false;
+                this.btnSaveAddress.Visible = false;
+                this.btnCancelAddAdddress.Visible = false;
+                this.btnAddAddress.Visible = true;
+                toggleAddresForm = false;
+            } else {
+                this.tbAddress.Visible = true;
+                this.btnSaveAddress.Visible = true;
+                this.btnCancelAddAdddress.Visible = true;
+                this.btnAddAddress.Visible = false;
+                toggleAddresForm = true;
+            }
         }
+
+        protected void btnEditPhone_Click(object sender, EventArgs e) {
+            this.ToggleEditPhone();
+        }
+
+        protected void btnSavePhone_Click(object sender, EventArgs e) {
+            this.ToggleEditPhone();
+        }
+
+        protected void btnAddAddress_Click(object sender, EventArgs e) {
+            this.ToggleEditAddress();
+        }
+
+        protected void btnCancelAddAdddress_Click(object sender, EventArgs e) {
+            this.ToggleEditAddress();
+        }
+
+        protected void btnSaveAddress_Click(object sender, EventArgs e) {
+            this.ToggleEditAddress();
+            this.lblAddressMessage.Text = "Saved!";
+        }
+
+        protected void btnDeleteFavorites_Click(object sender, EventArgs e) {
+            List<ListItem> selected = this.cblFavorites.Items.Cast<ListItem>()
+            .Where(li => li.Selected).ToList();
+
+            foreach (ListItem item in selected) {
+                Favorite f = Favorites.FirstOrDefault(x => x.ID == Convert.ToInt32(item..Value));
+                Favorites.Remove(f);
+
+            }
+            this.BindFavorites();
+        }
+
     }
 
     

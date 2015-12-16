@@ -8,8 +8,10 @@
     <div id="divFavorites">
         <h2>Favorites</h2>
         <asp:CheckBoxList ID="cblFavorites" runat="server"></asp:CheckBoxList>
-        <%-- <asp:Repeater ID="Repeater1" runat="server"></asp:Repeater> --%>
+        With selected: 
+        <asp:Button ID="btnDeleteFavorites" runat="server" Text="Delete" OnClick="btnDeleteFavorites_Click" />
         <asp:Button ID="btnOrderFavorites" runat="server" Text="Order" />
+
         <p><asp:Literal ID="ltOrderFavoritesErrorMessage" runat="server"></asp:Literal></p> 
         <h2>Discount card</h2>
         <asp:Image ID="imgDiscountCard" runat="server" Width =" 300" Height="150" />
@@ -21,8 +23,8 @@
         <p>Phone: 
             <asp:Literal ID="ltPhone" runat="server"></asp:Literal>
             <asp:TextBox ID="tbPhone" runat="server" Visible="False"></asp:TextBox>
-            <asp:Button ID="btnEditPhone" runat="server" Text="Change" />
-            <asp:Button ID="btnSavePhone" runat="server" Text="Save" Visible="False" />
+            <asp:Button ID="btnEditPhone" runat="server" Text="Change" OnClick="btnEditPhone_Click" />
+            <asp:Button ID="btnSavePhone" runat="server" Text="Save" Visible="False" OnClick="btnSavePhone_Click" />
         </p>
         
         <asp:Repeater ID="rptAddresses" runat="server">
@@ -34,8 +36,9 @@
         </asp:Repeater>
         <br />
         <asp:TextBox ID="tbAddress" runat="server" Visible="False"></asp:TextBox>
-        <asp:Button ID="btnAddAddress" runat="server" Text="New" />
-        <asp:Button ID="btnCancelAddAdddress" runat="server" Text="Cancel" Visible="False" />
-        <asp:Button ID="btnSaveAddress" runat="server" Text="Save" Visible="False" />
+        <asp:Button ID="btnAddAddress" runat="server" Text="New" OnClick="btnAddAddress_Click" />
+        <asp:Button ID="btnCancelAddAdddress" runat="server" Text="Cancel" Visible="False" OnClick="btnCancelAddAdddress_Click" />
+        <asp:Button ID="btnSaveAddress" runat="server" Text="Save" Visible="False" OnClick="btnSaveAddress_Click" />
+        <asp:Label ID="lblAddressMessage" runat="server" Text=""></asp:Label>
     </div>
 </asp:Content>

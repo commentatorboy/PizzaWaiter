@@ -31,6 +31,15 @@ namespace WebClient {
         protected global::System.Web.UI.WebControls.CheckBoxList cblFavorites;
         
         /// <summary>
+        /// btnDeleteFavorites control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDeleteFavorites;
+        
+        /// <summary>
         /// btnOrderFavorites control.
         /// </summary>
         /// <remarks>
@@ -146,5 +155,14 @@ namespace WebClient {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSaveAddress;
+        
+        /// <summary>
+        /// lblAddressMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAddressMessage;
     }
 }
