@@ -9,11 +9,11 @@ namespace WebClient {
     
     public partial class Profile : System.Web.UI.Page {
 
-        private List<Address> Addresses;
+        private static List<Address> Addresses;
         private static List<Favorite> Favorites;
         private List<ListBoxItem> listBoxItems;
-        private User User;
-        private int userID;
+        private static User user;
+        //private int userID;
         private static bool togglePhoneForm;
         private static bool toggleAddresForm;
         
@@ -27,17 +27,17 @@ namespace WebClient {
                 // then redirect to login
           
                 // TODO: this.User = proxy.GetUserByID(this.UserID);
-                this.User = new User(1, "+45 7894563210");
+                user = new User(1, "+45 7894563210",5);
                 
                 // TODO: Get data about addresses and favorites from server
                 // this.Addresses = proxy.GetAddressesByUserID(this.UserID);
                 // this.Favorites = proxy.GetFavoritesByUserID(this.UserID);
-                this.Addresses = new List<Address>();
+                Addresses = new List<Address>();
                 Favorites = new List<Favorite>();
 
-                this.Addresses.Add(new Address(1, 1, "Address1, user1"));
-                this.Addresses.Add(new Address(2, 1, "Address2, user1"));
-                this.Addresses.Add(new Address(3, 1, "Address3, user1"));
+                Addresses.Add(new Address(1, 1, "Address1, user1"));
+                Addresses.Add(new Address(2, 1, "Address2, user1"));
+                Addresses.Add(new Address(3, 1, "Address3, user1"));
                 //this.Addresses.Add(new Address(4, 2, "Address4, user2"));
                 //this.Addresses.Add(new Address(5, 2, "Address5, user2"));
 
@@ -50,6 +50,8 @@ namespace WebClient {
                 toggleAddresForm = false;
                 togglePhoneForm = false;
 
+
+                this.BindUserInfo();
                 this.BindAddresses();
                 this.BindFavorites();
             }
@@ -62,9 +64,15 @@ namespace WebClient {
             foreach (Favorite favorite in Favorites)
             {
                 //we should get f.dish.name and f.dish.restaurant.name from the service and database
-                listBoxItems.Add(new ListBoxItem(favorite.ID, String.Format("DishID: {0}", favorite.DishID)));
+                listBoxItems.Add(new ListBoxItem(favorite.ID, String.Format("<span style=\"display:none\">[{0}]</span>DishID: {1}",favorite.ID, favorite.DishID)));
             }
             return listBoxItems;
+        }
+
+        private void BindUserInfo() {
+            this.ltPhone.Text = user.PhoneNumber;
+            this.ltPrepaidAmount.Text = "200";
+            this.ltRank.Text = user.Rank.ToString();
         }
 
         private void BindFavorites() {
@@ -78,12 +86,13 @@ namespace WebClient {
 
         private void BindAddresses() {
 
-            this.rptAddresses.DataSource = this.Addresses;
+            this.rptAddresses.DataSource = Addresses;
             this.rptAddresses.DataBind();
         }
 
         private void ToggleEditPhone() {
             if (togglePhoneForm) {
+                this.tbPhone.Text = "";
                 this.tbPhone.Visible = false;
                 this.btnSavePhone.Visible = false;
                 this.btnEditPhone.Visible = true;
@@ -98,6 +107,7 @@ namespace WebClient {
         }
         private void ToggleEditAddress() {
             if (toggleAddresForm) {
+                this.tbAddress.Text = "";
                 this.tbAddress.Visible = false;
                 this.btnSaveAddress.Visible = false;
                 this.btnCancelAddAdddress.Visible = false;
@@ -117,6 +127,8 @@ namespace WebClient {
         }
 
         protected void btnSavePhone_Click(object sender, EventArgs e) {
+            user.PhoneNumber = this.tbPhone.Text;
+            this.BindUserInfo();
             this.ToggleEditPhone();
         }
 
@@ -129,33 +141,45 @@ namespace WebClient {
         }
 
         protected void btnSaveAddress_Click(object sender, EventArgs e) {
-            this.ToggleEditAddress();
+            Address a = new Address();
+            a.ID = Addresses[Addresses.Count-1].ID + 1; // TODO: remove this line, for test purpouse
+            a.UserID = user.ID;
+            a.UserAddress = tbAddress.Text;
+            //TODO: save in db
+            //TODO: refresh Addresses with fresh data from db
+            Addresses.Add(a);//TODO: remove this line, here for test purpouse
+            this.BindAddresses();
             this.lblAddressMessage.Text = "Saved!";
+            this.ToggleEditAddress();
         }
 
+        protected void cmdDeleteAddress(object sender, CommandEventArgs e) {
+            //order = (List<PartOrder>)Session["order"];
+            int addressId = Convert.ToInt32(e.CommandArgument);
+            Address a = Addresses.FirstOrDefault(x => x.ID == addressId);
+            Addresses.Remove(a);
+            this.BindAddresses();
+        }
+            
+        /*
+        [HttpPost]
+        [ValidateInput(false)]
+        [AllowHtml]*/
         protected void btnDeleteFavorites_Click(object sender, EventArgs e) {
             List<ListItem> selected = this.cblFavorites.Items.Cast<ListItem>()
             .Where(li => li.Selected).ToList();
 
             foreach (ListItem item in selected) {
-                Favorite f = Favorites.FirstOrDefault(x => x.ID == Convert.ToInt32(item..Value));
+                string text = item.Text;
+                //<span style=\"display:none\">[{0}]</span>DishID: {1}
+                int id = Convert.ToInt32(text.Split('[')[1].Split(']')[0]);
+                Favorite f = Favorites.FirstOrDefault(x => x.ID == id);
                 Favorites.Remove(f);
-
             }
             this.BindFavorites();
         }
 
     }
-
-    
-
-
-
-
-
-
-
-
 
     public class Favorite
     {
@@ -175,6 +199,8 @@ namespace WebClient {
         public int UserID { get; set; }
         public string UserAddress { get; set; }
 
+        public Address() {
+        }
         public Address(int id, int userID, string userAddress) {
             this.ID = id;
             this.UserID = UserID;
@@ -185,10 +211,12 @@ namespace WebClient {
     public class User {
         public int ID { get; set; }
         public string PhoneNumber { get; set; }
+        public int Rank { get; set; }
 
-        public User(int userID, string phoneNumber) {
+        public User(int userID, string phoneNumber, int rank) {
             this.ID = userID;
             this.PhoneNumber = phoneNumber;
+            this.Rank = rank;
         }
     }
 }

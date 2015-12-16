@@ -13,13 +13,13 @@ namespace WebClient {
     public partial class Profile {
         
         /// <summary>
-        /// lblRank control.
+        /// ltRank control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRank;
+        protected global::System.Web.UI.WebControls.Literal ltRank;
         
         /// <summary>
         /// cblFavorites control.
