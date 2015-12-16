@@ -4,13 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using WebClient.Models;
 namespace WebClient {
     
     public partial class Profile : System.Web.UI.Page {
 
         private List<Address> Addresses;
         private List<Favorite> Favorites;
+        private List<ListBoxItem> listBoxItems;
         private User User;
         private int userID;
         
@@ -38,7 +39,7 @@ namespace WebClient {
                 //this.Addresses.Add(new Address(4, 2, "Address4, user2"));
                 //this.Addresses.Add(new Address(5, 2, "Address5, user2"));
 
-                this.Favorites.Add(new Favorite(1, 1, 1));
+                this.Favorites.Add(new Favorite(1, 1, 9));
                 this.Favorites.Add(new Favorite(2, 1, 8));
                 //this.Favorites.Add(new Favorite(3, 2, 9));
                 //this.Favorites.Add(new Favorite(4, 2, 11));
@@ -48,12 +49,28 @@ namespace WebClient {
                 this.BindFavorites();
             }
         }
+        
+        private List<ListBoxItem> ToListItem()
+        {
+            //convert favorites to listboxitem
+            listBoxItems = new List<ListBoxItem>();
+            foreach (Favorite favorite in this.Favorites)
+            {
+                listBoxItems.Add(new ListBoxItem(favorite.DishID.ToString(), String.Format("DishID: {0}", favorite.DishID)));
+            }
+            return listBoxItems;
+        }
 
         private void BindFavorites() {
+            this.cblFavorites.DataMember = "Key";
+            this.cblFavorites.DataValueField = "Value";
+            this.cblFavorites.DataSource = ToListItem();
+            this.cblFavorites.DataBind();
             
         }
 
         private void BindAddresses() {
+
             this.rptAddresses.DataSource = this.Addresses;
             this.rptAddresses.DataBind();
         }
@@ -83,7 +100,7 @@ namespace WebClient {
         public Favorite(int id, int userId, int dishId) {
             this.ID = id;
             this.UserID = userId;
-            this.DishID = DishID;
+            this.DishID = dishId;
         }
     }
     public class Address

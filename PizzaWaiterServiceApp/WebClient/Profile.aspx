@@ -7,8 +7,8 @@
         <asp:Label ID="lblRank" runat="server" Text="Rank"></asp:Label></p>
     <div id="divFavorites">
         <h2>Favorites</h2>
-<%--        <asp:CheckBoxList ID="cblFavorites" runat="server"></asp:CheckBoxList>--%>
-        <asp:Repeater ID="Repeater1" runat="server"></asp:Repeater>
+        <asp:CheckBoxList ID="cblFavorites" runat="server"></asp:CheckBoxList>
+        <%-- <asp:Repeater ID="Repeater1" runat="server"></asp:Repeater> --%>
         <asp:Button ID="btnOrderFavorites" runat="server" Text="Order" />
         <p><asp:Literal ID="ltOrderFavoritesErrorMessage" runat="server"></asp:Literal></p> 
         <h2>Discount card</h2>
