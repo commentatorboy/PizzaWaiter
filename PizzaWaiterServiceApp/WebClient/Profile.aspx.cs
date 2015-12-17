@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Models;
+using WebClient.Models;
+using WebClient.PizzaWaiterTestServiceReference;
 namespace WebClient {
     
     public partial class Profile : System.Web.UI.Page {
@@ -16,37 +18,30 @@ namespace WebClient {
         //private int userID;
         private static bool togglePhoneForm;
         private static bool toggleAddresForm;
+        IPizzaWaiterTestService proxy;
         
 
         protected void Page_Load(object sender, EventArgs e) {
+            proxy = Proxy.Get();
             if (!IsPostBack) {
 
-                //TODO: replace with session
-                // this.UserID = Session["UserID"];
+
                 // TODO: if no session or user doesnt exist, 
                 // then redirect to login
-          
-                // TODO: this.User = proxy.GetUserByID(this.UserID);
-                user = new User(1, "+45 7894563210",5);
+
+                //TODO: replace with session
+                int userId = 3; // this.UserID = Session["UserID"];
+                user = proxy.GetUserByID(userId);
+                //user = new User(1, "+45 7894563210",5);
                 
                 // TODO: Get data about addresses and favorites from server
-                // this.Addresses = proxy.GetAddressesByUserID(this.UserID);
+                Addresses = proxy.GetAddressesByUserId(user.ID).ToList();
                 // this.Favorites = proxy.GetFavoritesByUserID(this.UserID);
-                Addresses = new List<Address>();
                 Favorites = new List<Favorite>();
-
-                Addresses.Add(new Address(1, 1, "Address1, user1"));
-                Addresses.Add(new Address(2, 1, "Address2, user1"));
-                Addresses.Add(new Address(3, 1, "Address3, user1"));
-                //this.Addresses.Add(new Address(4, 2, "Address4, user2"));
-                //this.Addresses.Add(new Address(5, 2, "Address5, user2"));
 
                 Favorites.Add(new Favorite(1, 1, 9));
                 Favorites.Add(new Favorite(2, 1, 8));
-                //this.Favorites.Add(new Favorite(3, 2, 9));
-                //this.Favorites.Add(new Favorite(4, 2, 11));
 
-                //end todo
                 toggleAddresForm = false;
                 togglePhoneForm = false;
 
@@ -72,7 +67,7 @@ namespace WebClient {
         private void BindUserInfo() {
             this.ltPhone.Text = user.PhoneNumber;
             this.ltPrepaidAmount.Text = "200";
-            this.ltRank.Text = user.Rank.ToString();
+            this.ltRank.Text = user.RankID.ToString();
         }
 
         private void BindFavorites() {
@@ -127,9 +122,14 @@ namespace WebClient {
         }
 
         protected void btnSavePhone_Click(object sender, EventArgs e) {
-            user.PhoneNumber = this.tbPhone.Text;
-            this.BindUserInfo();
-            this.ToggleEditPhone();
+            string phone = this.tbPhone.Text;
+            bool success = proxy.UpdatePhoneNumber(user.ID, phone);
+            if (success) {
+                user.PhoneNumber = phone;
+                this.BindUserInfo();
+                this.ToggleEditPhone();
+            }
+            
         }
 
         protected void btnAddAddress_Click(object sender, EventArgs e) {
@@ -141,24 +141,42 @@ namespace WebClient {
         }
 
         protected void btnSaveAddress_Click(object sender, EventArgs e) {
+            /*
             Address a = new Address();
             a.ID = Addresses[Addresses.Count-1].ID + 1; // TODO: remove this line, for test purpouse
             a.UserID = user.ID;
             a.UserAddress = tbAddress.Text;
+            */
+            string newAddress = tbAddress.Text;
             //TODO: save in db
+            bool success = this.proxy.CreateNewUserAddress(user.ID, newAddress);
+            if (success) {
+                Addresses = proxy.GetAddressesByUserId(user.ID).ToList();
+                this.lblAddressMessage.Text = "Saved!";
+                this.BindAddresses();
+                this.ToggleEditAddress();
+            } else {
+                this.lblAddressMessage.Text = "Failed!";
+            }
             //TODO: refresh Addresses with fresh data from db
-            Addresses.Add(a);//TODO: remove this line, here for test purpouse
-            this.BindAddresses();
-            this.lblAddressMessage.Text = "Saved!";
-            this.ToggleEditAddress();
+            //Addresses.Add(a);//TODO: remove this line, here for test purpouse
+            
+            //this.lblAddressMessage.Text = "Saved!";
+            
         }
 
         protected void cmdDeleteAddress(object sender, CommandEventArgs e) {
             //order = (List<PartOrder>)Session["order"];
-            int addressId = Convert.ToInt32(e.CommandArgument);
-            Address a = Addresses.FirstOrDefault(x => x.ID == addressId);
-            Addresses.Remove(a);
-            this.BindAddresses();
+            if (Addresses.Count()>1) {
+                int addressId = Convert.ToInt32(e.CommandArgument);
+                bool success = proxy.DeleteAddressByID(addressId);
+                if (success) {
+                    Address a = Addresses.FirstOrDefault(x => x.ID == addressId);
+                    Addresses.Remove(a);
+                    this.BindAddresses();
+                }
+            }
+            // else Fekk eff!
         }
             
         /*
@@ -192,7 +210,7 @@ namespace WebClient {
             this.UserID = userId;
             this.DishID = dishId;
         }
-    }
+    }/*
     public class Address
     {
         public int ID { get; set; }
@@ -207,7 +225,7 @@ namespace WebClient {
             this.UserAddress = userAddress;
         }
     }
-
+    
     public class User {
         public int ID { get; set; }
         public string PhoneNumber { get; set; }
@@ -218,5 +236,5 @@ namespace WebClient {
             this.PhoneNumber = phoneNumber;
             this.Rank = rank;
         }
-    }
+    }*/
 }

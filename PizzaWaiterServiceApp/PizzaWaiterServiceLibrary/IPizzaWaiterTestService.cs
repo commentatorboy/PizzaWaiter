@@ -13,6 +13,10 @@ namespace PizzaWaiterServiceLibrary {
     public interface IPizzaWaiterTestService
     {
         [OperationContract]
+        User GetUserByID(int userID);
+        [OperationContract]
+        List<Address> GetAddressesByUserId(int userID);
+        [OperationContract]
         bool CreateNewUserAddress(int userID, string userAddress);
         [OperationContract]
         bool DeleteAddressByID(int addressID);

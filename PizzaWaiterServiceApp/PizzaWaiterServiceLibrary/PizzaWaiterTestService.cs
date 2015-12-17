@@ -13,7 +13,7 @@ namespace PizzaWaiterServiceLibrary {
     public class PizzaWaiterTestService : IPizzaWaiterTestService {
 
 
-
+        
         public PizzaWaiterTestService()
         {
             /*
@@ -24,6 +24,16 @@ namespace PizzaWaiterServiceLibrary {
             SqlConfig.SqlDatabase = "PizzaWaiter";
            
         }
+        public User GetUserByID(int userID) {
+            UserDB userDB = new UserDB();
+            return userDB.GetById(userID);
+        }
+
+        public List<Address> GetAddressesByUserId(int userID) {
+            AddressDB addressDB = new AddressDB();
+            return addressDB.GetByUserId(userID);
+        }
+
         public bool CreateNewUserAddress(int userID, string userAddress) {
             Address address = new Address();
             address.UserID = userID;

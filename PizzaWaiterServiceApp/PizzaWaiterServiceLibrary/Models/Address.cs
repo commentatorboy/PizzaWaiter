@@ -235,5 +235,9 @@ namespace Models
         {
             return this.GetAll().FirstOrDefault(x => x.UserAddress == address);
         }
+
+        internal List<Address> GetByUserId(int userId) {
+            return this.GetAll().Where(x => x.UserID == userId).ToList();
+        }
     }
 }
