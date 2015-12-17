@@ -41,6 +41,8 @@
 
                                             </asp:Repeater>
                                         </asp:LinkButton>
+                                        <asp:ImageButton ID="ibAddToFavorites" runat="server" ImageUrl="~/Resources/FavoritesButton.png" OnCommand="ibAddToFavorites_Command" 
+                                            CommandArgument='<%#Eval("ID") %>' Visible='<%#ShowFavoriteButton(Eval("ID")) %>'/>
                                     </li>
 
 

@@ -30,17 +30,17 @@ namespace WebClient {
                 // then redirect to login
 
                 //TODO: replace with session
-                int userId = 3; // this.UserID = Session["UserID"];
+                int userId = Globals.UserInSessionID; // this.UserID = Session["UserID"];
                 user = proxy.GetUserByID(userId);
                 //user = new User(1, "+45 7894563210",5);
                 
                 // TODO: Get data about addresses and favorites from server
                 Addresses = proxy.GetAddressesByUserId(user.ID).ToList();
                 // this.Favorites = proxy.GetFavoritesByUserID(this.UserID);
-                Favorites = new List<Favorite>();
+                Favorites = proxy.GetFavoritesByUserID(user.ID).ToList();
 
-                Favorites.Add(new Favorite(1, 1, 9));
-                Favorites.Add(new Favorite(2, 1, 8));
+                //Favorites.Add(new Favorite(1, 1, 9));
+                //Favorites.Add(new Favorite(2, 1, 8));
 
                 toggleAddresForm = false;
                 togglePhoneForm = false;
@@ -186,20 +186,56 @@ namespace WebClient {
         protected void btnDeleteFavorites_Click(object sender, EventArgs e) {
             List<ListItem> selected = this.cblFavorites.Items.Cast<ListItem>()
             .Where(li => li.Selected).ToList();
-
+            ///TODO: Refactor with getselectedfavorites method
             foreach (ListItem item in selected) {
                 string text = item.Text;
                 //<span style=\"display:none\">[{0}]</span>DishID: {1}
                 int id = Convert.ToInt32(text.Split('[')[1].Split(']')[0]);
                 Favorite f = Favorites.FirstOrDefault(x => x.ID == id);
+                //We can maybe compare favorites with selectedfavorites.
                 Favorites.Remove(f);
             }
             this.BindFavorites();
         }
 
+        protected List<Favorite> GetSelectedFavorites()
+        {
+            List<ListItem> selected = this.cblFavorites.Items.Cast<ListItem>()
+            .Where(li => li.Selected).ToList();
+            List<Favorite> selectedFavorites = new List<Favorite>();
+
+            foreach (ListItem item in selected)
+            {
+                string text = item.Text;
+                //<span style=\"display:none\">[{0}]</span>DishID: {1}
+                int id = Convert.ToInt32(text.Split('[')[1].Split(']')[0]);
+                Favorite f = Favorites.FirstOrDefault(x => x.ID == id);
+                selectedFavorites.Add(f);
+            }
+
+
+            return selectedFavorites;
+        }
+
+        protected void btnOrderFavorites_Click(object sender, EventArgs e)
+        {
+            //Button will take selected favorites and add them to the order list in order page (showmenu.aspx)
+            List<Favorite> selectedFavorites = this.GetSelectedFavorites();
+            if(selectedFavorites.Count>0)
+            {
+                Session["Favorites"] = selectedFavorites; //remember to cast it when retreiving
+                Response.Redirect(String.Format("ShowMenu.aspx?ID={0}", selectedFavorites.First().Dish.RestaurantMenu.Restaurant.ID)); //remember that the id should be the login.
+                //Each dish in the menu, has a button add favorite.
+                //The button should add to favorites list.
+                
+            }
+
+
+            //
+        }
     }
 
-    public class Favorite
+    /*public class Favorite
     {
         public int ID { get; set; }
         public int UserID { get; set; }
@@ -210,7 +246,9 @@ namespace WebClient {
             this.UserID = userId;
             this.DishID = dishId;
         }
-    }/*
+        
+    }*/
+    /*
     public class Address
     {
         public int ID { get; set; }

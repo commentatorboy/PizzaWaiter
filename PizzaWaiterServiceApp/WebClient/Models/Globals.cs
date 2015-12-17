@@ -9,5 +9,6 @@ namespace WebClient.Models
     public static class Globals
     {
         public static List<Restaurant> Restaurants { get; set; }
+        public static int UserInSessionID = 3;
     }
 }

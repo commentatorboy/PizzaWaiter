@@ -17,18 +17,47 @@ namespace WebClient {
         private int RestaurantID;
         List<RestaurantMenu> restaurantMenues;
         static List<PartOrder> order;
+        private static User user;
 
         protected void Page_Load(object sender, EventArgs e) {
             proxy = Proxy.Get();
+            //If user is logged in
+
             if (!IsPostBack) {
-                
+
+                if (Globals.UserInSessionID != 0)
+                {
+                    //show favorites buttons.
+
+                    user = proxy.GetUserByID(Globals.UserInSessionID);
+                }
+
                 RestaurantID = Convert.ToInt32(Request.QueryString["ID"]);
                 if (RestaurantID>0) {
                     restaurantMenues = proxy.GetRestaurantMenues(RestaurantID).ToList();
                     BindMenu();
                 }
-                order = new List<PartOrder>(); 
+
+
+
+                order = new List<PartOrder>();
+                List<Favorite> favorites = (List<Favorite>)Session["Favorites"];
+                if (favorites.Count > 0)
+                {
+                    foreach(Favorite f in favorites)
+                    {
+                        //This makes sure that the dish is from the restaurant.
+                        if(f.Dish.RestaurantMenu.Restaurant.ID == RestaurantID)
+                        {
+                            this.AddPartOrder(f.DishID);
+                           
+                        }
+                    }
+                    BindOrder();
+                } 
+
             }
+
             
         }
 
@@ -169,6 +198,32 @@ namespace WebClient {
             } else {
                 this.ltConfirmation.Text = "Fill up the hone number, address and the order";
             }
+        }
+
+        protected void ibAddToFavorites_Command(object sender, CommandEventArgs e)
+        {
+            int dishID = Convert.ToInt32(e.CommandArgument);
+            proxy.AddFavorite(user.ID, dishID);
+            BindMenu();
+        }
+
+        protected bool ShowFavoriteButton(object stringDishID)
+        {
+            bool exists = false;
+            int dishID = Convert.ToInt32(stringDishID);
+            
+            if (user != null)
+            {
+                Favorite userFavorites = proxy.GetFavoritesByUserID(user.ID).FirstOrDefault(x => x.DishID == dishID);
+                if(userFavorites != null)
+                {
+                    //enable favorites button on repeater
+                    exists = true;
+
+                }
+            }
+            
+            return (!exists);
         }
     }
 }

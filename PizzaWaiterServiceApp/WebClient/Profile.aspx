@@ -10,7 +10,7 @@
         <asp:CheckBoxList ID="cblFavorites" runat="server"></asp:CheckBoxList>
         With selected: 
         <asp:Button ID="btnDeleteFavorites" runat="server" Text="Delete" CausesValidation="false" OnClick="btnDeleteFavorites_Click" />
-        <asp:Button ID="btnOrderFavorites" runat="server" Text="Order" />
+        <asp:Button ID="btnOrderFavorites" runat="server" Text="Order" OnClick="btnOrderFavorites_Click" />
 
         <p><asp:Literal ID="ltOrderFavoritesErrorMessage" runat="server"></asp:Literal></p> 
         <h2>Discount card</h2>
