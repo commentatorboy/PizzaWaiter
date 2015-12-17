@@ -152,10 +152,7 @@ namespace Models {
                  * */
 
             }
-            if(this.Response.Messages.Count == 0)
-            {
-                this.Response.Success = true;
-            }
+
             /* finish by adding the final user to response, 
              * (validation may correct some data without giving a visible to user error)
              * so we can use both the user and the messages later

@@ -260,6 +260,12 @@ namespace PizzaWaiterServiceLibrary {
             User user = userDB.GetById(userID);
             user.PhoneNumber = phoneNumber;
             Response<User> response = user.Update();
+            if (!response.Success) {
+                User updatedUser = userDB.GetById(userID);
+                if (updatedUser.PhoneNumber == phoneNumber) {
+                    response.Success = true;
+                }
+            }
             return response.Success;
         }
 
