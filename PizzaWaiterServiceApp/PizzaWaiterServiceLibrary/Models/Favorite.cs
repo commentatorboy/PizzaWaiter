@@ -260,11 +260,37 @@ namespace Models
         {
             return this.GetAll().Where(x => x.UserID == userid).ToList();
         }
-
+        
         internal bool Exists(int userID, int dishID)
         {
             Favorite favorite = this.GetAll().FirstOrDefault(x => x.DishID == dishID && x.UserID == userID);
             return (favorite != null);
+        }
+
+        internal Response<Favorite> DeleteBatch(List<Favorite> favorites)
+        {
+            this.Response = new Response<Favorite>();
+            int index = 0 ;
+            
+            string[] batchQuery = new string[favorites.Count];
+            foreach(Favorite f in favorites)
+            {
+                batchQuery[index] = string.Format("ID = {0}", f.ID);
+                index++;
+            }
+            string completeQuery = string.Join(" OR ", batchQuery);
+            int rowCount = this.Delete(completeQuery);
+
+            if (this.Success)
+            {
+                this.Response.Messages.Add(string.Format("request successfull. {0} Favorites deleted", rowCount));
+                this.Response.Success = true;
+            }
+            else
+            {
+                this.Response.Messages.Add("Request failed in Favorites DeleteBatch");
+            }
+            return this.Response;
         }
     }
 }

@@ -184,17 +184,32 @@ namespace WebClient {
         [ValidateInput(false)]
         [AllowHtml]*/
         protected void btnDeleteFavorites_Click(object sender, EventArgs e) {
-            List<ListItem> selected = this.cblFavorites.Items.Cast<ListItem>()
-            .Where(li => li.Selected).ToList();
-            ///TODO: Refactor with getselectedfavorites method
-            foreach (ListItem item in selected) {
-                string text = item.Text;
-                //<span style=\"display:none\">[{0}]</span>DishID: {1}
-                int id = Convert.ToInt32(text.Split('[')[1].Split(']')[0]);
-                Favorite f = Favorites.FirstOrDefault(x => x.ID == id);
-                //We can maybe compare favorites with selectedfavorites.
-                Favorites.Remove(f);
+
+            List<Favorite> selectedFavorites;
+            selectedFavorites = this.GetSelectedFavorites();
+            //this might be null
+            bool success = proxy.DeleteFavorites(selectedFavorites.ToArray());
+            if(success)
+            {
+                foreach(Favorite f in selectedFavorites)
+                {
+                    //removing the favorites in the static favorites list
+                    Favorites.Remove(f);
+                }
             }
+
+            //list<listitem> selected = this.cblfavorites.items.cast<listitem>()
+            //.where(li => li.selected).tolist();
+            /////todo: refactor with getselectedfavorites method
+            //foreach (listitem item in selected) {
+            //    string text = item.text;
+            //    //<span style=\"display:none\">[{0}]</span>dishid: {1}
+            //    int id = convert.toint32(text.split('[')[1].split(']')[0]);
+            //    favorite f = favorites.firstordefault(x => x.id == id);
+            //    //we can maybe compare favorites with selectedfavorites.
+            //    favorites.remove(f);
+                
+            //}
             this.BindFavorites();
         }
 

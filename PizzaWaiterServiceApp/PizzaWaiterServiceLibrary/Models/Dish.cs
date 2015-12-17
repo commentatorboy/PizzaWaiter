@@ -312,10 +312,11 @@ namespace Models
             RestaurantMenuDB restaurantMenuDB = new RestaurantMenuDB();
             List<RestaurantMenu> restaurantMenues = restaurantMenuDB.GetByRestaurantId(restaurantID);
             List<Dish> dishes = new List<Dish>();
-                        foreach (RestaurantMenu rm in restaurantMenues)
+            foreach (RestaurantMenu rm in restaurantMenues)
             {
                 dishes.AddRange(this.GetByRestaurantMenuId(rm.ID));
             }
+            
 
             return dishes;
         }

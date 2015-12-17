@@ -200,23 +200,23 @@ namespace Models {
             if(partOrders != null)
             {
                 string[] completeString = new string[partOrders.Count];
-                int var = 0;
+                int index = 0;
 
                 foreach (PartOrder po in partOrders)
                 {
                     ///Delete from (class name) where id=(orderIdn0) OR id=(orderIdn..) OR id=(orderIdn)
                     string joinPartOrdersID = string.Format("PartOrderID = {0}", po.ID);
-                    completeString[var] = joinPartOrdersID;
-                    var++;
+                    completeString[index] = joinPartOrdersID;
+                    index++;
                 }
 
                 string sqlCondition = string.Join(" OR ", completeString);
                 
 
-                int rowcount = this.Delete(sqlCondition);
+                int rowCount = this.Delete(sqlCondition);
                 if (this.Success)
                 {
-                    this.Response.Messages.Add(string.Format("request successfull. {0} Custom ingredients deleted", rowcount));
+                    this.Response.Messages.Add(string.Format("request successfull. {0} Custom ingredients deleted", rowCount));
                     this.Response.Success = true;
                 }
                 else

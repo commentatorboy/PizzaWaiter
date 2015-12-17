@@ -15,9 +15,10 @@ namespace WebClient {
         /// TODO: prop proxy
         IPizzaWaiterTestService proxy;
         private int RestaurantID;
-        List<RestaurantMenu> restaurantMenues;
+        private static List<RestaurantMenu> restaurantMenues;
         static List<PartOrder> order;
         private static User user;
+        private static bool isLoggedIn;
 
         protected void Page_Load(object sender, EventArgs e) {
             proxy = Proxy.Get();
@@ -25,12 +26,8 @@ namespace WebClient {
 
             if (!IsPostBack) {
 
-                if (Globals.UserInSessionID != 0)
-                {
-                    //show favorites buttons.
-
-                    user = proxy.GetUserByID(Globals.UserInSessionID);
-                }
+                //setting the logged in state and set its state
+                SetLoginState();
 
                 RestaurantID = Convert.ToInt32(Request.QueryString["ID"]);
                 if (RestaurantID>0) {
@@ -38,23 +35,14 @@ namespace WebClient {
                     BindMenu();
                 }
 
-
-
                 order = new List<PartOrder>();
-                List<Favorite> favorites = (List<Favorite>)Session["Favorites"];
-                if (favorites.Count > 0)
+
+                //this part should only work on login
+                if(isLoggedIn)
                 {
-                    foreach(Favorite f in favorites)
-                    {
-                        //This makes sure that the dish is from the restaurant.
-                        if(f.Dish.RestaurantMenu.Restaurant.ID == RestaurantID)
-                        {
-                            this.AddPartOrder(f.DishID);
-                           
-                        }
-                    }
-                    BindOrder();
-                } 
+                    BindFavoritesToOrder();
+                }
+                
 
             }
 
@@ -63,12 +51,10 @@ namespace WebClient {
 
         protected void BindMenu() {
 
-            this.rptMenu.DataSource = this.restaurantMenues.OrderBy(x=>x.Position);
+            this.rptMenu.DataSource = restaurantMenues.OrderBy(x=>x.Position);
             this.rptMenu.DataBind();
         }
-
         
-
         protected string FormatMenuTitle(WebClient.PizzaWaiterTestServiceReference.Menu m) {
             return m.Title;
         }
@@ -194,6 +180,9 @@ namespace WebClient {
                 if(proxy.ProcessOrder(order.ToArray(), phoneNr, address))
                 {
                     this.ltConfirmation.Text = "Order is sent";
+                    //session favorites should de deleted since it should not show them again in the orders
+                    Session["Favorites"] = null;
+                    
                 }
             } else {
                 this.ltConfirmation.Text = "Fill up the hone number, address and the order";
@@ -204,26 +193,69 @@ namespace WebClient {
         {
             int dishID = Convert.ToInt32(e.CommandArgument);
             proxy.AddFavorite(user.ID, dishID);
+
             BindMenu();
         }
+
+        protected void BindFavoritesToOrder()
+        {
+
+            //check if we even have a session with favorites. 
+            if(Session["Favorites"] != null)
+            {
+                List<Favorite> favorites = (List<Favorite>)Session["Favorites"];
+                
+                if (favorites.Count > 0)
+                {
+                    foreach (Favorite f in favorites)
+                    {
+                        //This makes sure that the dish is from the restaurant.
+                        if (f.Dish.RestaurantMenu.Restaurant.ID == RestaurantID)
+                        {
+                            this.AddPartOrder(f.DishID);
+
+                        }
+                    }
+                    BindOrder();
+                }
+            }
+            
+        }
+
+        
 
         protected bool ShowFavoriteButton(object stringDishID)
         {
             bool exists = false;
             int dishID = Convert.ToInt32(stringDishID);
             
-            if (user != null)
+            if (isLoggedIn)
             {
                 Favorite userFavorites = proxy.GetFavoritesByUserID(user.ID).FirstOrDefault(x => x.DishID == dishID);
                 if(userFavorites != null)
                 {
                     //enable favorites button on repeater
                     exists = true;
-
+                    
                 }
             }
             
             return (!exists);
+        }
+
+        private void SetLoginState()
+        {
+            //If user is logged in
+            if (Globals.UserInSessionID != 0)
+            {
+                //show favorites buttons.
+                isLoggedIn = true;
+                user = proxy.GetUserByID(Globals.UserInSessionID);
+            }
+            else
+            {
+                isLoggedIn = false;
+            }
         }
     }
 }

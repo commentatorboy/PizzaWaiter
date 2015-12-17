@@ -16,14 +16,58 @@ namespace PizzaWaiterServiceLibrary {
         
         public PizzaWaiterTestService()
         {
-            /*
+            
             SqlConfig.SqlServer = "(localdb)\\V11.0";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-            */
+            /*
             SqlConfig.SqlServer = "ALEXANDRALAPTOP\\SQLEXPRESS";
             SqlConfig.SqlDatabase = "PizzaWaiter";
-           
+           */
+
         }
+
+        public bool DeleteFavorites(List<Favorite> favorites)
+        {
+            FavoriteDB favoriteDB = new FavoriteDB();
+            //batch delete here.
+            Response<Favorite> response = favoriteDB.DeleteBatch(favorites);
+
+            return response.Success;
+        }
+
+        public bool AddFavorite(int userID, int dishID)
+        {
+            Response<Favorite> response;
+            FavoriteDB favoriteDB = new FavoriteDB();
+            bool exists = favoriteDB.Exists(userID, dishID);
+
+            if(!exists)
+            {
+                Favorite favorite = new Favorite();
+                favorite.DishID = dishID;
+                favorite.UserID = userID;
+
+                response = favorite.Create();
+                
+            }
+            else
+            {
+                //if the favorite does exists
+                response = new Response<Favorite>();
+            }
+            
+            return response.Success;
+        }
+
+        public List<Favorite> GetFavoritesByUserID(int userid)
+        {
+            //Stub
+            FavoriteDB favoriteDB = new FavoriteDB();
+            List<Favorite> favorites = favoriteDB.GetByUserID(userid);
+
+            return favorites;
+        }
+
         public User GetUserByID(int userID) {
             UserDB userDB = new UserDB();
             return userDB.GetById(userID);
@@ -111,6 +155,7 @@ namespace PizzaWaiterServiceLibrary {
             OrderDB orderDB = new OrderDB();
             Order order = orderDB.GetById(orderID);
             //Make a check for nulls
+            
             order.Delete();
         }
 
@@ -256,6 +301,13 @@ namespace PizzaWaiterServiceLibrary {
 
         public bool UpdatePhoneNumber(int userID, string phoneNumber)
         {
+            /*
+            UserDB userDB = new UserDB();
+            User user = userDB.GetById(userID);
+            user.PhoneNumber = phoneNumber;
+            Response<User> response = user.Update();
+            return response.Success;*/
+
             UserDB userDB = new UserDB();
             User user = userDB.GetById(userID);
             user.PhoneNumber = phoneNumber;

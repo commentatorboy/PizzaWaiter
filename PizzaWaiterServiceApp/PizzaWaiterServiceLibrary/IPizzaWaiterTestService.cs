@@ -13,6 +13,12 @@ namespace PizzaWaiterServiceLibrary {
     public interface IPizzaWaiterTestService
     {
         [OperationContract]
+        bool DeleteFavorites(List<Favorite> favorites);
+        [OperationContract]
+        bool AddFavorite(int userID, int dishID);
+        [OperationContract]
+        List<Favorite> GetFavoritesByUserID(int userid);
+        [OperationContract]
         User GetUserByID(int userID);
         [OperationContract]
         List<Address> GetAddressesByUserId(int userID);
