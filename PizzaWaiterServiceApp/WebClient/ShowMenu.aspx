@@ -112,16 +112,15 @@
                     </p>
                     <p>
                         <asp:DropDownList ID="ddlAllAddresses" runat="server" AppendDataBoundItems="true" Visible="false" Enabled="false"></asp:DropDownList>
-                        </p>
+                    </p>
                     <p>
                         <asp:TextBox ID="txtAddress" runat="server" AutoPostBack="true" OnTextChanged="txtAddress_TextChanged" />
-                        
+
                     </p>
                 </div>
                 <div class="SubmitOrderButton">
 
                     <asp:Button ID="btnSubmitOrder" runat="server" Text="Submit Order" OnClick="btnSubmitOrder_Click" />
-                    <asp:DropDownList ID="DropDownList1" runat="server"></asp:DropDownList>
                 </div>
             </div>
         </div>
