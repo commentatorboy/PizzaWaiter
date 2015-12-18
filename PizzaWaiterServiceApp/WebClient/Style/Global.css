@@ -9,6 +9,7 @@ ul{
 }
 span.MenuTitle{
     color: darkred;
+    font-weight:bold;
 }
 div.MenuCard{
     float: left;
