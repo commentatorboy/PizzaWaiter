@@ -76,6 +76,15 @@ namespace WebClient {
         protected global::System.Web.UI.WebControls.Literal ltAddress;
         
         /// <summary>
+        /// ddlAllAddresses control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAllAddresses;
+        
+        /// <summary>
         /// txtAddress control.
         /// </summary>
         /// <remarks>

@@ -28,7 +28,7 @@ namespace WebClient {
 
                 // TODO: if no session or user doesnt exist, 
                 // then redirect to login
-
+                Response.Redirect("Default.aspx");
                 //TODO: replace with session
                 int userId = Globals.UserInSessionID; // this.UserID = Session["UserID"];
                 user = proxy.GetUserByID(userId);
