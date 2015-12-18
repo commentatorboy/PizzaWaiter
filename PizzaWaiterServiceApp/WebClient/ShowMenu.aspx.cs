@@ -43,7 +43,11 @@ namespace WebClient {
                 //this part should only work on login
                 if(isLoggedIn)
                 {
+                    this.ddlAllAddresses.Visible = true;
+                    this.ddlAllAddresses.Enabled = true;
+                    this.txtPhoneNr.Text = user.PhoneNumber;
                     BindFavoritesToOrder();
+                    BindAllAddresses();
                 }
                 
 
@@ -52,6 +56,14 @@ namespace WebClient {
             
         }
 
+        protected void BindAllAddresses() {
+            this.ddlAllAddresses.Items.Clear();
+            this.ddlAllAddresses.DataTextField = "UserAddress";
+            this.ddlAllAddresses.DataValueField = "ID";
+            List<Address> addresses = proxy.GetAddressesByUserId(user.ID).ToList();
+            this.ddlAllAddresses.DataSource = addresses;
+            this.ddlAllAddresses.DataBind();
+        }
         protected void BindMenu() {
 
             this.rptMenu.DataSource = restaurantMenues.OrderBy(x=>x.Position);
@@ -176,7 +188,13 @@ namespace WebClient {
 
         protected void btnSubmitOrder_Click(object sender, EventArgs e) {
             string phoneNr = this.txtPhoneNr.Text;
+
             string address = this.txtAddress.Text;
+            if (isLoggedIn && this.ddlAllAddresses.Items.Count > 0 && address == "")
+	        {
+                /// TODO: refactor into reading address ID and using it for insertion
+                address = this.ddlAllAddresses.SelectedItem.Text;
+            }
 
             if (phoneNr!="" && address !="" && order.Count()!=0) {
                 if(proxy.ProcessOrder(order.ToArray(), phoneNr, address))
@@ -224,8 +242,6 @@ namespace WebClient {
             
         }
 
-        
-
         protected bool ShowFavoriteButton(object stringDishID)
         {
             bool exists = false;
@@ -257,6 +273,16 @@ namespace WebClient {
             else
             {
                 isLoggedIn = false;
+            }
+        }
+
+        protected void txtAddress_TextChanged(object sender, EventArgs e) {
+            if (isLoggedIn) {
+                if (this.txtAddress.Text != "") {
+                    this.ddlAllAddresses.Enabled = false;
+                } else {
+                    this.ddlAllAddresses.Enabled = true;
+                }
             }
         }
     }

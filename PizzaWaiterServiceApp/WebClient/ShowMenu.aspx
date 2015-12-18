@@ -111,7 +111,11 @@
                         <asp:Literal ID="ltAddress" runat="server" Text="Address:" />
                     </p>
                     <p>
-                        <asp:TextBox ID="txtAddress" runat="server" />
+                        <asp:DropDownList ID="ddlAllAddresses" runat="server" AppendDataBoundItems="true" Visible="false" Enabled="false"></asp:DropDownList>
+                        </p>
+                    <p>
+                        <asp:TextBox ID="txtAddress" runat="server" AutoPostBack="true" OnTextChanged="txtAddress_TextChanged" />
+                        
                     </p>
                 </div>
                 <div class="SubmitOrderButton">
