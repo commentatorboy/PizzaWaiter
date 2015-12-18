@@ -12,6 +12,7 @@ namespace WebClient {
 
     public partial class ShowMenu : System.Web.UI.Page {
 
+        
         /// TODO: prop proxy
         IPizzaWaiterTestService proxy;
         private int RestaurantID;
@@ -23,7 +24,6 @@ namespace WebClient {
         protected void Page_Load(object sender, EventArgs e) {
             proxy = Proxy.Get();
             //If user is logged in
-
             if (!IsPostBack) {
 
                 //setting the logged in state and set its state

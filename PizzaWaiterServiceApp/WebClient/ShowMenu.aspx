@@ -26,7 +26,7 @@
                                 <asp:Repeater ID="rptDish" runat="server" DataSource='<%#GetDishes(Container.DataItem)%>'>
 
                                     <HeaderTemplate>
-                                        <table>
+                                        <table class="Favorite">
                                     </HeaderTemplate>
                                     <FooterTemplate>
                                         </table>
@@ -36,7 +36,7 @@
                                             <td>
                                                 <asp:LinkButton ID="addToOrder" CommandName='addToOrder' CommandArgument='<%#Eval("ID") %>' OnCommand="blAddToOrder" runat="server">
 
-                                                    <asp:Literal ID="ltDishName" runat="server" Text='<%#String.Format("{0}.{1} - {2}", Eval("Number"), Eval("Name"),Eval("Price")) %>'></asp:Literal>
+                                                    <asp:Literal ID="ltDishName" runat="server" Text='<%#String.Format("{0}.{1} - {2} kr.", Eval("Number"), Eval("Name"),Eval("Price")) %>'></asp:Literal>
                                                     <br />
                                                     <asp:Repeater ID="rptIngredient" runat="server" DataSource='<%#GetIngredients(Container.DataItem)%>'>
 
@@ -117,6 +117,7 @@
                 <div class="SubmitOrderButton">
 
                     <asp:Button ID="btnSubmitOrder" runat="server" Text="Submit Order" OnClick="btnSubmitOrder_Click" />
+                    <asp:DropDownList ID="DropDownList1" runat="server"></asp:DropDownList>
                 </div>
             </div>
         </div>
