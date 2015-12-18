@@ -32,7 +32,10 @@ namespace WebClient {
                 RestaurantID = Convert.ToInt32(Request.QueryString["ID"]);
                 if (RestaurantID>0) {
                     restaurantMenues = proxy.GetRestaurantMenues(RestaurantID).ToList();
+
+                    this.ltRestaurantTitle.Text = restaurantMenues[0].Restaurant.Name;
                     BindMenu();
+                    
                 }
 
                 order = new List<PartOrder>();
@@ -85,7 +88,6 @@ namespace WebClient {
         protected void blAddToOrder(object sender, CommandEventArgs e) {
             //order = (List<PartOrder>)Session["order"];
             int dishId = Convert.ToInt32(e.CommandArgument);
-            this.ltTest.Text = "adding dish...." + dishId;
 
             List<PartOrder> sameDishes = order.Where(x => x.Dish.ID == dishId).ToList();
             
